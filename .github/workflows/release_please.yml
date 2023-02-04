@@ -61,7 +61,7 @@ jobs:
         with:
           upload_url: ${{ steps.release.outputs.upload_url }}
           asset_path: ./app/build/outputs/apk/release/app-release-unsigned.apk
-      - name: Upload artifact to Firebase App Distribution
+      - name: Upload PROD app to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1
         with:
           appId: ${{secrets.FIREBASE_APP_ID}}
@@ -69,7 +69,7 @@ jobs:
           groups: prod
           file: app/build/outputs/apk/release/app-release-unsigned.apk
         if: ${{ steps.release.outputs.release_created }}
-      - name: Upload artifact to Firebase App Distribution
+      - name: Upload TEST app to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1
         with:
           appId: ${{secrets.FIREBASE_APP_ID}}
