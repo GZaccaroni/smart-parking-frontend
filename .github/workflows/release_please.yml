@@ -23,7 +23,7 @@ jobs:
           release-type: simple
           package-name: warverse
       - uses: actions/checkout@v3
-      - name: Setup JDK 1.8
+      - name: Setup Java
         uses: actions/setup-java@v3
         with:
           java-version: 17
@@ -31,18 +31,18 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
       # Publish docs
-      - name: Build docs
+      - name: Build release docs
         run: ./gradlew dokkaHtmlMultiModule
         if: ${{ steps.release.outputs.release_created }}
-      - name: Setup Pages
+      - name: Setup Github Pages
         uses: actions/configure-pages@v2
         if: ${{ steps.release.outputs.release_created }}
-      - name: Upload docs
+      - name: Upload release docs
         uses: actions/upload-pages-artifact@v1
         with:
           path: './build/dokka/htmlMultiModule'
         if: ${{ steps.release.outputs.release_created }}
-      - name: Deploy to GitHub Pages
+      - name: Deploy release docs to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
         if: ${{ steps.release.outputs.release_created }}
@@ -74,4 +74,5 @@ jobs:
           serviceCredentialsFileContent: ${{ secrets.FIREBASE_CREDENTIALS_FILE_CONTENT }}
           groups: test
           file: app/build/outputs/apk/release/app-release-unsigned.apk
+          debug: true
         if: ${{ !steps.release.outputs.release_created }}
