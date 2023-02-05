@@ -16,7 +16,6 @@ val jacocoReport by tasks.registering(JacocoReport::class) {
 
     reports {
         xml.required.set(true)
-        html.required.set(true)
     }
 
     classDirectories.setFrom(fileTree(project.buildDir) {
