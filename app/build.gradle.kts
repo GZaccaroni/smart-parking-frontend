@@ -1,21 +1,20 @@
 @file:Suppress("UnstableApiUsage")
 
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
+    id(Deps.BuildPlugins.androidApplication)
+    id(Deps.BuildPlugins.androidKotlin)
+
+    id(ScriptPlugins.quality)
 }
 
-val composeVersion =
-    rootProject.extra.get("compose_ui_version") as String
-
 android {
-    namespace = "it.unibo.smart_parking"
-    compileSdk = 33
+    namespace = AppConfig.applicationId
+    compileSdk = AppConfig.AndroidSdk.compile
 
     defaultConfig {
-        applicationId = "it.unibo.smart_parking"
-        minSdk = 24
-        targetSdk = 33
+        applicationId = AppConfig.applicationId
+        minSdk = AppConfig.AndroidSdk.min
+        targetSdk = AppConfig.AndroidSdk.target
         versionCode = 1
         versionName = rootProject.file("version.txt").readText().trim()
 
@@ -45,7 +44,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.0"
+        kotlinCompilerExtensionVersion = Deps.BuildPlugins.Versions.compilerExtensionVersion
     }
     packagingOptions {
         resources {
@@ -55,17 +54,16 @@ android {
 }
 
 dependencies {
-
-    implementation("androidx.core:core-ktx:1.9.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
-    implementation("androidx.activity:activity-compose:1.6.1")
-    implementation("androidx.compose.ui:ui:$composeVersion")
-    implementation("androidx.compose.ui:ui-tooling-preview:$composeVersion")
-    implementation("androidx.compose.material:material:1.3.1")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:$composeVersion")
-    debugImplementation("androidx.compose.ui:ui-tooling:$composeVersion")
-    debugImplementation("androidx.compose.ui:ui-test-manifest:$composeVersion")
+    implementation(Deps.Libraries.androidXCore)
+    implementation(Deps.Libraries.androidXLifecycleRuntime)
+    implementation(Deps.Libraries.androidXActivity)
+    implementation(Deps.Libraries.androidXComposeUi)
+    implementation(Deps.Libraries.androidXComposeUiToolingPreview)
+    implementation(Deps.Libraries.androidXComposeMaterial)
+    testImplementation(Deps.TestLibraries.junit)
+    androidTestImplementation(Deps.TestLibraries.junitAndroidExt)
+    androidTestImplementation(Deps.TestLibraries.espressoCore)
+    androidTestImplementation(Deps.TestLibraries.uiTestJunit4)
+    debugImplementation(Deps.DebugLibraries.composeUiTooling)
+    debugImplementation(Deps.DebugLibraries.composeUiTestManifest)
 }
