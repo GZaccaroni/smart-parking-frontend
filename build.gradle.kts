@@ -1,16 +1,11 @@
 @file:Suppress("UnstableApiUsage")
 
-buildscript {
-    extra.apply {
-        set("compose_ui_version", "1.3.3")
-    }
-}// Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
-    id("com.android.application") version "7.4.1" apply false
-    id("com.android.library") version "7.4.1" apply false
-    id("org.jetbrains.kotlin.android") version "1.8.0" apply false
-    id("org.jetbrains.dokka") version "1.7.20"
-    id("org.sonarqube") version "3.5.0.2730"
+    id(Deps.BuildPlugins.androidApplication) version Deps.BuildPlugins.Versions.buildTools apply false
+    id(Deps.BuildPlugins.androidLibrary) version Deps.BuildPlugins.Versions.buildTools apply false
+    id(Deps.BuildPlugins.androidKotlin) version Deps.BuildPlugins.Versions.androidKotlin apply false
+    id(Deps.BuildPlugins.dokka) version Deps.BuildPlugins.Versions.dokka
+    id(Deps.BuildPlugins.sonarqube) version Deps.BuildPlugins.Versions.sonarqube
 }
 sonarqube {
     properties {
@@ -20,5 +15,5 @@ sonarqube {
     }
 }
 subprojects {
-    apply(plugin = "org.jetbrains.dokka")
+    apply(plugin = Deps.BuildPlugins.dokka)
 }
