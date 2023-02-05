@@ -62,7 +62,7 @@ jobs:
       - name: Upload PROD app to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1
         with:
-          appId: ${{secrets.FIREBASE_APP_ID}}
+          appId: ${{ secrets.FIREBASE_APP_ID }}
           serviceCredentialsFileContent: ${{ secrets.FIREBASE_CREDENTIALS_FILE_CONTENT }}
           groups: prod
           file: app/build/outputs/apk/release/app-release-unsigned.apk
@@ -70,9 +70,8 @@ jobs:
       - name: Upload TEST app to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1
         with:
-          appId: ${{secrets.FIREBASE_APP_ID}}
+          appId: ${{ secrets.FIREBASE_APP_ID }}
           serviceCredentialsFileContent: ${{ secrets.FIREBASE_CREDENTIALS_FILE_CONTENT }}
           groups: test
           file: app/build/outputs/apk/release/app-release-unsigned.apk
-          debug: true
         if: ${{ !steps.release.outputs.release_created }}
