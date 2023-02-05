@@ -1,4 +1,4 @@
-name: Scala CI
+name: Check PR
 
 on:
   pull_request:
@@ -9,6 +9,7 @@ permissions:
 
 jobs:
   run-tests:
+    name: Run tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -22,7 +23,7 @@ jobs:
       - name: Run tests
         run: ./gradlew test
   sonar:
-    name: Build and analyze
+    name: Sonar analysis
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
