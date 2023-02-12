@@ -54,12 +54,13 @@ android {
 }
 
 dependencies {
-    implementation(Deps.Libraries.androidXCore)
-    implementation(Deps.Libraries.androidXLifecycleRuntime)
-    implementation(Deps.Libraries.androidXActivity)
-    implementation(Deps.Libraries.androidXComposeUi)
-    implementation(Deps.Libraries.androidXComposeUiToolingPreview)
-    implementation(Deps.Libraries.androidXComposeMaterial)
+    implementation(project(":domain"))
+    implementation(project(":data"))
+    implementation(project(":presentation"))
+
+    implementation(Deps.Libraries.koin)
+    implementation(Deps.Libraries.koinAndroid)
+
     testImplementation(Deps.TestLibraries.junit)
     androidTestImplementation(Deps.TestLibraries.junitAndroidExt)
     androidTestImplementation(Deps.TestLibraries.espressoCore)
