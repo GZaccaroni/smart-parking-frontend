@@ -11,7 +11,7 @@ interface UserRepository {
     val authState: AuthState
     val authStateFlow: Flow<AuthState>
 
-    suspend fun signUp(credentials: UserCredentials): Either<AppError, Unit>
+    suspend fun signUp(user: User): Either<AppError, Unit>
     suspend fun login(credentials: UserCredentials): Either<AppError, Unit>
     suspend fun logout(): Either<AppError, Unit>
     suspend fun changePassword(currentPassword: String): Either<AppError, Unit>
