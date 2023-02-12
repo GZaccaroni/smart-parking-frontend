@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "it.unibo.smart_parking.presentation"
+    namespace = "it.unibolss.smartparking.presentation"
     buildFeatures {
         compose = true
     }
