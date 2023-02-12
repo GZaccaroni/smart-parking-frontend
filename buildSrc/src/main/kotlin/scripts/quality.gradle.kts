@@ -1,10 +1,13 @@
 package scripts
 
+plugins {
+    id("jacoco")
+}
+
 private object Default {
     const val BUILD_TYPE = "debug"
-    const val BUILD_FLAVOR = ""
 
-    val BUILD_VARIANT = "${BUILD_FLAVOR.capitalize()}${BUILD_TYPE.capitalize()}"
+    val BUILD_VARIANT = "${BUILD_TYPE.capitalize()}"
 }
 
 val jacocoReport by tasks.registering(JacocoReport::class) {
@@ -12,10 +15,12 @@ val jacocoReport by tasks.registering(JacocoReport::class) {
     description = "Report code coverage on tests within the Android codebase."
     dependsOn("test${Default.BUILD_VARIANT}UnitTest")
 
-    val buildVariantClassPath = "${Default.BUILD_FLAVOR}${Default.BUILD_TYPE.capitalize()}"
+    val buildVariantClassPath = "${Default.BUILD_TYPE}"
 
     reports {
         xml.required.set(true)
+        html.required.set(false)
+        csv.required.set(false)
     }
 
     classDirectories.setFrom(fileTree(project.buildDir) {
