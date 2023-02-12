@@ -15,4 +15,8 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "Smart Parking"
+
+include(":domain")
+include(":data")
+include(":presentation")
 include("app")

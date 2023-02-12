@@ -14,6 +14,7 @@ object Deps {
             const val compilerExtensionVersion = "1.4.0"
         }
         const val androidApplication = "com.android.application"
+        const val buildTools = "com.android.tools.build:gradle"
         const val androidLibrary = "com.android.library"
         const val androidKotlin = "org.jetbrains.kotlin.android"
         const val dokka = "org.jetbrains.dokka"
