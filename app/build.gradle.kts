@@ -40,12 +40,6 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = Deps.BuildPlugins.Versions.compilerExtensionVersion
-    }
     packagingOptions {
         resources {
             excludes.add("/META-INF/{AL2.0,LGPL2.1}")
@@ -65,6 +59,4 @@ dependencies {
     androidTestImplementation(Deps.TestLibraries.junitAndroidExt)
     androidTestImplementation(Deps.TestLibraries.espressoCore)
     androidTestImplementation(Deps.TestLibraries.uiTestJunit4)
-    debugImplementation(Deps.DebugLibraries.composeUiTooling)
-    debugImplementation(Deps.DebugLibraries.composeUiTestManifest)
 }
