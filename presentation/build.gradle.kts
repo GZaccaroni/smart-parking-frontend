@@ -1,9 +1,17 @@
+@file:Suppress("UnstableApiUsage")
+
 plugins {
     `android-base-lib`
 }
 
 android {
     namespace = "it.unibo.smart_parking.presentation"
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = Deps.BuildPlugins.Versions.compilerExtensionVersion
+    }
 }
 
 dependencies {
