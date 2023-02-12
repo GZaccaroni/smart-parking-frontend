@@ -14,8 +14,8 @@ interface UserRepository {
     suspend fun signUp(user: User): Either<AppError, Unit>
     suspend fun login(credentials: UserCredentials): Either<AppError, Unit>
     suspend fun logout(): Either<AppError, Unit>
-    suspend fun changePassword(currentPassword: String): Either<AppError, Unit>
+    suspend fun changeUserPassword(currentPassword: String): Either<AppError, Unit>
 
-    suspend fun getCurrentUser(): Either<AppError, User>
-    suspend fun deleteCurrentUser(): Either<AppError, Unit>
+    suspend fun getUser(): Either<AppError, User>
+    suspend fun deleteUser(): Either<AppError, Unit>
 }
