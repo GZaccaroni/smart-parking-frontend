@@ -2,8 +2,7 @@
 <h3 align="center">Frontend</h3>
 
 ![License](https://img.shields.io/github/license/GZaccaroni/smart-parking-frontend)
-[![Renovate enabled](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://renovatebot.com/)
-
+[![Renovate enabled](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://renovatebot.com/) \
 [![codecov](https://codecov.io/gh/GZaccaroni/smart-parking-frontend/branch/main/graph/badge.svg?token=2ZI2IQJDMM)](https://codecov.io/gh/GZaccaroni/smart-parking-frontend)
 [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=GZaccaroni_smart-parking-frontend&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=GZaccaroni_smart-parking-frontend)
 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=GZaccaroni_smart-parking-frontend&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=GZaccaroni_smart-parking-frontend)
