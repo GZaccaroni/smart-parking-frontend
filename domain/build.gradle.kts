@@ -8,5 +8,7 @@ android {
 
 dependencies {
     implementation(Deps.Libraries.koin)
+    implementation(Deps.Libraries.kotlinCoroutines)
+    implementation(Deps.Libraries.arrowCore)
     testImplementation(Deps.TestLibraries.junit)
 }

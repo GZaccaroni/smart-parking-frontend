@@ -28,7 +28,10 @@ object Deps {
             const val androidXActivity = "1.6.1"
             const val androidXCompose = "1.3.3"
             const val androidXComposeMaterial = "1.3.1"
+
             const val koin = "3.3.3"
+            const val kotlinCoroutines = "1.6.4"
+            const val arrowStack = "1.0.1"
         }
         const val androidXCore = "androidx.core:core-ktx:${Versions.androidXCore}"
         const val androidXLifecycleRuntime = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.androidXLifecycleRuntime}"
@@ -36,8 +39,11 @@ object Deps {
         const val androidXComposeUi = "androidx.compose.ui:ui:${Versions.androidXCompose}"
         const val androidXComposeUiToolingPreview = "androidx.compose.ui:ui-tooling-preview:${Versions.androidXCompose}"
         const val androidXComposeMaterial = "androidx.compose.material:material:${Versions.androidXComposeMaterial}"
+
         const val koin = "io.insert-koin:koin-core:${Versions.koin}"
         const val koinAndroid = "io.insert-koin:koin-android:${Versions.koin}"
+        const val kotlinCoroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.kotlinCoroutines}"
+        const val arrowCore = "io.arrow-kt:arrow-core:${Versions.arrowStack}"
     }
 
     object TestLibraries {
