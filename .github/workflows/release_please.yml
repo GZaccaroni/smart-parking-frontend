@@ -11,58 +11,56 @@ permissions:
   pull-requests: write
 
 jobs:
-  release-please:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  release_please:
     runs-on: ubuntu-latest
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+      upload_url: ${{ steps.release.outputs.upload_url }}
     steps:
       - uses: google-github-actions/release-please-action@v3
         id: release
         with:
           release-type: simple
           package-name: warverse
+  release:
+    runs-on: ubuntu-latest
+    needs: release_please
+    if: ${{ needs.release_please.outputs.release_created }}
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
       - uses: actions/checkout@v3
-        if: ${{ steps.release.outputs.release_created }}
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
           java-version: 17
           distribution: zulu
-        if: ${{ steps.release.outputs.release_created }}
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
-        if: ${{ steps.release.outputs.release_created }}
       # Publish docs
       - name: Build release docs
         run: ./gradlew dokkaHtmlMultiModule
-        if: ${{ steps.release.outputs.release_created }}
       - name: Setup Github Pages
         uses: actions/configure-pages@v3
-        if: ${{ steps.release.outputs.release_created }}
       - name: Upload release docs
         uses: actions/upload-pages-artifact@v1
         with:
           path: './build/dokka/htmlMultiModule'
-        if: ${{ steps.release.outputs.release_created }}
       - name: Deploy release docs to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
-        if: ${{ steps.release.outputs.release_created }}
       # Generate and upload jar
       - name: Bump version code
         uses: chkfung/android-version-actions@v1.2.1
         with:
           gradlePath: app/build.gradle.kts
           versionCode: ${{github.run_number}}
-        if: ${{ steps.release.outputs.release_created }}
       - name: Build app
         run: ./gradlew assembleRelease
-        if: ${{ steps.release.outputs.release_created }}
       - uses: shogo82148/actions-upload-release-asset@v1
-        if: ${{ steps.release.outputs.release_created }}
         with:
-          upload_url: ${{ steps.release.outputs.upload_url }}
+          upload_url: ${{ needs.release_please.outputs.upload_url }}
           asset_path: ./app/build/outputs/apk/release/app-release-unsigned.apk
       - name: Upload PROD app to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1
@@ -71,4 +69,3 @@ jobs:
           serviceCredentialsFileContent: ${{ secrets.FIREBASE_CREDENTIALS_FILE_CONTENT }}
           groups: prod
           file: app/build/outputs/apk/release/app-release-unsigned.apk
-        if: ${{ steps.release.outputs.release_created }}
