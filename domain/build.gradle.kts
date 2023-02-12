@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace = "it.unibo.smart_parking.domain"
+    namespace = "it.unibolss.smartparking.domain"
 }
 
 dependencies {

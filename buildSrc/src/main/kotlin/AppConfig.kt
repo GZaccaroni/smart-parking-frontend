@@ -1,5 +1,5 @@
 object AppConfig {
-    const val applicationId = "it.unibo.smart_parking";
+    const val applicationId = "it.unibolss.smartparking";
 
     object AndroidSdk {
         const val min = 24
