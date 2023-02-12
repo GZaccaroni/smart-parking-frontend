@@ -23,13 +23,16 @@ jobs:
           release-type: simple
           package-name: warverse
       - uses: actions/checkout@v3
+        if: ${{ steps.release.outputs.release_created }}
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
           java-version: 17
           distribution: zulu
+        if: ${{ steps.release.outputs.release_created }}
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
+        if: ${{ steps.release.outputs.release_created }}
       # Publish docs
       - name: Build release docs
         run: ./gradlew dokkaHtmlMultiModule
@@ -52,8 +55,10 @@ jobs:
         with:
           gradlePath: app/build.gradle.kts
           versionCode: ${{github.run_number}}
+        if: ${{ steps.release.outputs.release_created }}
       - name: Build app
         run: ./gradlew assembleRelease
+        if: ${{ steps.release.outputs.release_created }}
       - uses: shogo82148/actions-upload-release-asset@v1
         if: ${{ steps.release.outputs.release_created }}
         with:
@@ -67,11 +72,3 @@ jobs:
           groups: prod
           file: app/build/outputs/apk/release/app-release-unsigned.apk
         if: ${{ steps.release.outputs.release_created }}
-      - name: Upload TEST app to Firebase App Distribution
-        uses: wzieba/Firebase-Distribution-Github-Action@v1
-        with:
-          appId: ${{ secrets.FIREBASE_APP_ID }}
-          serviceCredentialsFileContent: ${{ secrets.FIREBASE_CREDENTIALS_FILE_CONTENT }}
-          groups: test
-          file: app/build/outputs/apk/release/app-release-unsigned.apk
-        if: ${{ !steps.release.outputs.release_created }}
