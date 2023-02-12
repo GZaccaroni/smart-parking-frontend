@@ -7,5 +7,6 @@ android {
 }
 
 dependencies {
+    implementation(Deps.Libraries.koin)
     testImplementation(Deps.TestLibraries.junit)
 }
