@@ -21,7 +21,7 @@ jobs:
         id: release
         with:
           release-type: simple
-          package-name: warverse
+          package-name: smartparking
   release:
     runs-on: ubuntu-latest
     needs: release_please
