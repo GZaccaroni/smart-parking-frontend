@@ -44,6 +44,8 @@ object Deps {
         const val koinAndroid = "io.insert-koin:koin-android:${Versions.koin}"
         const val kotlinCoroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.kotlinCoroutines}"
         const val arrowCore = "io.arrow-kt:arrow-core:${Versions.arrowStack}"
+        const val arrowFxCoroutines = "io.arrow-kt:arrow-fx-coroutines:${Versions.arrowStack}"
+
     }
 
     object TestLibraries {
