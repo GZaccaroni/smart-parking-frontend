@@ -47,7 +47,7 @@ class LoginUserTest {
         } returns Either.Right(Unit)
 
         val result = useCase(LoginUser.Params(userCredentials))
-        assertEquals(result, Either.Right(Unit))
+        assertEquals(Either.Right(Unit), result)
 
         coVerify(exactly = 1) {
             userRepository.login(userCredentials)
@@ -64,7 +64,7 @@ class LoginUserTest {
         } returns false
 
         val result = useCase(LoginUser.Params(userCredentials))
-        assertEquals(result, Either.Left(AppError.InvalidUserEmail))
+        assertEquals(Either.Left(AppError.InvalidUserEmail), result)
 
         coVerify(exactly = 1) {
             validateUserEmail(ValidateUserEmail.Params(userCredentials.email))

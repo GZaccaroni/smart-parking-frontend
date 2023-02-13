@@ -48,7 +48,7 @@ class IncrementParkingSlotOccupationTest {
             parkingSlotRepository.incrementParkingSlotOccupation(parkingSlotId)
         } returns Either.Right(Unit)
         val result = useCase()
-        assertEquals(result, Either.Right(Unit))
+        assertEquals(Either.Right(Unit), result)
 
         coVerify(exactly = 1) {
             parkingSlotRepository.incrementParkingSlotOccupation(parkingSlotId)
@@ -64,7 +64,7 @@ class IncrementParkingSlotOccupationTest {
         } returns Either.Right(user)
 
         val result = useCase()
-        assertEquals(result, Either.Left(AppError.NoParkingSlotOccupied))
+        assertEquals(Either.Left(AppError.NoParkingSlotOccupied), result)
 
         verify {
             parkingSlotRepository wasNot Called

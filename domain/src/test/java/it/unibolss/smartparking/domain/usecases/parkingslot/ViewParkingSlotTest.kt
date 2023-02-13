@@ -44,7 +44,7 @@ class ViewParkingSlotTest {
         } returns Either.Right(parkingSlot)
 
         val result = useCase(ViewParkingSlot.Params(parkingSlotId))
-        assertEquals(result, Either.Right(parkingSlot))
+        assertEquals(Either.Right(parkingSlot), result)
 
         coVerify(exactly = 1) {
             parkingSlotRepository.getParkingSlot(parkingSlotId)

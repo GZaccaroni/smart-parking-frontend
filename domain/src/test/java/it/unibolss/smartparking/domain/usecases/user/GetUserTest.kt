@@ -44,7 +44,7 @@ class GetUserTest {
         } returns Either.Right(user)
 
         val result = useCase()
-        assertEquals(result, Either.Right(user))
+        assertEquals(Either.Right(user), result)
 
         coVerify(exactly = 1) {
             userRepository.getUser()
@@ -58,7 +58,7 @@ class GetUserTest {
         } returns AuthState.Guest
 
         val result = useCase()
-        assertEquals(result, Either.Left(AppError.Unauthorized))
+        assertEquals(Either.Left(AppError.Unauthorized), result)
 
         coVerify(exactly = 0) {
             userRepository.getUser()
