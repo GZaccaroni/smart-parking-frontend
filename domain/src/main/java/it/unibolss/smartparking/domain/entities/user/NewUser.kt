@@ -1,8 +1,7 @@
 package it.unibolss.smartparking.domain.entities.user
 
-data class User(
-    val id: String,
+data class NewUser(
     val name: String,
     val email: String,
-    val currentParkingSlot: UserParkingSlot?
+    val password: String,
 )
