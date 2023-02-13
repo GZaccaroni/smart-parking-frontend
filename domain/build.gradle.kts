@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
+
 plugins {
     `android-base-lib`
 }
@@ -12,4 +14,6 @@ dependencies {
     implementation(Deps.Libraries.arrowCore)
     implementation(Deps.Libraries.arrowFxCoroutines)
     testImplementation(Deps.TestLibraries.junit)
+    testImplementation(Deps.TestLibraries.kotlinCoroutines)
+    testImplementation(Deps.TestLibraries.mockk)
 }
