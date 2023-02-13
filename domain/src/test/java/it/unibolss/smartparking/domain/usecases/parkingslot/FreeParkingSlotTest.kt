@@ -9,8 +9,6 @@ import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import io.mockk.mockk
 import io.mockk.verify
-import it.unibolss.smartparking.domain.entities.geo.GeoPosition
-import it.unibolss.smartparking.domain.entities.parkingslot.ParkingSlot
 import it.unibolss.smartparking.domain.entities.user.User
 import it.unibolss.smartparking.domain.repositories.parkingslot.ParkingSlotRepository
 import it.unibolss.smartparking.domain.repositories.user.UserRepository
@@ -22,7 +20,7 @@ import org.junit.Before
 import org.junit.Test
 
 @ExperimentalCoroutinesApi
-class FreeParkingSlotsTest {
+class FreeParkingSlotTest {
     @MockK
     lateinit var userRepository: UserRepository
     @MockK
