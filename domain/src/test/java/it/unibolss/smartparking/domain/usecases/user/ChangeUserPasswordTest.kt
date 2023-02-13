@@ -49,7 +49,7 @@ class ChangeUserPasswordTest {
         } returns true
 
         val result = useCase(ChangeUserPassword.Params(currentPassword, newPassword))
-        assertEquals(result, Either.Right(Unit))
+        assertEquals(Either.Right(Unit), result)
 
         coVerify(exactly = 1) {
             userRepository.changeUserPassword(currentPassword, newPassword)
@@ -71,7 +71,7 @@ class ChangeUserPasswordTest {
         } returns false
 
         val result = useCase(ChangeUserPassword.Params(currentPassword, newPassword))
-        assertEquals(result, Either.Left(AppError.InvalidUserPassword))
+        assertEquals(Either.Left(AppError.InvalidUserPassword), result)
 
         coVerify(exactly = 0) {
             userRepository.changeUserPassword(currentPassword, newPassword)

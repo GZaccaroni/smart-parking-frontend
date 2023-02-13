@@ -48,7 +48,7 @@ class OccupyParkingSlotTest {
             parkingSlotRepository.occupyParkingSlot(parkingSlotId)
         } returns Either.Right(Unit)
         val result = useCase(OccupyParkingSlot.Params(parkingSlotId))
-        assertEquals(result, Either.Right(Unit))
+        assertEquals(Either.Right(Unit), result)
 
         coVerify(exactly = 1) {
             parkingSlotRepository.occupyParkingSlot(parkingSlotId)
@@ -66,7 +66,7 @@ class OccupyParkingSlotTest {
         } returns Either.Right(user)
 
         val result = useCase(OccupyParkingSlot.Params(newParkingSlotId))
-        assertEquals(result, Either.Left(AppError.AlreadyParking))
+        assertEquals(Either.Left(AppError.AlreadyParking), result)
 
         verify {
             parkingSlotRepository wasNot Called

@@ -47,7 +47,7 @@ class FreeParkingSlotTest {
             parkingSlotRepository.freeParkingSlot(parkingSlotId)
         } returns Either.Right(Unit)
         val result = useCase()
-        assertEquals(result, Either.Right(Unit))
+        assertEquals(Either.Right(Unit), result)
 
         coVerify(exactly = 1) {
             parkingSlotRepository.freeParkingSlot(parkingSlotId)
@@ -63,7 +63,7 @@ class FreeParkingSlotTest {
         } returns Either.Right(user)
 
         val result = useCase()
-        assertEquals(result, Either.Right(Unit))
+        assertEquals(Either.Right(Unit), result)
 
         verify {
             parkingSlotRepository wasNot Called

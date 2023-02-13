@@ -43,7 +43,7 @@ class LogoutUserTest {
         } returns Either.Right(Unit)
 
         val result = useCase()
-        assertEquals(result, Either.Right(Unit))
+        assertEquals(Either.Right(Unit), result)
 
         coVerify(exactly = 1) {
             userRepository.logout()
@@ -57,7 +57,7 @@ class LogoutUserTest {
         } returns AuthState.Guest
 
         val result = useCase()
-        assertEquals(result, Either.Right(Unit))
+        assertEquals(Either.Right(Unit), result)
 
         coVerify(exactly = 0) {
             userRepository.logout()

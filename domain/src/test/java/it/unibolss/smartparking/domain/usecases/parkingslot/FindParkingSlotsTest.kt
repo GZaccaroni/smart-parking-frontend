@@ -37,7 +37,7 @@ class FindParkingSlotsTest {
         val result = useCase(
             FindParkingSlots.Params(center, radius)
         )
-        assertEquals(result, Either.Right(listOf(parkingSlot)))
+        assertEquals(Either.Right(listOf(parkingSlot)), result)
 
         coVerify(exactly = 1) {
             parkingSlotRepository.getParkingSlots(center, radius)
@@ -54,7 +54,7 @@ class FindParkingSlotsTest {
         val result = useCase(
             FindParkingSlots.Params(center, radius)
         )
-        assertEquals(result, Either.Right(emptyList<ParkingSlot>()))
+        assertEquals(Either.Right(emptyList<ParkingSlot>()), result)
 
         coVerify(exactly = 0) {
             parkingSlotRepository.getParkingSlots(center, radius)
