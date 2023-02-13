@@ -16,15 +16,3 @@ sonarqube {
 subprojects {
     apply(plugin = Deps.BuildPlugins.dokka)
 }
-allprojects {
-    tasks.withType<KotlinCompile>().configureEach {
-        kotlinOptions {
-            jvmTarget = "1.8"
-
-            freeCompilerArgs = freeCompilerArgs + listOf(
-                "-opt-in=kotlin.time.ExperimentalTime",
-                "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
-            )
-        }
-    }
-}

@@ -87,7 +87,7 @@ class SignUpUserTest {
         } returns true
         every {
             validateUserEmail(ValidateUserEmail.Params(testNewUser.email))
-        } returns true
+        } returns false
         every {
             validateUserPassword(ValidateUserPassword.Params(testNewUser.password))
         } returns true
