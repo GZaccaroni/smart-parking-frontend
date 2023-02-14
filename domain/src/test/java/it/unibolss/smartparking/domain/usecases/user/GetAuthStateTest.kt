@@ -39,7 +39,7 @@ class GetAuthStateTest {
         assertEquals(loggedIn, result)
 
         coVerify(exactly = 1) {
-            userRepository.authStateFlow
+            userRepository.authState
         }
     }
 }
