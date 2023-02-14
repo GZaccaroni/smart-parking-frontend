@@ -19,6 +19,7 @@ dependencies {
 
     implementation(Deps.Libraries.koin)
     implementation(Deps.Libraries.koinAndroid)
+    implementation(Deps.Libraries.koinAndroidCompose)
 
     implementation(Deps.Libraries.androidXCore)
     implementation(Deps.Libraries.androidXLifecycleRuntime)
@@ -26,6 +27,7 @@ dependencies {
     implementation(Deps.Libraries.androidXComposeUi)
     implementation(Deps.Libraries.androidXComposeUiToolingPreview)
     implementation(Deps.Libraries.androidXComposeMaterial)
+    implementation(Deps.Libraries.androidXComposeNavigation)
 
     testImplementation(Deps.TestLibraries.junit)
     androidTestImplementation(Deps.TestLibraries.junitAndroidExt)
