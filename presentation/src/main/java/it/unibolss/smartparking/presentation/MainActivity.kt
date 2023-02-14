@@ -3,41 +3,21 @@ package it.unibolss.smartparking.presentation
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import it.unibolss.smartparking.presentation.common.theme.SmartParkingTheme
+import it.unibolss.smartparking.domain.entities.user.AuthState
+import it.unibolss.smartparking.domain.usecases.common.invoke
+import it.unibolss.smartparking.domain.usecases.user.GetAuthState
+import it.unibolss.smartparking.presentation.common.SmartParkingApp
+import org.koin.android.ext.android.inject
 
 class MainActivity : ComponentActivity() {
+
+    //private val getAuthState: GetAuthState by inject()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            SmartParkingTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-                    Greeting("Android")
-                }
-            }
+//            SmartParkingApp(isLoggedIn = getAuthState() is AuthState.LoggedIn)
+            SmartParkingApp(isLoggedIn = false)
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    SmartParkingTheme {
-        Greeting("Android")
     }
 }
