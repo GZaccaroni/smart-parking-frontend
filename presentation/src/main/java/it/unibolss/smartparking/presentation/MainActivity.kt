@@ -11,13 +11,12 @@ import org.koin.android.ext.android.inject
 
 class MainActivity : ComponentActivity() {
 
-    //private val getAuthState: GetAuthState by inject()
+    private val getAuthState: GetAuthState by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-//            SmartParkingApp(isLoggedIn = getAuthState() is AuthState.LoggedIn)
-            SmartParkingApp(isLoggedIn = false)
+            SmartParkingApp(isLoggedIn = getAuthState() is AuthState.LoggedIn)
         }
     }
 }
