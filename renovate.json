@@ -4,5 +4,11 @@
     "config:base", ":disableDependencyDashboard", ":semanticCommits"
   ],
   "baseBranches": ["main"],
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "automerge": true
+    }
+  ],
   "platformAutomerge": true
 }
