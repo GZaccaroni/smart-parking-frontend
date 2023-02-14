@@ -15,11 +15,6 @@ interface UserRepository {
     val authState: AuthState
 
     /**
-     * Returns a [Flow] that automatically emits new values when the [AuthState] changes.
-     */
-    val authStateFlow: Flow<AuthState>
-
-    /**
      * Creates a new user with the given data [NewUser] and automatically logs in.
      */
     suspend fun signUp(user: NewUser): Either<AppError, Unit>
