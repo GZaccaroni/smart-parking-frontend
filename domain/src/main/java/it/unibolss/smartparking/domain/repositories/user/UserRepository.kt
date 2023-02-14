@@ -6,7 +6,6 @@ import it.unibolss.smartparking.domain.entities.user.AuthState
 import it.unibolss.smartparking.domain.entities.user.NewUser
 import it.unibolss.smartparking.domain.entities.user.User
 import it.unibolss.smartparking.domain.entities.user.UserCredentials
-import kotlinx.coroutines.flow.Flow
 
 interface UserRepository {
     /**
