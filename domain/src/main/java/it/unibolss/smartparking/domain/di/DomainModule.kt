@@ -10,7 +10,7 @@ import it.unibolss.smartparking.domain.usecases.user.DeleteUser
 import it.unibolss.smartparking.domain.usecases.user.GetUser
 import it.unibolss.smartparking.domain.usecases.user.LoginUser
 import it.unibolss.smartparking.domain.usecases.user.LogoutUser
-import it.unibolss.smartparking.domain.usecases.user.ObserveAuthState
+import it.unibolss.smartparking.domain.usecases.user.GetAuthState
 import it.unibolss.smartparking.domain.usecases.user.SignUpUser
 import it.unibolss.smartparking.domain.usecases.user.ValidateUserEmail
 import it.unibolss.smartparking.domain.usecases.user.ValidateUserName
@@ -30,7 +30,7 @@ internal val useCaseModule = module {
     singleOf(::GetUser)
     singleOf(::LoginUser)
     singleOf(::LogoutUser)
-    singleOf(::ObserveAuthState)
+    singleOf(::GetAuthState)
     singleOf(::SignUpUser)
     singleOf(::ValidateUserEmail)
     singleOf(::ValidateUserName)
