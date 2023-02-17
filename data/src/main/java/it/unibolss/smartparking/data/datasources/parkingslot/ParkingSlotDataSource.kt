@@ -12,4 +12,7 @@ internal interface ParkingSlotDataSource {
 
     suspend fun occupyParkingSlot(id: String): Response<Unit>
 
+    suspend fun incrementParkingSlotOccupation(id: String): Response<Unit>
+
+    suspend fun freeParkingSlot(id: String): Response<Unit>
 }
