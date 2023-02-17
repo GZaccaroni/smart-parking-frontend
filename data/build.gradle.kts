@@ -12,6 +12,9 @@ android {
 dependencies {
     implementation(project(":domain"))
 
+    implementation(Deps.Libraries.kotlinCoroutines)
+    implementation(Deps.Libraries.kotlinDateTime)
+
     implementation(Deps.Libraries.koin)
     implementation(Deps.Libraries.retrofit)
     implementation(Deps.Libraries.kotlinSerializationJson)

@@ -1,9 +1,11 @@
 package it.unibolss.smartparking.data.models.parkingslot
 
-import java.util.Date
+import kotlinx.datetime.Instant
+import kotlinx.serialization.Serializable
 
+@Serializable
 internal data class ParkingSlotDto(
     val id: String,
     val position: GeoPositionDto,
-    val freesAt: Date?
+    val freesAt: Instant?
 )
