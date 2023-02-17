@@ -1,7 +1,7 @@
 package it.unibolss.smartparking.data.datasources.parkingslot
 
+import it.unibolss.smartparking.data.models.parkingslot.GetParkingSlotsBody
 import it.unibolss.smartparking.data.models.parkingslot.ParkingSlotDto
-import it.unibolss.smartparking.data.models.user.LoginRequestBody
 import it.unibolss.smartparking.domain.entities.parkingslot.ParkingSlot
 import retrofit2.Response
 import retrofit2.http.Body
@@ -13,7 +13,7 @@ internal interface ParkingSlotDataSource {
     @GET("parking-slot/")
     suspend fun getParkingSlots(
         @Body
-        body: LoginRequestBody
+        body: GetParkingSlotsBody
     ): Response<List<ParkingSlotDto>>
 
     @GET("parking-slot/{id}")
