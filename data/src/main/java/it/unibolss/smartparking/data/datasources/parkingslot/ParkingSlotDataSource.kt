@@ -9,4 +9,7 @@ internal interface ParkingSlotDataSource {
     suspend fun getParkingSlots(center: GeoPosition, radius: Double): Response<List<ParkingSlotDto>>
 
     suspend fun getParkingSlot(id: String): Response<ParkingSlot>
+
+    suspend fun occupyParkingSlot(id: String): Response<Unit>
+
 }
