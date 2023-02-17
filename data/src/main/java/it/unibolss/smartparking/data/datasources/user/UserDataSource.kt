@@ -19,4 +19,6 @@ internal interface UserDataSource {
     suspend fun changeUserPassword(
         body: ChangePasswordRequestBody
     ): Response<Unit>
+
+    suspend fun getUser(): Response<UserDto>
 }
