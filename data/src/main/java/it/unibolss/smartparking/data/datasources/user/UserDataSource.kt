@@ -12,4 +12,5 @@ internal interface UserDataSource {
         user: SignUpRequestBody
     ): Response<Unit>
 
+    suspend fun login(credentials: LoginRequestBody): Response<Unit>
 }
