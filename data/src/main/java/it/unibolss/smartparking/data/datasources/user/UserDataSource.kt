@@ -21,4 +21,5 @@ internal interface UserDataSource {
     ): Response<Unit>
 
     suspend fun getUser(): Response<UserDto>
+    suspend fun deleteUser(): Response<Unit>
 }
