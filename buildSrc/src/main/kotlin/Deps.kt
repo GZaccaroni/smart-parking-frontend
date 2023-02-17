@@ -19,6 +19,7 @@ object Deps {
         const val androidKotlin = "org.jetbrains.kotlin.android"
         const val dokka = "org.jetbrains.dokka"
         const val sonarqube = "org.sonarqube"
+        const val kotlinSerialization = "org.jetbrains.kotlin.plugin.serialization";
     }
 
     object Libraries {
@@ -34,6 +35,9 @@ object Deps {
             const val koinAndroidCompose = "3.4.2"
             const val kotlinCoroutines = "1.6.4"
             const val arrowStack = "1.0.1"
+            const val retrofit = "2.9.0"
+            const val kotlinSerializationJson = "1.4.1"
+            const val kotlinRetrofitSerialization = "0.8.0"
         }
         const val androidXCore = "androidx.core:core-ktx:${Versions.androidXCore}"
         const val androidXLifecycleRuntime = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.androidXLifecycleRuntime}"
@@ -50,6 +54,9 @@ object Deps {
         const val arrowCore = "io.arrow-kt:arrow-core:${Versions.arrowStack}"
         const val arrowFxCoroutines = "io.arrow-kt:arrow-fx-coroutines:${Versions.arrowStack}"
 
+        const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}";
+        const val kotlinSerializationJson = "org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.kotlinSerializationJson}"
+        const val kotlinRetrofitSerialization = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:${Versions.kotlinRetrofitSerialization}"
     }
 
     object TestLibraries {
