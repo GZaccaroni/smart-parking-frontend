@@ -13,4 +13,10 @@ internal interface UserDataSource {
     ): Response<Unit>
 
     suspend fun login(credentials: LoginRequestBody): Response<Unit>
+
+    suspend fun logout(): Response<Unit>
+
+    suspend fun changeUserPassword(
+        body: ChangePasswordRequestBody
+    ): Response<Unit>
 }
