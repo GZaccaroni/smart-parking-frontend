@@ -34,6 +34,7 @@ object Deps {
             const val koin = "3.3.3"
             const val koinAndroidCompose = "3.4.2"
             const val kotlinCoroutines = "1.6.4"
+            const val kotlinDateTime = "0.4.0"
             const val arrowStack = "1.0.1"
             const val retrofit = "2.9.0"
             const val kotlinSerializationJson = "1.4.1"
@@ -51,6 +52,7 @@ object Deps {
         const val koinAndroid = "io.insert-koin:koin-android:${Versions.koin}"
         const val koinAndroidCompose = "io.insert-koin:koin-androidx-compose:${Versions.koinAndroidCompose}"
         const val kotlinCoroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.kotlinCoroutines}"
+        const val kotlinDateTime = "org.jetbrains.kotlinx:kotlinx-datetime:${Versions.kotlinDateTime}"
         const val arrowCore = "io.arrow-kt:arrow-core:${Versions.arrowStack}"
         const val arrowFxCoroutines = "io.arrow-kt:arrow-fx-coroutines:${Versions.arrowStack}"
 

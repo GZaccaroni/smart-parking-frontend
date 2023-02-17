@@ -1,20 +1,48 @@
 package it.unibolss.smartparking.data.datasources.parkingslot
 
 import it.unibolss.smartparking.data.models.parkingslot.ParkingSlotDto
-import it.unibolss.smartparking.data.models.user.UserDto
-import it.unibolss.smartparking.domain.entities.geo.GeoPosition
+import it.unibolss.smartparking.data.models.user.LoginRequestBody
 import it.unibolss.smartparking.domain.entities.parkingslot.ParkingSlot
 import retrofit2.Response
+import retrofit2.http.Body
+import retrofit2.http.GET
+import retrofit2.http.POST
+import retrofit2.http.Path
 
 internal interface ParkingSlotDataSource {
-    suspend fun getParkingSlots(center: GeoPosition, radius: Double): Response<List<ParkingSlotDto>>
+    @GET("parking-slot/")
+    suspend fun getParkingSlots(
+        @Body
+        body: LoginRequestBody
+    ): Response<List<ParkingSlotDto>>
 
-    suspend fun getParkingSlot(id: String): Response<ParkingSlot>
+    @GET("parking-slot/{id}")
+    suspend fun getParkingSlot(
+        @Path("id")
+        id: String
+    ): Response<ParkingSlot>
 
-    suspend fun occupyParkingSlot(id: String): Response<Unit>
+    @POST("parking-slot/{id}/occupy")
+    suspend fun occupyParkingSlot(
+        @Path("id")
+        id: String
+    ): Response<Unit>
 
-    suspend fun incrementParkingSlotOccupation(id: String): Response<Unit>
+    @POST("parking-slot/{id}/increment-occupation")
+    suspend fun incrementParkingSlotOccupation(
+        @Path("id")
+        id: String
+    ): Response<Unit>
 
-    suspend fun getCurrentParkingSlot(): Response<ParkingSlot>
-    suspend fun freeParkingSlot(id: String): Response<Unit>
+    @GET("user/{userId}/parking-slot")
+    suspend fun getCurrentParkingSlot(
+        @Path("userId")
+        userId: String,
+    ): Response<ParkingSlot>
+
+    @POST("parking-slot/{id}/free")
+    suspend fun freeParkingSlot(
+        @Path("id")
+        id: String
+    ): Response<Unit>
 }
