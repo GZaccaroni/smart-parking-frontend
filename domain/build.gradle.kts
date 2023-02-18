@@ -9,9 +9,10 @@ android {
 }
 
 dependencies {
+    api(Deps.Libraries.arrowCore)
+
     implementation(Deps.Libraries.koin)
     implementation(Deps.Libraries.kotlinCoroutines)
-    implementation(Deps.Libraries.arrowCore)
     implementation(Deps.Libraries.arrowFxCoroutines)
     testImplementation(Deps.TestLibraries.junit)
     testImplementation(Deps.TestLibraries.kotlinCoroutines)
