@@ -30,9 +30,13 @@ dependencies {
     implementation(Deps.Libraries.androidXComposeNavigation)
 
     testImplementation(Deps.TestLibraries.junit)
+    testImplementation(Deps.TestLibraries.kotlinCoroutines)
+    testImplementation(Deps.TestLibraries.mockk)
+
     androidTestImplementation(Deps.TestLibraries.junitAndroidExt)
     androidTestImplementation(Deps.TestLibraries.espressoCore)
     androidTestImplementation(Deps.TestLibraries.uiTestJunit4)
+
     debugImplementation(Deps.DebugLibraries.composeUiTooling)
     debugImplementation(Deps.DebugLibraries.composeUiTestManifest)
 }
