@@ -7,5 +7,6 @@ import kotlinx.serialization.Serializable
 internal data class ParkingSlotDto(
     val id: String,
     val position: GeoPositionDto,
-    val freesAt: Instant?
+    val occupied: Boolean,
+    val stopEnd: Instant?
 )
