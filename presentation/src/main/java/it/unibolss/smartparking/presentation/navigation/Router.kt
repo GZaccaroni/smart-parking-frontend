@@ -1,10 +1,10 @@
 package it.unibolss.smartparking.presentation.navigation
 
 import androidx.navigation.NavOptions
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.SharedFlow
 
 interface Router {
-    val commands: StateFlow<RouterCommand?>
+    val commands: SharedFlow<RouterCommand>
     fun navigateTo(route: Route, navOptions: NavOptions? = null)
     fun popBackStack()
 }
