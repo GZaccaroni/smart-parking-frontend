@@ -4,7 +4,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -18,6 +20,8 @@ import it.unibolss.smartparking.presentation.screens.parkingslot.parkingSlotScre
 import it.unibolss.smartparking.presentation.screens.parkingslots.ParkingSlotsRoute
 import it.unibolss.smartparking.presentation.screens.parkingslots.parkingSlotsScreen
 import it.unibolss.smartparking.presentation.screens.signup.signUpScreen
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.compose.get
 
 @Composable
@@ -48,13 +52,14 @@ fun SmartParkingApp(
 @Composable
 private fun createNavController(router: Router): NavHostController {
     val navController = rememberNavController()
-    router.commands.collectAsState().value.also { command ->
-        when (command) {
-            is RouterCommand.NavigateTo ->
-                navController.navigate(command.route.path, command.navOptions)
-            RouterCommand.PopBackStack ->
-                navController.popBackStack()
-            null -> return@also
+    LaunchedEffect(true) {
+        router.commands.collect { command ->
+            when (command) {
+                is RouterCommand.NavigateTo ->
+                    navController.navigate(command.route.path, command.navOptions)
+                RouterCommand.PopBackStack ->
+                    navController.popBackStack()
+            }
         }
     }
     return navController
