@@ -10,6 +10,7 @@ android {
 
 dependencies {
     api(Deps.Libraries.arrowCore)
+    api(Deps.Libraries.kotlinDateTime)
 
     implementation(Deps.Libraries.koin)
     implementation(Deps.Libraries.kotlinCoroutines)
