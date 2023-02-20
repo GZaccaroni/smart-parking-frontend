@@ -1,5 +1,6 @@
 package it.unibolss.smartparking.data.datasources.user
 
+import it.unibolss.smartparking.data.models.user.AuthenticationResult
 import it.unibolss.smartparking.data.models.user.ChangePasswordRequestBody
 import it.unibolss.smartparking.data.models.user.LoginRequestBody
 import it.unibolss.smartparking.data.models.user.SignUpRequestBody
@@ -9,7 +10,6 @@ import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST
-import retrofit2.http.Path
 
 internal interface UserDataSource {
 
@@ -17,31 +17,22 @@ internal interface UserDataSource {
     suspend fun signUp(
         @Body
         body: SignUpRequestBody
-    ): Response<UserDto>
+    ): Response<AuthenticationResult>
 
     @POST("user/login")
     suspend fun login(
         @Body
         body: LoginRequestBody
-    ): Response<UserDto>
+    ): Response<AuthenticationResult>
 
-    @POST("user/logout")
-    suspend fun logout(): Response<Unit>
-
-    @POST("user/{id}/change-password")
+    @POST("user/change-password")
     suspend fun changeUserPassword(
         body: ChangePasswordRequestBody
     ): Response<Unit>
 
-    @GET("user/{id}")
-    suspend fun getUser(
-        @Path("id")
-        id: String,
-    ): Response<UserDto>
+    @GET("user/current")
+    suspend fun getUser(): Response<UserDto>
 
-    @DELETE("user/{id}")
-    suspend fun deleteUser(
-        @Path("id")
-        id: String,
-    ): Response<Unit>
+    @DELETE("user/current")
+    suspend fun deleteUser(): Response<Unit>
 }
