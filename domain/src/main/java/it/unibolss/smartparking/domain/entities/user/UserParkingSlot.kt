@@ -1,10 +1,10 @@
 package it.unibolss.smartparking.domain.entities.user
 
 import it.unibolss.smartparking.domain.entities.geo.GeoPosition
-import java.util.Date
+import kotlinx.datetime.Instant
 
 data class UserParkingSlot(
     val id: String,
-    val expiresAt: Date,
+    val expiresAt: Instant,
     val position: GeoPosition
 )
