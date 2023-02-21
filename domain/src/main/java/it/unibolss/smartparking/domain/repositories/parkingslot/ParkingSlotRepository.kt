@@ -14,7 +14,12 @@ interface ParkingSlotRepository {
     /**
      * Finds a parking slot identified by [id]
      */
-    suspend fun getParkingSlot(id: String): Either<AppError, ParkingSlot?>
+    suspend fun getParkingSlot(id: String): Either<AppError, ParkingSlot>
+
+    /**
+     * Finds the parking slot currently occupied by the user
+     */
+    suspend fun getCurrentParkingSlot(): Either<AppError, ParkingSlot?>
 
     /**
      * Occupies a parking slot identified by [id]

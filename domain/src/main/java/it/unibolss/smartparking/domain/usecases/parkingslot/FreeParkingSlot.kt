@@ -12,16 +12,15 @@ import it.unibolss.smartparking.domain.usecases.common.AsyncFailableUseCase
  * nothing.
  */
 class FreeParkingSlot(
-    private val userRepository: UserRepository,
     private val parkingSlotRepository: ParkingSlotRepository
 ) : AsyncFailableUseCase<Unit, AppError, Unit>() {
 
     override suspend fun run(params: Unit): Either<AppError, Unit> =
-        userRepository.getUser()
+        parkingSlotRepository.getCurrentParkingSlot()
             .flatMap {
-                if (it.currentParkingSlot == null)
+                if (it == null)
                     Either.Right(Unit)
                 else
-                    parkingSlotRepository.freeParkingSlot(it.currentParkingSlot.id)
+                    parkingSlotRepository.freeParkingSlot(it.id)
             }
 }

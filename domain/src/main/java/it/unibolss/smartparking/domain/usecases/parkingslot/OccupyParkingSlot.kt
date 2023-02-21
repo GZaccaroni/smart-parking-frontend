@@ -13,14 +13,13 @@ import it.unibolss.smartparking.domain.usecases.common.AsyncFailableUseCase
  * [AppError.AlreadyParking]
  */
 class OccupyParkingSlot(
-    private val userRepository: UserRepository,
     private val parkingSlotRepository: ParkingSlotRepository
 ) : AsyncFailableUseCase<OccupyParkingSlot.Params, AppError, Unit>() {
 
     override suspend fun run(params: Params): Either<AppError, Unit> =
-        userRepository.getUser()
+        parkingSlotRepository.getCurrentParkingSlot()
             .flatMap {
-                if (it.currentParkingSlot != null)
+                if (it != null)
                     Either.Left(AppError.AlreadyParking)
                 else
                     parkingSlotRepository.occupyParkingSlot(params.id)
