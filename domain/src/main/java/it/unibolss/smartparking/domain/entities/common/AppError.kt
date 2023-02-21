@@ -3,9 +3,7 @@ package it.unibolss.smartparking.domain.entities.common
 enum class AppError {
     Generic,
     SerializationError,
-    SessionExpired,
     Unauthorized,
-    AlreadyLoggedIn,
     AlreadyRegistered,
     InvalidUserName,
     InvalidUserEmail,
@@ -13,5 +11,6 @@ enum class AppError {
     WrongCredentials,
     AlreadyParking,
     ParkingSlotOccupied,
+    ParkingSlotNotFound,
     NoParkingSlotOccupied
 }
