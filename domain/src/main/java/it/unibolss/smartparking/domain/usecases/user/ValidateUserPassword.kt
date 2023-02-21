@@ -8,12 +8,12 @@ import it.unibolss.smartparking.domain.usecases.common.UseCase
 class ValidateUserPassword : UseCase<ValidateUserPassword.Params, Boolean>() {
 
     override fun run(params: Params): Boolean {
-        return passwordLengthRange.contains(params.password.length)
+        return params.password.length >= passwordMinLength
     }
 
     data class Params(val password: String)
 
     companion object {
-        private val passwordLengthRange = 6..40
+        private const val passwordMinLength = 6
     }
 }

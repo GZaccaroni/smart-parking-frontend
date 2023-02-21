@@ -15,10 +15,14 @@ class LoginUser(
 ) : AsyncFailableUseCase<LoginUser.Params, AppError, Unit>() {
 
     override suspend fun run(params: Params): Either<AppError, Unit> {
-        if (!validateUserEmail(ValidateUserEmail.Params(params.credentials.email)))
+        val trimmedEmail = params.email.trim()
+        if (!validateUserEmail(ValidateUserEmail.Params(trimmedEmail)))
             return Either.Left(AppError.InvalidUserEmail)
-        return userRepository.login(params.credentials)
+        return userRepository.login(UserCredentials(trimmedEmail, params.password))
     }
 
-    data class Params(val credentials: UserCredentials)
+    data class Params(
+        val email: String,
+        val password: String
+    )
 }
