@@ -29,12 +29,15 @@ class SignUpUser(
         return userRepository.signUp(cleanedUpUser)
     }
     private fun validationError(user: NewUser): AppError? {
-        if (!validateUserName(ValidateUserName.Params(user.name)))
+        if (!validateUserName(ValidateUserName.Params(user.name))) {
             return AppError.InvalidUserName
-        if (!validateUserEmail(ValidateUserEmail.Params(user.email)))
+        }
+        if (!validateUserEmail(ValidateUserEmail.Params(user.email))) {
             return AppError.InvalidUserEmail
-        if (!validateUserPassword(ValidateUserPassword.Params(user.password)))
+        }
+        if (!validateUserPassword(ValidateUserPassword.Params(user.password))) {
             return AppError.InvalidUserPassword
+        }
 
         return null
     }
