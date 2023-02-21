@@ -27,6 +27,7 @@ interface UserRepository {
      * Logs out the currently logged in user.
      */
     suspend fun logout(): Either<AppError, Unit>
+
     /**
      * Changes the current user password [currentPassword] with a new one [newPassword].
      */
@@ -39,6 +40,7 @@ interface UserRepository {
      * Gets the informations [User] of the currently logged in user
      */
     suspend fun getUser(): Either<AppError, User>
+
     /**
      * Deletes the currently logged in user
      */
