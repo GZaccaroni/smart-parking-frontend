@@ -34,4 +34,10 @@ private fun AppErrorDto.toDomainError(): AppError =
     when (this) {
         AppErrorDto.Unauthorized -> AppError.Unauthorized
         AppErrorDto.AlreadyRegistered -> AppError.AlreadyRegistered
+        AppErrorDto.ParkingSlotNotFound -> AppError.ParkingSlotNotFound
+        AppErrorDto.ParkingSlotOccupied -> AppError.ParkingSlotOccupied
+        AppErrorDto.InvalidUserName -> AppError.InvalidUserName
+        AppErrorDto.InvalidUserEmail -> AppError.InvalidUserEmail
+        AppErrorDto.InvalidUserPassword -> AppError.InvalidUserPassword
+        AppErrorDto.WrongCredentials -> AppError.WrongCredentials
     }
