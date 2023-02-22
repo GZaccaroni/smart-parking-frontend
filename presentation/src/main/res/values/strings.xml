@@ -1,10 +1,6 @@
 <resources>
-    <string name="app_name">Smart Parking</string>
-
     <string name="login_screen_title">Login</string>
-    <string name="sign_up_screen_title">Sign Up</string>
 
-    <string name="user_name">Name</string>
     <string name="user_email">Email</string>
     <string name="user_password">Password</string>
     <string name="go_to_sign_up_cta">Don\'t have an account yet? Sign Up!</string>
