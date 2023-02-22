@@ -98,6 +98,8 @@ internal class LoginScreenViewModelTest {
 
     @Test
     fun testFailedValidationCase() = runTest {
+        advanceUntilIdle()
+
         viewModel.setEmail("invalidemail")
 
         advanceUntilIdle()
