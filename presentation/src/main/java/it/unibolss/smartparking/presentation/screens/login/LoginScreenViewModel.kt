@@ -23,7 +23,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
-class LoginScreenViewModel(
+internal class LoginScreenViewModel(
     private val loginUser: LoginUser,
     private val validateUserEmail: ValidateUserEmail,
     private val validateUserPassword: ValidateUserPassword,

@@ -1,5 +1,5 @@
 package it.unibolss.smartparking.presentation.navigation
 
-interface Route {
+internal interface Route {
     val path: String
 }

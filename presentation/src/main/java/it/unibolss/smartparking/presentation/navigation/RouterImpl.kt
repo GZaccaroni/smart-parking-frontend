@@ -3,13 +3,10 @@ package it.unibolss.smartparking.presentation.navigation
 import androidx.navigation.NavOptions
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
-import kotlinx.coroutines.flow.asStateFlow
 
-class RouterImpl : Router {
+internal class RouterImpl : Router {
     private val _commands = MutableSharedFlow<RouterCommand>(replay = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
     override val commands: SharedFlow<RouterCommand> = _commands.asSharedFlow()
 
