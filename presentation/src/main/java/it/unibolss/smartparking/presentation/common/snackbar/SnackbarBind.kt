@@ -7,7 +7,7 @@ import androidx.compose.runtime.collectAsState
 import kotlinx.coroutines.flow.SharedFlow
 
 @Composable
-fun SharedFlow<SnackbarContent>.Bind(snackbarHostState: SnackbarHostState) {
+internal fun SharedFlow<SnackbarContent>.Bind(snackbarHostState: SnackbarHostState) {
     val value = this.collectAsState(null).value ?: return
     val message = value.message
     LaunchedEffect(value) {

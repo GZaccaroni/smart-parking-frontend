@@ -5,8 +5,6 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -20,12 +18,10 @@ import it.unibolss.smartparking.presentation.screens.parkingslot.parkingSlotScre
 import it.unibolss.smartparking.presentation.screens.parkingslots.ParkingSlotsRoute
 import it.unibolss.smartparking.presentation.screens.parkingslots.parkingSlotsScreen
 import it.unibolss.smartparking.presentation.screens.signup.signUpScreen
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.compose.get
 
 @Composable
-fun SmartParkingApp(
+internal fun SmartParkingApp(
     isLoggedIn: Boolean,
     router: Router = get()
 ) {

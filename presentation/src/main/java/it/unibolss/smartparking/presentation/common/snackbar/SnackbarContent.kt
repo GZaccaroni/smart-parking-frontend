@@ -5,7 +5,7 @@ import it.unibolss.smartparking.domain.entities.common.AppError
 import it.unibolss.smartparking.presentation.common.error.message
 import java.util.UUID
 
-sealed interface SnackbarContent {
+internal sealed interface SnackbarContent {
     val id: String
 
     @get:Composable
