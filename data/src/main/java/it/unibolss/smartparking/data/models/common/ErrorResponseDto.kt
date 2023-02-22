@@ -1,5 +1,5 @@
 package it.unibolss.smartparking.data.models.common
 
-data class ErrorResponseDto(
+internal data class ErrorResponseDto(
     val errorCode: AppErrorDto
 )
