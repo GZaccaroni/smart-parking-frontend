@@ -6,13 +6,9 @@ import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
-import io.mockk.mockk
 import it.unibolss.smartparking.domain.entities.common.AppError
-import it.unibolss.smartparking.domain.entities.user.AuthState
-import it.unibolss.smartparking.domain.entities.user.User
 import it.unibolss.smartparking.domain.entities.user.UserCredentials
 import it.unibolss.smartparking.domain.repositories.user.UserRepository
-import it.unibolss.smartparking.domain.usecases.common.invoke
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
@@ -46,7 +42,7 @@ class LoginUserTest {
             userRepository.login(userCredentials)
         } returns Either.Right(Unit)
 
-        val result = useCase(LoginUser.Params(userCredentials))
+        val result = useCase(LoginUser.Params(userCredentials.email, userCredentials.password))
         assertEquals(Either.Right(Unit), result)
 
         coVerify(exactly = 1) {
@@ -63,7 +59,7 @@ class LoginUserTest {
             validateUserEmail(ValidateUserEmail.Params(userCredentials.email))
         } returns false
 
-        val result = useCase(LoginUser.Params(userCredentials))
+        val result = useCase(LoginUser.Params(userCredentials.email, userCredentials.password))
         assertEquals(Either.Left(AppError.InvalidUserEmail), result)
 
         coVerify(exactly = 1) {
