@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">Smart Parking</string>
+
+    <string name="login_screen_title">Login</string>
+    <string name="sign_up_screen_title">Sign Up</string>
+
+    <string name="user_name">Name</string>
+    <string name="user_email">Email</string>
+    <string name="user_password">Password</string>
+    <string name="go_to_sign_up_cta">Don\'t have an account yet? Sign Up!</string>
+    <string name="login_cta">Login</string>
+
+    <string name="app_error_generic">An unknown error occurred (GEN).</string>
+    <string name="app_error_serialization_failed">An unknown error occurred (SERI).</string>
+    <string name="app_error_unauthorized">Please, login to access this page.</string>
+    <string name="app_error_already_registered">There is already a user with these credentials.</string>
+    <string name="app_error_invalid_user_name">Please, insert a valid name.</string>
+    <string name="app_error_invalid_user_email">Please, insert a valid email.</string>
+    <string name="app_error_invalid_user_password">Please, insert a valid password.</string>
+    <string name="app_error_wrong_credentials">Incorrect email or password.</string>
+    <string name="app_error_already_parking">You should free your current parking slot before occupying another one.</string>
+    <string name="app_error_parking_slot_occupied">This parking slot is already occupied.</string>
+    <string name="app_error_parking_slot_not_found">We haven\'t found this parking slot.</string>
+    <string name="app_error_no_parking_slot_occupied">You aren\'t currently occupying any parking slot.</string>
 </resources>

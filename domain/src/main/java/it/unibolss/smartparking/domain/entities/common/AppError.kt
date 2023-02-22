@@ -2,7 +2,7 @@ package it.unibolss.smartparking.domain.entities.common
 
 enum class AppError {
     Generic,
-    SerializationError,
+    SerializationFailed,
     Unauthorized,
     AlreadyRegistered,
     InvalidUserName,
