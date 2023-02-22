@@ -3,7 +3,7 @@ package it.unibolss.smartparking.data.models.common
 import kotlinx.serialization.Serializable
 
 @Serializable
-enum class AppErrorDto {
+internal enum class AppErrorDto {
     Unauthorized,
     AlreadyRegistered,
     ParkingSlotNotFound,
