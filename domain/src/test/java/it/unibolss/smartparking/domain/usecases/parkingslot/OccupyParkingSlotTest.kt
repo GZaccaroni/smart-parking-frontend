@@ -5,15 +5,11 @@ import io.mockk.Called
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.coVerify
-import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import io.mockk.mockk
-import io.mockk.verify
 import it.unibolss.smartparking.domain.entities.common.AppError
-import it.unibolss.smartparking.domain.entities.user.User
+import it.unibolss.smartparking.domain.entities.parkingslot.ParkingSlot
 import it.unibolss.smartparking.domain.repositories.parkingslot.ParkingSlotRepository
-import it.unibolss.smartparking.domain.repositories.user.UserRepository
-import it.unibolss.smartparking.domain.usecases.common.invoke
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
@@ -23,8 +19,6 @@ import org.junit.Test
 @ExperimentalCoroutinesApi
 class OccupyParkingSlotTest {
     @MockK
-    lateinit var userRepository: UserRepository
-    @MockK
     lateinit var parkingSlotRepository: ParkingSlotRepository
 
     lateinit var useCase: OccupyParkingSlot
@@ -32,18 +26,16 @@ class OccupyParkingSlotTest {
     @Before
     fun setUp() {
         MockKAnnotations.init(this)
-        useCase = OccupyParkingSlot(userRepository, parkingSlotRepository)
+        useCase = OccupyParkingSlot(parkingSlotRepository)
     }
 
     @Test
     fun testHappyCase() = runTest {
         val parkingSlotId = "1"
-        val user = mockk<User>()
 
-        every { user.currentParkingSlot } returns null
         coEvery {
-            userRepository.getUser()
-        } returns Either.Right(user)
+            parkingSlotRepository.getCurrentParkingSlot()
+        } returns Either.Right(null)
         coEvery {
             parkingSlotRepository.occupyParkingSlot(parkingSlotId)
         } returns Either.Right(Unit)
@@ -54,22 +46,21 @@ class OccupyParkingSlotTest {
             parkingSlotRepository.occupyParkingSlot(parkingSlotId)
         }
     }
+
     @Test
     fun testAlreadyParked() = runTest {
-        val parkingSlotId = "1"
         val newParkingSlotId = "1"
-        val user = mockk<User>()
+        val parkingSlot = mockk<ParkingSlot>()
 
-        every { user.currentParkingSlot?.id } returns parkingSlotId
         coEvery {
-            userRepository.getUser()
-        } returns Either.Right(user)
+            parkingSlotRepository.getCurrentParkingSlot()
+        } returns Either.Right(parkingSlot)
 
         val result = useCase(OccupyParkingSlot.Params(newParkingSlotId))
         assertEquals(Either.Left(AppError.AlreadyParking), result)
 
-        verify {
-            parkingSlotRepository wasNot Called
+        coVerify {
+            parkingSlotRepository.occupyParkingSlot(any()) wasNot Called
         }
     }
 }
