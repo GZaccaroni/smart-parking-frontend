@@ -24,7 +24,7 @@ internal sealed interface SnackbarContent {
             get() = error.message
 
         override fun equals(other: Any?): Boolean =
-            if (other is Error) (other.id == id) else false
+            (other as? Error)?.id == id
 
         override fun hashCode(): Int = id.hashCode()
     }

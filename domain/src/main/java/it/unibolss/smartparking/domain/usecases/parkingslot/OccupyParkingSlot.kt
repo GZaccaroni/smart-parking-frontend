@@ -4,7 +4,6 @@ import arrow.core.Either
 import arrow.core.flatMap
 import it.unibolss.smartparking.domain.entities.common.AppError
 import it.unibolss.smartparking.domain.repositories.parkingslot.ParkingSlotRepository
-import it.unibolss.smartparking.domain.repositories.user.UserRepository
 import it.unibolss.smartparking.domain.usecases.common.AsyncFailableUseCase
 
 /**
@@ -19,10 +18,11 @@ class OccupyParkingSlot(
     override suspend fun run(params: Params): Either<AppError, Unit> =
         parkingSlotRepository.getCurrentParkingSlot()
             .flatMap {
-                if (it != null)
+                if (it != null) {
                     Either.Left(AppError.AlreadyParking)
-                else
+                } else {
                     parkingSlotRepository.occupyParkingSlot(params.id)
+                }
             }
 
     data class Params(
