@@ -7,4 +7,19 @@ import it.unibolss.smartparking.presentation.R
 
 internal val AppError.message: String
     @Composable
-    get() = stringResource(id = R.string.app_name)
+    get() = stringResource(
+        when (this) {
+            AppError.Generic -> R.string.app_error_generic
+            AppError.SerializationFailed -> R.string.app_error_serialization_failed
+            AppError.Unauthorized -> R.string.app_error_unauthorized
+            AppError.AlreadyRegistered -> R.string.app_error_already_registered
+            AppError.InvalidUserName -> R.string.app_error_invalid_user_name
+            AppError.InvalidUserEmail -> R.string.app_error_invalid_user_email
+            AppError.InvalidUserPassword -> R.string.app_error_invalid_user_password
+            AppError.WrongCredentials -> R.string.app_error_wrong_credentials
+            AppError.AlreadyParking -> R.string.app_error_already_parking
+            AppError.ParkingSlotOccupied -> R.string.app_error_parking_slot_occupied
+            AppError.ParkingSlotNotFound -> R.string.app_error_parking_slot_not_found
+            AppError.NoParkingSlotOccupied -> R.string.app_error_no_parking_slot_occupied
+        }
+    )

@@ -14,7 +14,7 @@ internal inline fun <reified T> Response<T>.toEither(): Either<AppError, T> {
         if (body != null) {
             Either.Right(body)
         } else {
-            Either.Left(AppError.SerializationError)
+            Either.Left(AppError.SerializationFailed)
         }
     } else {
         val response = errorBody()?.string()
