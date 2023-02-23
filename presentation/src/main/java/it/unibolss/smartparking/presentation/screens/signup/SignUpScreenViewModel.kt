@@ -62,10 +62,11 @@ internal class SignUpScreenViewModel(
             .stateIn(viewModelScope, SharingStarted.Eagerly, false)
 
     val submitButtonEnabled: StateFlow<Boolean> =
-        combine(email, password) { email, password ->
+        combine(name, email, password) { name, email, password ->
+            val nameValid = validateUserName(ValidateUserName.Params(name))
             val emailValid = validateUserEmail(ValidateUserEmail.Params(email))
             val passwordValid = validateUserPassword(ValidateUserPassword.Params(password))
-            emailValid && passwordValid
+            nameValid && emailValid && passwordValid
         }.stateIn(viewModelScope, SharingStarted.Eagerly, false)
 
     private val _loading = MutableStateFlow(false)
