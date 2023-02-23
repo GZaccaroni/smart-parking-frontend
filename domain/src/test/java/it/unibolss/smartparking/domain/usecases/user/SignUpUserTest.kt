@@ -28,7 +28,9 @@ class SignUpUserTest {
 
     lateinit var useCase: SignUpUser
 
-    private val testNewUser = NewUser("Test", "test@test.it", "pw")
+    private val newUserName = "Test"
+    private val newUserEmail = "test@test.it"
+    private val newUserPassword = "pw"
 
     @Before
     fun setUp() {
@@ -38,77 +40,102 @@ class SignUpUserTest {
 
     @Test
     fun testHappyCase() = runTest {
-
         every {
-            validateUserName(ValidateUserName.Params(testNewUser.name))
+            validateUserName(ValidateUserName.Params(newUserName))
         } returns true
         every {
-            validateUserEmail(ValidateUserEmail.Params(testNewUser.email))
+            validateUserEmail(ValidateUserEmail.Params(newUserEmail))
         } returns true
         every {
-            validateUserPassword(ValidateUserPassword.Params(testNewUser.password))
+            validateUserPassword(ValidateUserPassword.Params(newUserPassword))
         } returns true
 
         coEvery {
-            userRepository.signUp(testNewUser)
+            userRepository.signUp(NewUser(newUserName, newUserEmail, newUserPassword))
         } returns Either.Right(Unit)
 
-        val result = useCase(SignUpUser.Params(testNewUser))
+        val result = useCase(
+            SignUpUser.Params(
+                name = newUserName,
+                email = newUserEmail,
+                password = newUserPassword
+            )
+        )
         assertEquals(Either.Right(Unit), result)
 
         coVerify(exactly = 1) {
-            userRepository.signUp(testNewUser)
-            validateUserName(ValidateUserName.Params(testNewUser.name))
-            validateUserEmail(ValidateUserEmail.Params(testNewUser.email))
-            validateUserPassword(ValidateUserPassword.Params(testNewUser.password))
+            userRepository.signUp(
+                NewUser(newUserName, newUserEmail, newUserPassword)
+            )
+            validateUserName(ValidateUserName.Params(newUserName))
+            validateUserEmail(ValidateUserEmail.Params(newUserEmail))
+            validateUserPassword(ValidateUserPassword.Params(newUserPassword))
         }
     }
+
     @Test
     fun testInvalidName() = runTest {
-
         every {
-            validateUserName(ValidateUserName.Params(testNewUser.name))
+            validateUserName(ValidateUserName.Params(newUserName))
         } returns false
         every {
-            validateUserEmail(ValidateUserEmail.Params(testNewUser.email))
+            validateUserEmail(ValidateUserEmail.Params(newUserEmail))
         } returns true
         every {
-            validateUserPassword(ValidateUserPassword.Params(testNewUser.password))
+            validateUserPassword(ValidateUserPassword.Params(newUserPassword))
         } returns true
 
-        val result = useCase(SignUpUser.Params(testNewUser))
+        val result = useCase(
+            SignUpUser.Params(
+                name = newUserName,
+                email = newUserEmail,
+                password = newUserPassword
+            )
+        )
         assertEquals(Either.Left(AppError.InvalidUserName), result)
     }
+
     @Test
     fun testInvalidEmail() = runTest {
-
         every {
-            validateUserName(ValidateUserName.Params(testNewUser.name))
+            validateUserName(ValidateUserName.Params(newUserName))
         } returns true
         every {
-            validateUserEmail(ValidateUserEmail.Params(testNewUser.email))
+            validateUserEmail(ValidateUserEmail.Params(newUserEmail))
         } returns false
         every {
-            validateUserPassword(ValidateUserPassword.Params(testNewUser.password))
+            validateUserPassword(ValidateUserPassword.Params(newUserPassword))
         } returns true
 
-        val result = useCase(SignUpUser.Params(testNewUser))
+        val result = useCase(
+            SignUpUser.Params(
+                name = newUserName,
+                password = newUserPassword,
+                email = newUserEmail
+            )
+        )
         assertEquals(Either.Left(AppError.InvalidUserEmail), result)
     }
+
     @Test
     fun testInvalidPassword() = runTest {
-
         every {
-            validateUserName(ValidateUserName.Params(testNewUser.name))
+            validateUserName(ValidateUserName.Params(newUserName))
         } returns true
         every {
-            validateUserEmail(ValidateUserEmail.Params(testNewUser.email))
+            validateUserEmail(ValidateUserEmail.Params(newUserEmail))
         } returns true
         every {
-            validateUserPassword(ValidateUserPassword.Params(testNewUser.password))
+            validateUserPassword(ValidateUserPassword.Params(newUserPassword))
         } returns false
 
-        val result = useCase(SignUpUser.Params(testNewUser))
+        val result = useCase(
+            SignUpUser.Params(
+                name = newUserName,
+                email = newUserEmail,
+                password = newUserPassword
+            )
+        )
         assertEquals(Either.Left(AppError.InvalidUserPassword), result)
     }
 }

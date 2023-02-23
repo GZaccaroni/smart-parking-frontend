@@ -17,16 +17,16 @@ class SignUpUser(
 ) : AsyncFailableUseCase<SignUpUser.Params, AppError, Unit>() {
 
     override suspend fun run(params: Params): Either<AppError, Unit> {
-        val cleanedUpUser = params.user.copy(
-            name = params.user.name.trim(),
-            email = params.user.email.trim(),
-            password = params.user.password.trim(),
+        val user = NewUser(
+            name = params.name.trim(),
+            email = params.email.trim(),
+            password = params.password.trim(),
         )
-        val validationError = validationError(cleanedUpUser)
+        val validationError = validationError(user)
         if (validationError != null) {
             return Either.Left(validationError)
         }
-        return userRepository.signUp(cleanedUpUser)
+        return userRepository.signUp(user)
     }
     private fun validationError(user: NewUser): AppError? {
         if (!validateUserName(ValidateUserName.Params(user.name))) {
@@ -42,5 +42,9 @@ class SignUpUser(
         return null
     }
 
-    data class Params(val user: NewUser)
+    data class Params(
+        val name: String,
+        val email: String,
+        val password: String
+    )
 }
