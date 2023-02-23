@@ -22,10 +22,8 @@ jobs:
           distribution: zulu
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
-      - name: Run tests
-        run: ./gradlew test
       - name: Generate coverage
-        run: ./gradlew runTestCoverage
+        run: ./gradlew createDebugUnitTestCoverageReport
       - uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}

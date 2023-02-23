@@ -8,6 +8,20 @@ permissions:
   contents: read
 
 jobs:
+  run-tests:
+    name: Run tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: zulu
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+      - name: Run tests
+        run: ./gradlew test
   sonar:
     name: Sonar analysis
     runs-on: ubuntu-latest
