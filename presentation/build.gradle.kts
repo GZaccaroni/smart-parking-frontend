@@ -9,6 +9,11 @@ android {
     buildFeatures {
         compose = true
     }
+    buildTypes {
+        debug {
+            enableUnitTestCoverage = true
+        }
+    }
     composeOptions {
         kotlinCompilerExtensionVersion = Deps.BuildPlugins.Versions.compilerExtensionVersion
     }

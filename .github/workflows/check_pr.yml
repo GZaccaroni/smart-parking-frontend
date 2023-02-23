@@ -22,10 +22,6 @@ jobs:
         uses: gradle/gradle-build-action@v2
       - name: Run tests
         run: ./gradlew test
-      - name: Generate coverage
-        run: ./gradlew runTestCoverage
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v3
   sonar:
     name: Sonar analysis
     runs-on: ubuntu-latest

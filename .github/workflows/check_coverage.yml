@@ -1,0 +1,29 @@
+name: Check Coverage
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  check_coverage:
+    name: Check code coverage
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: zulu
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+      - name: Generate coverage
+        run: ./gradlew createDebugUnitTestCoverageReport
+      - uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
