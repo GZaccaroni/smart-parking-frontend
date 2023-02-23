@@ -1,11 +1,16 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
-
+@file:Suppress("UnstableApiUsage")
 plugins {
     `android-base-lib`
 }
 
 android {
     namespace = "it.unibolss.smartparking.domain"
+
+    buildTypes {
+        debug {
+            enableUnitTestCoverage = true
+        }
+    }
 }
 
 dependencies {

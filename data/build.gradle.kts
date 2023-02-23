@@ -1,4 +1,4 @@
-import org.jetbrains.kotlin.ir.backend.js.compile
+@file:Suppress("UnstableApiUsage")
 
 plugins {
     `android-base-lib`
@@ -7,6 +7,12 @@ plugins {
 
 android {
     namespace = "it.unibolss.smartparking.data"
+
+    buildTypes {
+        debug {
+            enableUnitTestCoverage = true
+        }
+    }
 }
 
 dependencies {
