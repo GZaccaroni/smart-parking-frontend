@@ -1,10 +1,13 @@
 <resources>
-    <string name="login_screen_title">Login</string>
+    <string name="screen_title_login">Login</string>
+    <string name="screen_title_sign_up">Sign Up</string>
 
+    <string name="user_name">Name</string>
     <string name="user_email">Email</string>
     <string name="user_password">Password</string>
     <string name="go_to_sign_up_cta">Don\'t have an account yet? Sign Up!</string>
     <string name="login_cta">Login</string>
+    <string name="sign_up_cta">Sign Up</string>
 
     <string name="app_error_generic">An unknown error occurred (GEN).</string>
     <string name="app_error_serialization_failed">An unknown error occurred (SERI).</string>
