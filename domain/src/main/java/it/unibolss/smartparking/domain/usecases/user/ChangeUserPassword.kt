@@ -5,6 +5,7 @@ import it.unibolss.smartparking.domain.entities.common.AppError
 import it.unibolss.smartparking.domain.entities.user.AuthState
 import it.unibolss.smartparking.domain.repositories.user.UserRepository
 import it.unibolss.smartparking.domain.usecases.common.AsyncFailableUseCase
+import it.unibolss.smartparking.domain.usecases.user.ChangeUserPassword.Params
 
 /**
  * Changes the current password [Params.currentPassword] of the user with the new one
@@ -17,6 +18,8 @@ class ChangeUserPassword(
 ) : AsyncFailableUseCase<ChangeUserPassword.Params, AppError, Unit>() {
 
     override suspend fun run(params: Params): Either<AppError, Unit> {
+        if (params.newPassword == params.currentPassword)
+            return Either.Left(AppError.NewPasswordEqualToCurrent)
         if (!validateUserPassword(ValidateUserPassword.Params(params.newPassword)))
             return Either.Left(AppError.InvalidUserPassword)
         if (userRepository.authState is AuthState.Guest)
