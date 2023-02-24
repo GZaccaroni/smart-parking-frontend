@@ -12,6 +12,7 @@ import androidx.navigation.compose.rememberNavController
 import it.unibolss.smartparking.presentation.common.theme.SmartParkingTheme
 import it.unibolss.smartparking.presentation.navigation.Router
 import it.unibolss.smartparking.presentation.navigation.RouterCommand
+import it.unibolss.smartparking.presentation.screens.changepassword.changePasswordScreen
 import it.unibolss.smartparking.presentation.screens.login.LoginRoute
 import it.unibolss.smartparking.presentation.screens.login.loginScreen
 import it.unibolss.smartparking.presentation.screens.parkingslot.parkingSlotScreen
@@ -36,6 +37,7 @@ internal fun SmartParkingApp(
                 // User
                 loginScreen()
                 signUpScreen()
+                changePasswordScreen()
 
                 // Parking slots
                 parkingSlotsScreen()
