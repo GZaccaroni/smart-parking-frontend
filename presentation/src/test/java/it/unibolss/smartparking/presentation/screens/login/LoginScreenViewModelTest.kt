@@ -123,6 +123,7 @@ internal class LoginScreenViewModelTest {
         }
         viewModel.setEmail(successEmail)
         viewModel.setPassword(successPassword)
+        advanceUntilIdle()
 
         coEvery {
             loginUser.invoke(LoginUser.Params(successEmail, successPassword))

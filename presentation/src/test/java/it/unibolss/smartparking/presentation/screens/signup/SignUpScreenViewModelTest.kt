@@ -141,6 +141,7 @@ internal class SignUpScreenViewModelTest {
         viewModel.setName(successName)
         viewModel.setEmail(successEmail)
         viewModel.setPassword(successPassword)
+        advanceUntilIdle()
 
         coEvery {
             signUpUser.invoke(SignUpUser.Params(successName, successEmail, successPassword))
