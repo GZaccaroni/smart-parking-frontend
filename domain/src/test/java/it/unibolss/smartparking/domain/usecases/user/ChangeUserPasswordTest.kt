@@ -77,4 +77,26 @@ class ChangeUserPasswordTest {
             userRepository.changeUserPassword(currentPassword, newPassword)
         }
     }
+
+    @Test
+    fun testInvalidNewPasswordEqualToOld() = runTest {
+        val userId = "id"
+        val currentPassword = "current"
+        val newPassword = "current"
+
+        coEvery {
+            userRepository.authState
+        } returns AuthState.LoggedIn(userId)
+
+        every {
+            validateUserPassword(ValidateUserPassword.Params(newPassword))
+        } returns false
+
+        val result = useCase(ChangeUserPassword.Params(currentPassword, newPassword))
+        assertEquals(Either.Left(AppError.NewPasswordEqualToCurrent), result)
+
+        coVerify(exactly = 0) {
+            userRepository.changeUserPassword(currentPassword, newPassword)
+        }
+    }
 }

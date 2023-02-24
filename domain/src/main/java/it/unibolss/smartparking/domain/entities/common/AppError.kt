@@ -8,6 +8,7 @@ enum class AppError {
     InvalidUserName,
     InvalidUserEmail,
     InvalidUserPassword,
+    NewPasswordEqualToCurrent,
     WrongCredentials,
     AlreadyParking,
     ParkingSlotOccupied,
