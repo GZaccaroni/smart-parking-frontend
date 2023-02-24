@@ -153,6 +153,12 @@ internal class SignUpScreenViewModelTest {
         val result = deferred.await() as AppAlert.Error
         assertEquals(result.error, appError)
     }
+
+    @Test(expected = IllegalStateException::class)
+    fun testSubmitWithEmptyFields() = runTest {
+        viewModel.submit()
+    }
+
     private fun mockCommon() {
         every {
             validateUserName.invoke(eq(ValidateUserName.Params(successName)))

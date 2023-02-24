@@ -138,6 +138,12 @@ internal class ChangePasswordScreenViewModelTest {
         val result = deferred.await() as AppAlert.Error
         assertEquals(result.error, appError)
     }
+
+    @Test(expected = IllegalStateException::class)
+    fun testSubmitWithEmptyFields() = runTest {
+        viewModel.submit()
+    }
+
     private fun mockCommon() {
         every {
             validateUserPassword.invoke(ValidateUserPassword.Params(validPassword))
