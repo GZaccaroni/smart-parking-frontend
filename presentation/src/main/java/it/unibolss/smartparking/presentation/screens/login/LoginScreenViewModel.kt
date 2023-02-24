@@ -69,6 +69,12 @@ internal class LoginScreenViewModel(
     }
 
     fun submit() {
+        check(submitButtonEnabled.value) {
+            "Submit method should not be called if submitButtonEnabled is not true"
+        }
+        check(!loading.value) {
+            "Submit method should not be called if loading is true"
+        }
         viewModelScope.launch {
             _loading.value = true
             val result = loginUser(LoginUser.Params(email.value, password.value))
