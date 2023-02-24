@@ -16,7 +16,7 @@ internal sealed class AppAlert(
     abstract val message: String
 
     override fun equals(other: Any?): Boolean =
-        (other as? Error)?.id == id
+        (other is AppAlert) && other.id == id
 
     override fun hashCode(): Int = id.hashCode()
 
