@@ -10,7 +10,7 @@ object Deps {
             const val buildTools = "7.4.1"
             const val androidKotlin = "1.8.0"
             const val dokka = "1.7.20"
-            const val sonarqube = "3.5.0.2730"
+            const val sonarqube = "4.0.0.2929"
             const val compilerExtensionVersion = "1.4.0"
         }
         const val androidApplication = "com.android.application"
