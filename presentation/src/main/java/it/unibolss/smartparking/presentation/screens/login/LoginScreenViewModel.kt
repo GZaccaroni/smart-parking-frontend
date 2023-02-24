@@ -6,7 +6,7 @@ import androidx.navigation.NavOptions
 import it.unibolss.smartparking.domain.usecases.user.LoginUser
 import it.unibolss.smartparking.domain.usecases.user.ValidateUserEmail
 import it.unibolss.smartparking.domain.usecases.user.ValidateUserPassword
-import it.unibolss.smartparking.presentation.common.snackbar.SnackbarContent
+import it.unibolss.smartparking.presentation.common.appalert.AppAlert
 import it.unibolss.smartparking.presentation.navigation.Router
 import it.unibolss.smartparking.presentation.screens.parkingslots.ParkingSlotsRoute
 import it.unibolss.smartparking.presentation.screens.signup.SignUpRoute
@@ -30,8 +30,8 @@ internal class LoginScreenViewModel(
     private val router: Router,
 ) : ViewModel() {
 
-    private val _snackbar = MutableSharedFlow<SnackbarContent>(0)
-    val snackbar: SharedFlow<SnackbarContent> = _snackbar.asSharedFlow()
+    private val _snackbar = MutableSharedFlow<AppAlert>(0)
+    val snackbar: SharedFlow<AppAlert> = _snackbar.asSharedFlow()
 
     private val _email = MutableStateFlow("")
     val email: StateFlow<String> = _email.asStateFlow()
@@ -75,7 +75,7 @@ internal class LoginScreenViewModel(
 
             _loading.value = false
             result.fold(
-                { _snackbar.emit(SnackbarContent.Error(it)) },
+                { _snackbar.emit(AppAlert.Error(it)) },
                 {
                     router.navigateTo(
                         ParkingSlotsRoute,
