@@ -34,7 +34,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import it.unibolss.smartparking.presentation.R
-import it.unibolss.smartparking.presentation.common.snackbar.Bind
+import it.unibolss.smartparking.presentation.common.appalert.Bind
 import org.koin.androidx.compose.koinViewModel
 
 @Composable

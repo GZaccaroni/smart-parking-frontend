@@ -14,7 +14,7 @@ import it.unibolss.smartparking.domain.entities.common.AppError
 import it.unibolss.smartparking.domain.usecases.user.LoginUser
 import it.unibolss.smartparking.domain.usecases.user.ValidateUserEmail
 import it.unibolss.smartparking.domain.usecases.user.ValidateUserPassword
-import it.unibolss.smartparking.presentation.common.snackbar.SnackbarContent
+import it.unibolss.smartparking.presentation.common.appalert.AppAlert
 import it.unibolss.smartparking.presentation.navigation.Router
 import it.unibolss.smartparking.presentation.screens.parkingslots.ParkingSlotsRoute
 import junit.framework.TestCase.assertEquals
@@ -131,7 +131,7 @@ internal class LoginScreenViewModelTest {
         viewModel.submit()
         advanceUntilIdle()
 
-        val result = deferred.await() as SnackbarContent.Error
+        val result = deferred.await() as AppAlert.Error
         assertEquals(result.error, appError)
     }
     private fun mockCommon() {

@@ -7,7 +7,7 @@ import it.unibolss.smartparking.domain.usecases.user.SignUpUser
 import it.unibolss.smartparking.domain.usecases.user.ValidateUserEmail
 import it.unibolss.smartparking.domain.usecases.user.ValidateUserName
 import it.unibolss.smartparking.domain.usecases.user.ValidateUserPassword
-import it.unibolss.smartparking.presentation.common.snackbar.SnackbarContent
+import it.unibolss.smartparking.presentation.common.appalert.AppAlert
 import it.unibolss.smartparking.presentation.navigation.Router
 import it.unibolss.smartparking.presentation.screens.parkingslots.ParkingSlotsRoute
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -31,8 +31,8 @@ internal class SignUpScreenViewModel(
     private val router: Router,
 ) : ViewModel() {
 
-    private val _snackbar = MutableSharedFlow<SnackbarContent>(0)
-    val snackbar: SharedFlow<SnackbarContent> = _snackbar.asSharedFlow()
+    private val _snackbar = MutableSharedFlow<AppAlert>(0)
+    val snackbar: SharedFlow<AppAlert> = _snackbar.asSharedFlow()
 
     private val _name = MutableStateFlow("")
     val name: StateFlow<String> = _name.asStateFlow()
@@ -95,7 +95,7 @@ internal class SignUpScreenViewModel(
 
             _loading.value = false
             result.fold(
-                { _snackbar.emit(SnackbarContent.Error(it)) },
+                { _snackbar.emit(AppAlert.Error(it)) },
                 {
                     router.navigateTo(
                         ParkingSlotsRoute,
