@@ -16,6 +16,7 @@ internal val AppError.message: String
             AppError.InvalidUserName -> R.string.app_error_invalid_user_name
             AppError.InvalidUserEmail -> R.string.app_error_invalid_user_email
             AppError.InvalidUserPassword -> R.string.app_error_invalid_user_password
+            AppError.NewPasswordEqualToCurrent -> R.string.app_error_new_password_equal_to_current
             AppError.WrongCredentials -> R.string.app_error_wrong_credentials
             AppError.AlreadyParking -> R.string.app_error_already_parking
             AppError.ParkingSlotOccupied -> R.string.app_error_parking_slot_occupied
