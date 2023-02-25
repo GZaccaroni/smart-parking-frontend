@@ -26,4 +26,6 @@ dependencies {
     implementation(Deps.Libraries.kotlinRetrofitSerialization)
 
     testImplementation(Deps.TestLibraries.junit)
+    testImplementation(Deps.TestLibraries.kotlinCoroutines)
+    testImplementation(Deps.TestLibraries.mockk)
 }
