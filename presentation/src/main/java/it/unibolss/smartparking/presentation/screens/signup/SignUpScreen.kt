@@ -38,8 +38,9 @@ import it.unibolss.smartparking.presentation.common.appalert.Bind
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun SignUpScreen() {
-    val vm = koinViewModel<SignUpScreenViewModel>()
+fun SignUpScreen(
+    vm: SignUpScreenViewModel = koinViewModel()
+) {
     val scaffoldState: ScaffoldState = rememberScaffoldState()
     vm.snackbar.Bind(scaffoldState.snackbarHostState)
 

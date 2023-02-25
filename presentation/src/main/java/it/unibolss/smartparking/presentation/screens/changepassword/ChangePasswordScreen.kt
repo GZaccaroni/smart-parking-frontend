@@ -37,8 +37,9 @@ import it.unibolss.smartparking.presentation.common.appalert.Bind
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-internal fun ChangePasswordScreen() {
-    val vm = koinViewModel<ChangePasswordScreenViewModel>()
+fun ChangePasswordScreen(
+    vm: ChangePasswordScreenViewModel = koinViewModel()
+) {
     val scaffoldState: ScaffoldState = rememberScaffoldState()
     vm.snackbar.Bind(scaffoldState.snackbarHostState)
 

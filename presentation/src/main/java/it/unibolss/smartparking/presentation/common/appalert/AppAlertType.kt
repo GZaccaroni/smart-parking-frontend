@@ -1,6 +1,6 @@
 package it.unibolss.smartparking.presentation.common.appalert
 
-internal enum class AppAlertType {
+enum class AppAlertType {
     TOAST,
     SNACKBAR;
 }

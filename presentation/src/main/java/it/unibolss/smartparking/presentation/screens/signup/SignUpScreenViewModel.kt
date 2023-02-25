@@ -23,7 +23,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
-internal class SignUpScreenViewModel(
+class SignUpScreenViewModel(
     private val signUpUser: SignUpUser,
     private val validateUserName: ValidateUserName,
     private val validateUserEmail: ValidateUserEmail,

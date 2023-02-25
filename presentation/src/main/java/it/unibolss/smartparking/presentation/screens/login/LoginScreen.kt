@@ -38,8 +38,9 @@ import it.unibolss.smartparking.presentation.common.appalert.Bind
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-internal fun LoginScreen() {
-    val vm = koinViewModel<LoginScreenViewModel>()
+fun LoginScreen(
+    vm: LoginScreenViewModel = koinViewModel()
+) {
     val scaffoldState: ScaffoldState = rememberScaffoldState()
     vm.snackbar.Bind(scaffoldState.snackbarHostState)
 
