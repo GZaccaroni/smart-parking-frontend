@@ -8,7 +8,7 @@ import it.unibolss.smartparking.presentation.common.error.message
 import org.jetbrains.annotations.TestOnly
 import java.util.UUID
 
-internal sealed class AppAlert(
+sealed class AppAlert(
     val id: String = UUID.randomUUID().toString(),
     val type: AppAlertType
 ) {
