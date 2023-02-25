@@ -17,6 +17,19 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = Deps.BuildPlugins.Versions.compilerExtensionVersion
     }
+    packagingOptions {
+        resources.excludes.addAll(
+            listOf(
+                "META-INF/DEPENDENCIES",
+                "META-INF/NOTICE",
+                "META-INF/LICENSE",
+                "META-INF/LICENSE.md",
+                "META-INF/LICENSE-notice.md",
+                "META-INF/LICENSE.txt",
+                "META-INF/NOTICE.txt"
+            )
+        )
+    }
 }
 
 dependencies {
