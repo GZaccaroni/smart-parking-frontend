@@ -20,7 +20,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
-internal class ChangePasswordScreenViewModel(
+class ChangePasswordScreenViewModel(
     private val changeUserPassword: ChangeUserPassword,
     private val validateUserPassword: ValidateUserPassword,
     private val router: Router,
