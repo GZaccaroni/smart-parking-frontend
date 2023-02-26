@@ -42,8 +42,8 @@ class FindParkingSlotsTest {
         coVerify(exactly = 1) {
             parkingSlotRepository.getParkingSlots(center, radius)
         }
-
     }
+
     @Test
     fun testZeroRadius() = runTest {
         val center = mockk<GeoPosition>()
@@ -59,6 +59,5 @@ class FindParkingSlotsTest {
         coVerify(exactly = 0) {
             parkingSlotRepository.getParkingSlots(center, radius)
         }
-
     }
 }

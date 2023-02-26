@@ -50,6 +50,7 @@ dependencies {
     testImplementation(Deps.TestLibraries.junit)
     testImplementation(Deps.TestLibraries.kotlinCoroutines)
     testImplementation(Deps.TestLibraries.mockk)
+    testImplementation(Deps.TestLibraries.turbine)
 
     androidTestImplementation(Deps.TestLibraries.junitAndroidExt)
     androidTestImplementation(Deps.TestLibraries.espressoCore)
