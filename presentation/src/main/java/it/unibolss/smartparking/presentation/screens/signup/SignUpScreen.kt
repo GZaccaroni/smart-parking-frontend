@@ -34,6 +34,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import it.unibolss.smartparking.presentation.R
+import it.unibolss.smartparking.presentation.common.appalert.AppAlertState
 import it.unibolss.smartparking.presentation.common.appalert.Bind
 import org.jetbrains.annotations.TestOnly
 import org.koin.androidx.compose.koinViewModel
@@ -42,12 +43,12 @@ import org.koin.androidx.compose.koinViewModel
 fun SignUpScreen(
     vm: SignUpScreenViewModel = koinViewModel()
 ) {
-    val scaffoldState: ScaffoldState = rememberScaffoldState()
-    vm.snackbar.Bind(scaffoldState.snackbarHostState)
-
     val uiState by vm.uiState.collectAsState()
+    val alertState by vm.alertState.collectAsState()
+
     SignUpLayout(
         uiState = uiState,
+        alertState = alertState,
         onNameChange = { vm.setName(it) },
         onEmailChange = { vm.setEmail(it) },
         onPasswordChange = { vm.setPassword(it) },
@@ -59,12 +60,16 @@ fun SignUpScreen(
 @TestOnly
 fun SignUpLayout(
     uiState: SignUpUiState,
+    alertState: AppAlertState,
     onNameChange: (String) -> Unit,
     onEmailChange: (String) -> Unit,
     onPasswordChange: (String) -> Unit,
     onSubmit: () -> Unit
 ) {
-    Scaffold { paddingValues ->
+    val scaffoldState: ScaffoldState = rememberScaffoldState()
+    alertState.Bind(scaffoldState.snackbarHostState)
+
+    Scaffold(scaffoldState = scaffoldState) { paddingValues ->
         Box(
             modifier = Modifier.padding(paddingValues)
         ) {
