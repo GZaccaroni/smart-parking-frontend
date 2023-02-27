@@ -6,10 +6,8 @@ plugins {
 android {
     namespace = "it.unibolss.smartparking.domain"
 
-    buildTypes {
-        debug {
-            enableUnitTestCoverage = true
-        }
+    buildTypes.all {
+        enableUnitTestCoverage = true
     }
 }
 
