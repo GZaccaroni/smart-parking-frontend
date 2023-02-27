@@ -34,15 +34,40 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import it.unibolss.smartparking.presentation.R
+import it.unibolss.smartparking.presentation.common.appalert.AppAlertState
 import it.unibolss.smartparking.presentation.common.appalert.Bind
+import org.jetbrains.annotations.TestOnly
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun LoginScreen(
     vm: LoginScreenViewModel = koinViewModel()
 ) {
+    val uiState by vm.uiState.collectAsState()
+    val alertState by vm.alertState.collectAsState()
+
+    LoginLayout(
+        uiState = uiState,
+        alertState = alertState,
+        onEmailChange = { vm.setEmail(it) },
+        onPasswordChange = { vm.setPassword(it) },
+        onSubmit = { vm.submit() },
+        onSignUpClick = { vm.signUp() }
+    )
+}
+
+@Composable
+@TestOnly
+fun LoginLayout(
+    uiState: LoginUiState,
+    alertState: AppAlertState,
+    onEmailChange: (String) -> Unit,
+    onPasswordChange: (String) -> Unit,
+    onSubmit: () -> Unit,
+    onSignUpClick: () -> Unit
+) {
     val scaffoldState: ScaffoldState = rememberScaffoldState()
-    vm.snackbar.Bind(scaffoldState.snackbarHostState)
+    alertState.Bind(scaffoldState.snackbarHostState)
 
     Scaffold(scaffoldState = scaffoldState) { paddingValues ->
         Box(
@@ -62,11 +87,23 @@ fun LoginScreen(
                     fontSize = 40.sp,
                 )
 
-                EmailTextField(vm)
-                PasswordTextField(vm)
-                SubmitButton(vm)
+                EmailTextField(
+                    uiState = uiState,
+                    onEmailChange = onEmailChange
+                )
+                PasswordTextField(
+                    uiState = uiState,
+                    onPasswordChange = onPasswordChange
+                )
+                SubmitButton(
+                    uiState = uiState,
+                    onSubmit = onSubmit
+                )
 
-                SignUpButton(vm)
+                SignUpButton(
+                    uiState = uiState,
+                    onSignUpClick = onSignUpClick
+                )
             }
         }
     }
@@ -74,16 +111,13 @@ fun LoginScreen(
 
 @Composable
 private fun SignUpButton(
-    vm: LoginScreenViewModel,
+    uiState: LoginUiState,
+    onSignUpClick: () -> Unit
 ) {
-    val loading by vm.loading.collectAsState()
-
     TextButton(
         modifier = Modifier.fillMaxWidth(),
-        enabled = !loading,
-        onClick = {
-            vm.signUp()
-        }
+        enabled = !uiState.loading,
+        onClick = onSignUpClick
     ) {
         Text(stringResource(R.string.go_to_sign_up_cta), textAlign = TextAlign.Center)
     }
@@ -91,21 +125,17 @@ private fun SignUpButton(
 
 @Composable
 private fun SubmitButton(
-    vm: LoginScreenViewModel,
+    uiState: LoginUiState,
+    onSubmit: () -> Unit
 ) {
-    val submitButtonEnabled by vm.submitButtonEnabled.collectAsState()
-    val loading by vm.loading.collectAsState()
-
     Button(
         modifier = Modifier
             .height(48.dp)
             .fillMaxWidth(),
-        onClick = {
-            vm.submit()
-        },
-        enabled = submitButtonEnabled && !loading,
+        onClick = onSubmit,
+        enabled = uiState.submitEnabled && !uiState.loading,
     ) {
-        if (!loading) {
+        if (!uiState.loading) {
             Text(text = stringResource(R.string.login_cta))
         } else {
             CircularProgressIndicator(modifier = Modifier.size(32.dp))
@@ -115,22 +145,17 @@ private fun SubmitButton(
 
 @Composable
 private fun EmailTextField(
-    vm: LoginScreenViewModel,
+    uiState: LoginUiState,
+    onEmailChange: (String) -> Unit
 ) {
-    val email by vm.email.collectAsState()
-    val emailError by vm.emailError.collectAsState()
-    val loading by vm.loading.collectAsState()
-
     OutlinedTextField(
         modifier = Modifier.fillMaxWidth(),
-        value = email,
-        onValueChange = {
-            vm.setEmail(it)
-        },
-        enabled = !loading,
+        value = uiState.email,
+        onValueChange = onEmailChange,
+        enabled = !uiState.loading,
         leadingIcon = { Icon(Icons.Rounded.Email, contentDescription = null) },
         label = { Text(stringResource(R.string.user_email)) },
-        isError = emailError,
+        isError = uiState.isEmailError,
         textStyle = TextStyle(fontSize = 18.sp),
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
     )
@@ -138,22 +163,17 @@ private fun EmailTextField(
 
 @Composable
 private fun PasswordTextField(
-    vm: LoginScreenViewModel,
+    uiState: LoginUiState,
+    onPasswordChange: (String) -> Unit
 ) {
-    val password by vm.password.collectAsState()
-    val passwordError by vm.passwordError.collectAsState()
-    val loading by vm.loading.collectAsState()
-
     OutlinedTextField(
         modifier = Modifier.fillMaxWidth(),
-        value = password,
-        onValueChange = {
-            vm.setPassword(it)
-        },
-        enabled = !loading,
+        value = uiState.password,
+        onValueChange = onPasswordChange,
+        enabled = !uiState.loading,
         leadingIcon = { Icon(Icons.Rounded.Lock, contentDescription = null) },
         label = { Text(stringResource(R.string.user_password)) },
-        isError = passwordError,
+        isError = uiState.isPasswordError,
         textStyle = TextStyle(fontSize = 18.sp),
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
         visualTransformation = PasswordVisualTransformation(),
