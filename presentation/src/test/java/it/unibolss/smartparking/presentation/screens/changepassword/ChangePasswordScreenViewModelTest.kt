@@ -64,19 +64,19 @@ internal class ChangePasswordScreenViewModelTest {
         } returns Unit
 
         advanceUntilIdle()
-        assertFalse(viewModel.submitButtonEnabled.value)
+        assertFalse(viewModel.uiState.value.submitEnabled)
 
         viewModel.setCurrentPassword(validPassword)
 
         advanceUntilIdle()
-        assertFalse(viewModel.currentPasswordError.value)
-        assertFalse(viewModel.submitButtonEnabled.value)
+        assertFalse(viewModel.uiState.value.isCurrentPasswordError)
+        assertFalse(viewModel.uiState.value.submitEnabled)
 
         viewModel.setNewPassword(validPassword)
 
         advanceUntilIdle()
-        assertFalse(viewModel.newPasswordError.value)
-        assertTrue(viewModel.submitButtonEnabled.value)
+        assertFalse(viewModel.uiState.value.isNewPasswordError)
+        assertTrue(viewModel.uiState.value.submitEnabled)
 
         coEvery {
             changeUserPassword(
@@ -102,15 +102,15 @@ internal class ChangePasswordScreenViewModelTest {
         viewModel.setCurrentPassword("invalidpw1")
 
         advanceUntilIdle()
-        assertTrue(viewModel.currentPasswordError.value)
+        assertTrue(viewModel.uiState.value.isCurrentPasswordError)
 
         viewModel.setNewPassword("invalidpw2")
 
         advanceUntilIdle()
-        assertTrue(viewModel.newPasswordError.value)
+        assertTrue(viewModel.uiState.value.isNewPasswordError)
 
         advanceUntilIdle()
-        assertFalse(viewModel.submitButtonEnabled.value)
+        assertFalse(viewModel.uiState.value.submitEnabled)
     }
 
     @Test
