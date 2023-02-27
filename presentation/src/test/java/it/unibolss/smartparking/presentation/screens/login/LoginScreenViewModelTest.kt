@@ -70,19 +70,19 @@ internal class LoginScreenViewModelTest {
         } returns Unit
 
         advanceUntilIdle()
-        assertFalse(viewModel.submitButtonEnabled.value)
+        assertFalse(viewModel.uiState.value.submitEnabled)
 
         viewModel.setEmail(successEmail)
 
         advanceUntilIdle()
-        assertFalse(viewModel.emailError.value)
-        assertFalse(viewModel.submitButtonEnabled.value)
+        assertFalse(viewModel.uiState.value.isEmailError)
+        assertFalse(viewModel.uiState.value.submitEnabled)
 
         viewModel.setPassword(successPassword)
 
         advanceUntilIdle()
-        assertFalse(viewModel.passwordError.value)
-        assertTrue(viewModel.submitButtonEnabled.value)
+        assertFalse(viewModel.uiState.value.isPasswordError)
+        assertTrue(viewModel.uiState.value.submitEnabled)
 
         coEvery {
             loginUser.invoke(LoginUser.Params(successEmail, successPassword))
@@ -103,16 +103,16 @@ internal class LoginScreenViewModelTest {
         viewModel.setEmail("invalidemail")
 
         advanceUntilIdle()
-        assertTrue(viewModel.emailError.value)
+        assertTrue(viewModel.uiState.value.isEmailError)
 
         viewModel.setPassword("invalidpw")
 
         advanceUntilIdle()
-        assertTrue(viewModel.passwordError.value)
+        assertTrue(viewModel.uiState.value.isPasswordError)
 
         advanceUntilIdle()
-        assertFalse(viewModel.submitButtonEnabled.value)
-        assertTrue(viewModel.emailError.value)
+        assertFalse(viewModel.uiState.value.submitEnabled)
+        assertTrue(viewModel.uiState.value.isEmailError)
     }
 
     @Test
