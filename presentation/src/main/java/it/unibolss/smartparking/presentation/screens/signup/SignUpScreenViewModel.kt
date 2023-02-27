@@ -82,9 +82,9 @@ class SignUpScreenViewModel(
         val emailValid = validateUserEmail(ValidateUserEmail.Params(email))
         val passwordValid = validateUserPassword(ValidateUserPassword.Params(password))
         return this.copy(
-            isNameError = !nameValid,
-            isEmailError = !emailValid,
-            isPasswordError = !passwordValid,
+            isNameError = name.isNotEmpty() && !nameValid,
+            isEmailError = email.isNotEmpty() && !emailValid,
+            isPasswordError = password.isNotEmpty() && !passwordValid,
             submitEnabled = nameValid && emailValid && passwordValid
         )
     }
