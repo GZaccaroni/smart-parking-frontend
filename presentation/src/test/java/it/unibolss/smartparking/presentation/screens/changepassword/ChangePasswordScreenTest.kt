@@ -13,6 +13,7 @@ import androidx.compose.ui.test.performTextInput
 import io.mockk.MockKAnnotations
 import it.unibolss.smartparking.common.withRole
 import it.unibolss.smartparking.presentation.R
+import it.unibolss.smartparking.presentation.common.appalert.AppAlertState
 import junit.framework.TestCase.assertFalse
 import junit.framework.TestCase.assertTrue
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -52,6 +53,7 @@ class ChangePasswordScreenTest {
         composeTestRule.setContent {
             ChangePasswordLayout(
                 uiState = ChangePasswordUiState.initial(),
+                alertState = AppAlertState.None,
                 onCurrentPasswordChange = { onCurrentPasswordChangeCalled.set(true) },
                 onNewPasswordChange = { onNewPasswordChangeCalled.set(true) },
                 onSubmit = { onSubmitCalled.set(true) },
@@ -90,6 +92,7 @@ class ChangePasswordScreenTest {
         composeTestRule.setContent {
             ChangePasswordLayout(
                 uiState = ChangePasswordUiState.initial().copy(submitEnabled = true),
+                alertState = AppAlertState.None,
                 onCurrentPasswordChange = { },
                 onNewPasswordChange = { },
                 onSubmit = { onSubmitCalled.set(true) },
