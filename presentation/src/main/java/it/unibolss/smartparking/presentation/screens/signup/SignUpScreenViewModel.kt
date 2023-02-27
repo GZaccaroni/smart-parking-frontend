@@ -13,14 +13,9 @@ import it.unibolss.smartparking.presentation.screens.parkingslots.ParkingSlotsRo
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.drop
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 class SignUpScreenViewModel(
@@ -34,72 +29,43 @@ class SignUpScreenViewModel(
     private val _snackbar = MutableSharedFlow<AppAlert>(0)
     val snackbar: SharedFlow<AppAlert> = _snackbar.asSharedFlow()
 
-    private val _name = MutableStateFlow("")
-    val name: StateFlow<String> = _name.asStateFlow()
-
-    private val _email = MutableStateFlow("")
-    val email: StateFlow<String> = _email.asStateFlow()
-
-    private val _password = MutableStateFlow("")
-    val password: StateFlow<String> = _password.asStateFlow()
-
-    val nameError: StateFlow<Boolean> =
-        _name
-            .drop(1)
-            .map { !validateUserName(ValidateUserName.Params(it)) }
-            .stateIn(viewModelScope, SharingStarted.Eagerly, false)
-
-    val emailError: StateFlow<Boolean> =
-        _email
-            .drop(1)
-            .map { !validateUserEmail(ValidateUserEmail.Params(it)) }
-            .stateIn(viewModelScope, SharingStarted.Eagerly, false)
-
-    val passwordError: StateFlow<Boolean> =
-        _password
-            .drop(1)
-            .map { !validateUserPassword(ValidateUserPassword.Params(it)) }
-            .stateIn(viewModelScope, SharingStarted.Eagerly, false)
-
-    val submitButtonEnabled: StateFlow<Boolean> =
-        combine(name, email, password) { name, email, password ->
-            val nameValid = validateUserName(ValidateUserName.Params(name))
-            val emailValid = validateUserEmail(ValidateUserEmail.Params(email))
-            val passwordValid = validateUserPassword(ValidateUserPassword.Params(password))
-            nameValid && emailValid && passwordValid
-        }.stateIn(viewModelScope, SharingStarted.Eagerly, false)
-
-    private val _loading = MutableStateFlow(false)
-    val loading: StateFlow<Boolean> = _loading.asStateFlow()
+    private val _uiState = MutableStateFlow(SignUpUiState.initial())
+    val uiState: StateFlow<SignUpUiState> = _uiState.asStateFlow()
 
     fun setName(name: String) {
-        _name.value = name.trim()
+        val newName = name.trim()
+        _uiState.value =
+            _uiState.value.copy(name = newName).validated()
     }
     fun setEmail(email: String) {
-        _email.value = email.trim()
+        val newEmail = email.trim()
+        _uiState.value =
+            _uiState.value.copy(email = newEmail).validated()
     }
     fun setPassword(password: String) {
-        _password.value = password
+        _uiState.value =
+            _uiState.value.copy(password = password).validated()
     }
 
     fun submit() {
-        check(submitButtonEnabled.value) {
+        val currentUiState = _uiState.value
+        check(currentUiState.submitEnabled) {
             "Submit method should not be called if submitButtonEnabled is not true"
         }
-        check(!loading.value) {
+        check(!currentUiState.loading) {
             "Submit method should not be called if loading is true"
         }
         viewModelScope.launch {
-            _loading.value = true
+            _uiState.value = uiState.value.copy(loading = true)
             val result = signUpUser(
                 SignUpUser.Params(
-                    name = name.value,
-                    email = email.value,
-                    password = password.value
+                    name = currentUiState.name,
+                    email = currentUiState.email,
+                    password = currentUiState.password
                 )
             )
 
-            _loading.value = false
+            _uiState.value = uiState.value.copy(loading = false)
             result.fold(
                 { _snackbar.emit(AppAlert.Error(it)) },
                 {
@@ -110,5 +76,17 @@ class SignUpScreenViewModel(
                 }
             )
         }
+    }
+
+    private fun SignUpUiState.validated(): SignUpUiState {
+        val nameValid = validateUserName(ValidateUserName.Params(name))
+        val emailValid = validateUserEmail(ValidateUserEmail.Params(email))
+        val passwordValid = validateUserPassword(ValidateUserPassword.Params(password))
+        return this.copy(
+            isNameError = !nameValid,
+            isEmailError = !emailValid,
+            isPasswordError = !passwordValid,
+            submitEnabled = nameValid && emailValid && passwordValid
+        )
     }
 }

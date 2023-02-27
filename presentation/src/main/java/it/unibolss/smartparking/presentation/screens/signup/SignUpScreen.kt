@@ -35,6 +35,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import it.unibolss.smartparking.presentation.R
 import it.unibolss.smartparking.presentation.common.appalert.Bind
+import org.jetbrains.annotations.TestOnly
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -44,6 +45,25 @@ fun SignUpScreen(
     val scaffoldState: ScaffoldState = rememberScaffoldState()
     vm.snackbar.Bind(scaffoldState.snackbarHostState)
 
+    val uiState by vm.uiState.collectAsState()
+    SignUpLayout(
+        uiState = uiState,
+        onNameChange = { vm.setName(it) },
+        onEmailChange = { vm.setEmail(it) },
+        onPasswordChange = { vm.setPassword(it) },
+        onSubmit = { vm.submit() }
+    )
+}
+
+@Composable
+@TestOnly
+fun SignUpLayout(
+    uiState: SignUpUiState,
+    onNameChange: (String) -> Unit,
+    onEmailChange: (String) -> Unit,
+    onPasswordChange: (String) -> Unit,
+    onSubmit: () -> Unit
+) {
     Scaffold { paddingValues ->
         Box(
             modifier = Modifier.padding(paddingValues)
@@ -61,49 +81,26 @@ fun SignUpScreen(
                     text = stringResource(R.string.screen_title_sign_up),
                     fontSize = 40.sp,
                 )
-                NameTextField(vm)
-                EmailTextField(vm)
-                PasswordTextField(vm)
+                NameTextField(uiState, onNameChange)
+                EmailTextField(uiState, onEmailChange)
+                PasswordTextField(uiState, onPasswordChange)
 
-                SignUpButton(vm)
+                SignUpButton(uiState, onSubmit)
             }
         }
     }
 }
 
 @Composable
-private fun SignUpButton(vm: SignUpScreenViewModel) {
-    val loading by vm.loading.collectAsState()
-    val submitButtonEnabled by vm.submitButtonEnabled.collectAsState()
-    Button(
-        enabled = submitButtonEnabled && !loading,
-        modifier = Modifier
-            .height(48.dp)
-            .fillMaxWidth(),
-        onClick = {
-            vm.submit()
-        },
-    ) {
-        if (!loading) {
-            Text(text = stringResource(R.string.sign_up_cta))
-        } else {
-            CircularProgressIndicator(modifier = Modifier.size(32.dp))
-        }
-    }
-}
-
-@Composable
-private fun NameTextField(vm: SignUpScreenViewModel) {
-    val name by vm.name.collectAsState()
-    val nameError by vm.nameError.collectAsState()
-    val loading by vm.loading.collectAsState()
+private fun NameTextField(
+    uiState: SignUpUiState,
+    onNameChange: (String) -> Unit
+) {
     OutlinedTextField(
-        value = name,
-        isError = nameError,
-        enabled = !loading,
-        onValueChange = {
-            vm.setName(it)
-        },
+        value = uiState.name,
+        isError = uiState.isNameError,
+        enabled = !uiState.loading,
+        onValueChange = onNameChange,
         modifier = Modifier.fillMaxWidth(),
         leadingIcon = { Icon(Icons.Rounded.Face, contentDescription = null) },
         label = { Text(stringResource(R.string.user_name)) },
@@ -113,17 +110,15 @@ private fun NameTextField(vm: SignUpScreenViewModel) {
 }
 
 @Composable
-private fun EmailTextField(vm: SignUpScreenViewModel) {
-    val email by vm.email.collectAsState()
-    val emailError by vm.emailError.collectAsState()
-    val loading by vm.loading.collectAsState()
+private fun EmailTextField(
+    uiState: SignUpUiState,
+    onEmailChange: (String) -> Unit,
+) {
     OutlinedTextField(
-        value = email,
-        isError = emailError,
-        enabled = !loading,
-        onValueChange = {
-            vm.setEmail(it)
-        },
+        value = uiState.email,
+        isError = uiState.isEmailError,
+        enabled = !uiState.loading,
+        onValueChange = onEmailChange,
         modifier = Modifier.fillMaxWidth(),
         leadingIcon = { Icon(Icons.Rounded.Email, contentDescription = null) },
         label = { Text(stringResource(R.string.user_email)) },
@@ -134,17 +129,15 @@ private fun EmailTextField(vm: SignUpScreenViewModel) {
 }
 
 @Composable
-private fun PasswordTextField(vm: SignUpScreenViewModel) {
-    val password by vm.password.collectAsState()
-    val passwordError by vm.passwordError.collectAsState()
-    val loading by vm.loading.collectAsState()
+private fun PasswordTextField(
+    uiState: SignUpUiState,
+    onPasswordChange: (String) -> Unit,
+) {
     OutlinedTextField(
-        value = password,
-        isError = passwordError,
-        enabled = !loading,
-        onValueChange = {
-            vm.setPassword(it)
-        },
+        value = uiState.password,
+        isError = uiState.isPasswordError,
+        enabled = !uiState.loading,
+        onValueChange = onPasswordChange,
         modifier = Modifier.fillMaxWidth(),
         leadingIcon = { Icon(Icons.Rounded.Lock, contentDescription = null) },
         label = { Text(stringResource(R.string.user_password)) },
@@ -153,4 +146,24 @@ private fun PasswordTextField(vm: SignUpScreenViewModel) {
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
         visualTransformation = PasswordVisualTransformation(),
     )
+}
+
+@Composable
+private fun SignUpButton(
+    uiState: SignUpUiState,
+    onSubmit: () -> Unit
+) {
+    Button(
+        enabled = uiState.submitEnabled && !uiState.loading,
+        modifier = Modifier
+            .height(48.dp)
+            .fillMaxWidth(),
+        onClick = onSubmit,
+    ) {
+        if (!uiState.loading) {
+            Text(text = stringResource(R.string.sign_up_cta))
+        } else {
+            CircularProgressIndicator(modifier = Modifier.size(32.dp))
+        }
+    }
 }
