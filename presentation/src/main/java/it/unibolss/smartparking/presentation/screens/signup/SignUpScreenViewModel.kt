@@ -8,13 +8,12 @@ import it.unibolss.smartparking.domain.usecases.user.ValidateUserEmail
 import it.unibolss.smartparking.domain.usecases.user.ValidateUserName
 import it.unibolss.smartparking.domain.usecases.user.ValidateUserPassword
 import it.unibolss.smartparking.presentation.common.appalert.AppAlert
+import it.unibolss.smartparking.presentation.common.appalert.AppAlertState
+import it.unibolss.smartparking.presentation.common.appalert.show
 import it.unibolss.smartparking.presentation.navigation.Router
 import it.unibolss.smartparking.presentation.screens.parkingslots.ParkingSlotsRoute
-import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
@@ -26,8 +25,8 @@ class SignUpScreenViewModel(
     private val router: Router,
 ) : ViewModel() {
 
-    private val _snackbar = MutableSharedFlow<AppAlert>(0)
-    val snackbar: SharedFlow<AppAlert> = _snackbar.asSharedFlow()
+    private val _alertState = MutableStateFlow<AppAlertState>(AppAlertState.None)
+    val alertState: StateFlow<AppAlertState> = _alertState.asStateFlow()
 
     private val _uiState = MutableStateFlow(SignUpUiState.initial())
     val uiState: StateFlow<SignUpUiState> = _uiState.asStateFlow()
@@ -67,7 +66,7 @@ class SignUpScreenViewModel(
 
             _uiState.value = uiState.value.copy(loading = false)
             result.fold(
-                { _snackbar.emit(AppAlert.Error(it)) },
+                { _alertState.show(AppAlert.Error(it)) },
                 {
                     router.navigateTo(
                         ParkingSlotsRoute,
