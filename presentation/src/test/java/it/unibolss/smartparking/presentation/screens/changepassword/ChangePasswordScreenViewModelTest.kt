@@ -1,5 +1,6 @@
 package it.unibolss.smartparking.presentation.screens.changepassword
 
+import app.cash.turbine.testIn
 import arrow.core.Either
 import io.mockk.MockKAnnotations
 import io.mockk.Runs
@@ -14,14 +15,13 @@ import it.unibolss.smartparking.domain.entities.common.AppError
 import it.unibolss.smartparking.domain.usecases.user.ChangeUserPassword
 import it.unibolss.smartparking.domain.usecases.user.ValidateUserPassword
 import it.unibolss.smartparking.presentation.common.appalert.AppAlert
+import it.unibolss.smartparking.presentation.common.appalert.AppAlertState
 import it.unibolss.smartparking.presentation.navigation.Router
 import it.unibolss.smartparking.presentation.screens.parkingslots.ParkingSlotsRoute
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertFalse
 import junit.framework.TestCase.assertTrue
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.async
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
@@ -116,9 +116,7 @@ internal class ChangePasswordScreenViewModelTest {
     @Test
     fun testFailingCase() = runTest {
         val appError = mockk<AppError>()
-        val deferred = async {
-            viewModel.snackbar.first()
-        }
+        val alertTurbine = viewModel.alertState.testIn(backgroundScope)
         viewModel.setCurrentPassword(validPassword)
         viewModel.setNewPassword(validPassword)
 
@@ -135,8 +133,8 @@ internal class ChangePasswordScreenViewModelTest {
         viewModel.submit()
         advanceUntilIdle()
 
-        val result = deferred.await() as AppAlert.Error
-        assertEquals(result.error, appError)
+        alertTurbine.skipItems(1)
+        assertEquals(AppAlertState.Some(AppAlert.Error(appError)), alertTurbine.awaitItem())
     }
 
     @Test(expected = IllegalStateException::class)

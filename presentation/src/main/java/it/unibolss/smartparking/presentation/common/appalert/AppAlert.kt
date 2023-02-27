@@ -6,25 +6,18 @@ import androidx.compose.ui.res.stringResource
 import it.unibolss.smartparking.domain.entities.common.AppError
 import it.unibolss.smartparking.presentation.common.error.message
 import org.jetbrains.annotations.TestOnly
-import java.util.UUID
 
-sealed class AppAlert(
-    val id: String = UUID.randomUUID().toString(),
-    val type: AppAlertType
-) {
+sealed interface AppAlert {
     @get:Composable
-    abstract val message: String
+    val message: String
 
-    override fun equals(other: Any?): Boolean =
-        (other is AppAlert) && other.id == id
+    val type: AppAlertType
 
-    override fun hashCode(): Int = id.hashCode()
-
-    class Error(
+    data class Error(
         @get:TestOnly
         val error: AppError,
-        type: AppAlertType = AppAlertType.SNACKBAR
-    ) : AppAlert(type = type) {
+        override val type: AppAlertType = AppAlertType.SNACKBAR
+    ) : AppAlert {
 
         override val message: String
             @Composable
@@ -34,8 +27,8 @@ sealed class AppAlert(
         @get:TestOnly
         @StringRes
         val text: Int,
-        type: AppAlertType = AppAlertType.TOAST
-    ) : AppAlert(type = type) {
+        override val type: AppAlertType = AppAlertType.TOAST
+    ) : AppAlert {
 
         override val message: String
             @Composable
