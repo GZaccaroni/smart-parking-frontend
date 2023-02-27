@@ -33,30 +33,53 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import it.unibolss.smartparking.presentation.R
+import it.unibolss.smartparking.presentation.common.appalert.AppAlertState
 import it.unibolss.smartparking.presentation.common.appalert.Bind
+import org.jetbrains.annotations.TestOnly
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun ChangePasswordScreen(
     vm: ChangePasswordScreenViewModel = koinViewModel()
 ) {
+    val uiState by vm.uiState.collectAsState()
+    val alertState by vm.alertState.collectAsState()
+
+    ChangePasswordLayout(
+        uiState = uiState,
+        alertState = alertState,
+        onCurrentPasswordChange = { vm.setCurrentPassword(it) },
+        onNewPasswordChange = { vm.setNewPassword(it) },
+        onSubmit = { vm.submit() },
+        onBackClicked = { vm.goBack() }
+    )
+}
+
+@Composable
+@TestOnly
+fun ChangePasswordLayout(
+    uiState: ChangePasswordUiState,
+    alertState: AppAlertState,
+    onCurrentPasswordChange: (String) -> Unit,
+    onNewPasswordChange: (String) -> Unit,
+    onSubmit: () -> Unit,
+    onBackClicked: () -> Unit,
+) {
     val scaffoldState: ScaffoldState = rememberScaffoldState()
-    vm.snackbar.Bind(scaffoldState.snackbarHostState)
+    alertState.Bind(scaffoldState.snackbarHostState)
 
     Scaffold(
+        scaffoldState = scaffoldState,
         topBar = {
             TopAppBar(
                 title = { Text(stringResource(R.string.screen_title_change_password)) },
                 navigationIcon = {
-                    IconButton(onClick = {
-                        vm.goBack()
-                    }) {
+                    IconButton(onClick = onBackClicked) {
                         Icon(Icons.Rounded.ArrowBack, stringResource(R.string.go_back_cta))
                     }
                 },
             )
         },
-        scaffoldState = scaffoldState
     ) { paddingValues ->
         Box(
             modifier = Modifier.padding(paddingValues)
@@ -69,9 +92,18 @@ fun ChangePasswordScreen(
                     10.dp,
                 )
             ) {
-                CurrentPasswordTextField(vm)
-                NewPasswordTextField(vm)
-                SubmitButton(vm)
+                CurrentPasswordTextField(
+                    uiState = uiState,
+                    onCurrentPasswordChange = onCurrentPasswordChange
+                )
+                NewPasswordTextField(
+                    uiState = uiState,
+                    onNewPasswordChange = onNewPasswordChange
+                )
+                SubmitButton(
+                    uiState = uiState,
+                    onSubmit = onSubmit
+                )
             }
         }
     }
@@ -79,21 +111,17 @@ fun ChangePasswordScreen(
 
 @Composable
 private fun SubmitButton(
-    vm: ChangePasswordScreenViewModel,
+    uiState: ChangePasswordUiState,
+    onSubmit: () -> Unit
 ) {
-    val submitButtonEnabled by vm.submitButtonEnabled.collectAsState()
-    val loading by vm.loading.collectAsState()
-
     Button(
         modifier = Modifier
             .height(48.dp)
             .fillMaxWidth(),
-        onClick = {
-            vm.submit()
-        },
-        enabled = submitButtonEnabled && !loading,
+        onClick = onSubmit,
+        enabled = uiState.submitEnabled && !uiState.loading,
     ) {
-        if (!loading) {
+        if (!uiState.loading) {
             Text(text = stringResource(R.string.change_password_cta))
         } else {
             CircularProgressIndicator(modifier = Modifier.size(32.dp))
@@ -103,22 +131,17 @@ private fun SubmitButton(
 
 @Composable
 private fun CurrentPasswordTextField(
-    vm: ChangePasswordScreenViewModel,
+    uiState: ChangePasswordUiState,
+    onCurrentPasswordChange: (String) -> Unit
 ) {
-    val currentPassword by vm.currentPassword.collectAsState()
-    val currentPasswordError by vm.currentPasswordError.collectAsState()
-    val loading by vm.loading.collectAsState()
-
     OutlinedTextField(
         modifier = Modifier.fillMaxWidth(),
-        value = currentPassword,
-        onValueChange = {
-            vm.setCurrentPassword(it)
-        },
-        enabled = !loading,
+        value = uiState.currentPassword,
+        onValueChange = onCurrentPasswordChange,
+        enabled = !uiState.loading,
         leadingIcon = { Icon(Icons.Rounded.Lock, contentDescription = null) },
         label = { Text(stringResource(R.string.user_current_password)) },
-        isError = currentPasswordError,
+        isError = uiState.isCurrentPasswordError,
         textStyle = TextStyle(fontSize = 18.sp),
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
         visualTransformation = PasswordVisualTransformation(),
@@ -127,22 +150,17 @@ private fun CurrentPasswordTextField(
 
 @Composable
 private fun NewPasswordTextField(
-    vm: ChangePasswordScreenViewModel,
+    uiState: ChangePasswordUiState,
+    onNewPasswordChange: (String) -> Unit
 ) {
-    val newPassword by vm.newPassword.collectAsState()
-    val newPasswordError by vm.newPasswordError.collectAsState()
-    val loading by vm.loading.collectAsState()
-
     OutlinedTextField(
         modifier = Modifier.fillMaxWidth(),
-        value = newPassword,
-        onValueChange = {
-            vm.setNewPassword(it)
-        },
-        enabled = !loading,
+        value = uiState.newPassword,
+        onValueChange = onNewPasswordChange,
+        enabled = !uiState.loading,
         leadingIcon = { Icon(Icons.Rounded.Lock, contentDescription = null) },
         label = { Text(stringResource(R.string.user_new_password)) },
-        isError = newPasswordError,
+        isError = uiState.isNewPasswordError,
         textStyle = TextStyle(fontSize = 18.sp),
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
         visualTransformation = PasswordVisualTransformation(),
