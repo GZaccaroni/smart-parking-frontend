@@ -36,7 +36,7 @@ class LoginScreenTest {
     private val submitLabel: String
         get() = composeTestRule.activity.getString(R.string.login_cta)
     private val signUpLabel: String
-        get() = composeTestRule.activity.getString(R.string.sign_up_cta)
+        get() = composeTestRule.activity.getString(R.string.go_to_sign_up_cta)
 
     @Before
     fun setUp() {
