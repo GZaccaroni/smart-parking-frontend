@@ -30,6 +30,11 @@ android {
             )
         )
     }
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
+        }
+    }
 }
 
 dependencies {
@@ -51,10 +56,9 @@ dependencies {
     testImplementation(Deps.TestLibraries.kotlinCoroutines)
     testImplementation(Deps.TestLibraries.mockk)
     testImplementation(Deps.TestLibraries.turbine)
-
-    androidTestImplementation(Deps.TestLibraries.junitAndroidExt)
-    androidTestImplementation(Deps.TestLibraries.espressoCore)
-    androidTestImplementation(Deps.TestLibraries.uiTestJunit4)
+    testImplementation(Deps.TestLibraries.espressoCore)
+    testImplementation(Deps.TestLibraries.roboelectric)
+    testImplementation(Deps.TestLibraries.uiTestJunit4)
 
     debugImplementation(Deps.DebugLibraries.composeUiTooling)
     debugImplementation(Deps.DebugLibraries.composeUiTestManifest)
