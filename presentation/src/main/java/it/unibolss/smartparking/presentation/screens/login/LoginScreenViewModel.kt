@@ -75,8 +75,8 @@ class LoginScreenViewModel(
         val emailValid = validateUserEmail(ValidateUserEmail.Params(email))
         val passwordValid = validateUserPassword(ValidateUserPassword.Params(password))
         return this.copy(
-            isEmailError = !emailValid,
-            isPasswordError = !passwordValid,
+            isEmailError = email.isNotEmpty() && !emailValid,
+            isPasswordError = password.isNotEmpty() && !passwordValid,
             submitEnabled = emailValid && passwordValid
         )
     }

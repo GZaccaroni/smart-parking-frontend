@@ -68,8 +68,8 @@ class ChangePasswordScreenViewModel(
         val currentPasswordValid = validateUserPassword(ValidateUserPassword.Params(currentPassword))
         val newPasswordValid = validateUserPassword(ValidateUserPassword.Params(newPassword))
         return this.copy(
-            isCurrentPasswordError = !currentPasswordValid,
-            isNewPasswordError = !newPasswordValid,
+            isCurrentPasswordError = currentPassword.isNotEmpty() && !currentPasswordValid,
+            isNewPasswordError = newPassword.isNotEmpty() && !newPasswordValid,
             submitEnabled = currentPasswordValid && newPasswordValid
         )
     }
