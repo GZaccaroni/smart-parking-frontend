@@ -12,6 +12,7 @@ import androidx.compose.ui.test.performTextInput
 import io.mockk.MockKAnnotations
 import it.unibolss.smartparking.common.withRole
 import it.unibolss.smartparking.presentation.R
+import it.unibolss.smartparking.presentation.common.appalert.AppAlertState
 import junit.framework.TestCase.assertFalse
 import junit.framework.TestCase.assertTrue
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -51,6 +52,7 @@ class SignUpScreenTest {
         composeTestRule.setContent {
             SignUpLayout(
                 uiState = SignUpUiState.initial(),
+                alertState = AppAlertState.None,
                 onNameChange = { onNameChangeCalled.set(true) },
                 onEmailChange = { onEmailChangeCalled.set(true) },
                 onPasswordChange = { onPasswordChangeCalled.set(true) },
@@ -89,6 +91,7 @@ class SignUpScreenTest {
         composeTestRule.setContent {
             SignUpLayout(
                 uiState = SignUpUiState.initial().copy(submitEnabled = true),
+                alertState = AppAlertState.None,
                 onNameChange = { },
                 onEmailChange = { },
                 onPasswordChange = { },
