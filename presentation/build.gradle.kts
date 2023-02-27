@@ -9,10 +9,8 @@ android {
     buildFeatures {
         compose = true
     }
-    buildTypes {
-        debug {
-            enableUnitTestCoverage = true
-        }
+    buildTypes.all {
+        enableUnitTestCoverage = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = Deps.BuildPlugins.Versions.compilerExtensionVersion
@@ -59,6 +57,7 @@ dependencies {
     testImplementation(Deps.TestLibraries.espressoCore)
     testImplementation(Deps.TestLibraries.roboelectric)
     testImplementation(Deps.TestLibraries.uiTestJunit4)
+    testImplementation(Deps.DebugLibraries.composeUiTestManifest)
 
     debugImplementation(Deps.DebugLibraries.composeUiTooling)
     debugImplementation(Deps.DebugLibraries.composeUiTestManifest)
