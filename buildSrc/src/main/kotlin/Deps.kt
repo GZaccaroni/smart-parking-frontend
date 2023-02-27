@@ -68,6 +68,7 @@ object Deps {
             const val espressoCore = "3.5.1"
             const val mockk = "1.13.4"
             const val turbine = "0.12.1"
+            const val roboelectric = "4.9"
         }
         const val junit = "junit:junit:${Versions.junit}"
         const val junitAndroidExt = "androidx.test.ext:junit-ktx:${Versions.junitAndroidExt}"
@@ -76,6 +77,7 @@ object Deps {
         const val kotlinCoroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Libraries.Versions.kotlinCoroutines}"
         const val mockk = "io.mockk:mockk:${Versions.mockk}"
         const val turbine = "app.cash.turbine:turbine:${Versions.turbine}"
+        const val roboelectric = "org.robolectric:robolectric:${Versions.roboelectric}"
     }
 
     object DebugLibraries {
