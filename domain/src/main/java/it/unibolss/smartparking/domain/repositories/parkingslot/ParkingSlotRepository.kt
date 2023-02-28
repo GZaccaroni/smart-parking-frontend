@@ -4,6 +4,7 @@ import arrow.core.Either
 import it.unibolss.smartparking.domain.entities.common.AppError
 import it.unibolss.smartparking.domain.entities.geo.GeoPosition
 import it.unibolss.smartparking.domain.entities.parkingslot.ParkingSlot
+import kotlinx.datetime.Instant
 
 interface ParkingSlotRepository {
     /**
@@ -24,12 +25,18 @@ interface ParkingSlotRepository {
     /**
      * Occupies a parking slot identified by [id]
      */
-    suspend fun occupyParkingSlot(id: String): Either<AppError, Unit>
+    suspend fun occupyParkingSlot(
+        id: String,
+        stopEnd: Instant,
+    ): Either<AppError, Unit>
 
     /**
      * Increments the occupation of a parking slot identified by [id]
      */
-    suspend fun incrementParkingSlotOccupation(id: String): Either<AppError, Unit>
+    suspend fun incrementParkingSlotOccupation(
+        id: String,
+        stopEnd: Instant,
+    ): Either<AppError, Unit>
 
     /**
      * Frees the parking slot identified by [id]
