@@ -2,20 +2,36 @@
     <string name="screen_title_login">Login</string>
     <string name="screen_title_sign_up">Sign Up</string>
     <string name="screen_title_change_password">Change password</string>
+    <string name="screen_title_parking_slot">Parking slot</string>
 
     <string name="user_name">Name</string>
     <string name="user_email">Email</string>
     <string name="user_password">Password</string>
     <string name="user_current_password">Current password</string>
     <string name="user_new_password">New password</string>
+
+    <string name="parking_slot_id">ID</string>
+    <string name="parking_slot_position">Position</string>
+    <string name="parking_slot_state">State</string>
+    <string name="parking_slot_state_free">Free</string>
+    <string name="parking_slot_state_occupied">Occupied (frees on %s)</string>
+
+    <string name="occupy_parking_slot_cta">Occupy parking slot</string>
+    <string name="increment_parking_slot_occupation_cta">Increment occupation</string>
+    <string name="free_parking_slot_cta">Free parking slot</string>
+
     <string name="go_to_sign_up_cta">Don\'t have an account yet? Sign Up!</string>
     <string name="change_password_cta">Change Password</string>
     <string name="login_cta">Login</string>
     <string name="sign_up_cta">Sign Up</string>
     <string name="go_back_cta">Go back</string>
+    <string name="refresh_cta">Refresh</string>
 
     <!-- App Success -->
     <string name="app_success_change_password">Your password has been successfully changed.</string>
+    <string name="app_success_parking_slot_occupy">You have successfully occupied the parking slot.</string>
+    <string name="app_success_parking_slot_increment_occupation">You have successfully incremented the occupation of the parking slot.</string>
+    <string name="app_success_parking_slot_free">You have successfully freed the parking slot.</string>
 
     <!-- App Errors -->
     <string name="app_error_generic">An unknown error occurred (GEN).</string>
@@ -31,4 +47,5 @@
     <string name="app_error_parking_slot_occupied">This parking slot is already occupied.</string>
     <string name="app_error_parking_slot_not_found">We haven\'t found this parking slot.</string>
     <string name="app_error_no_parking_slot_occupied">You aren\'t currently occupying any parking slot.</string>
+    <string name="app_error_invalid_stop_end">The end of the stop should be in the future.</string>
 </resources>
