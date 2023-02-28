@@ -10,7 +10,7 @@ import kotlin.time.toDuration
 
 internal suspend fun MutableStateFlow<AppAlertState>.show(
     alert: AppAlert,
-    duration: Duration = 5.toDuration(DurationUnit.SECONDS)
+    duration: Duration = 4.toDuration(DurationUnit.SECONDS)
 ) {
     val state = AppAlertState.Some(alert)
     value = state
