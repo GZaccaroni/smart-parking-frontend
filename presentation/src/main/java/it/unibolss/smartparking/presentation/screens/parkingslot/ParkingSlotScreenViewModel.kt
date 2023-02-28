@@ -40,7 +40,6 @@ class ParkingSlotScreenViewModel(
         refresh()
     }
     fun occupy(stopEnd: LocalDateTime) {
-        println("Test 00.-1")
         val currentUiState = _uiState.value
         check(!currentUiState.loading) {
             "Occupy method should not be called if loading is true"
@@ -52,9 +51,7 @@ class ParkingSlotScreenViewModel(
         check(parkingSlot.isFree()) {
             "Occupy can be called only on a free parking slot"
         }
-        println("Test 00.0")
         viewModelScope.launch {
-            println("Test 00.1")
             _uiState.value = _uiState.value.copy(loading = true)
             val stopEndInstant = stopEnd.toInstant(TimeZone.currentSystemDefault())
             val result = occupyParkingSlot(
@@ -63,7 +60,6 @@ class ParkingSlotScreenViewModel(
                     stopEnd = stopEndInstant
                 )
             )
-            println("Test 00.2")
             when (result) {
                 is Either.Left -> {
                     _uiState.value = _uiState.value.copy(
@@ -81,7 +77,6 @@ class ParkingSlotScreenViewModel(
                     _alertState.show(AppAlert.Text(R.string.app_success_parking_slot_occupy))
                 }
             }
-            println("Test 00.3")
         }
     }
     fun incrementOccupation(stopEnd: LocalDateTime) {
