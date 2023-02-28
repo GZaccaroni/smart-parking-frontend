@@ -5,6 +5,8 @@ import arrow.core.flatMap
 import it.unibolss.smartparking.domain.entities.common.AppError
 import it.unibolss.smartparking.domain.repositories.parkingslot.ParkingSlotRepository
 import it.unibolss.smartparking.domain.usecases.common.AsyncFailableUseCase
+import kotlinx.datetime.Clock
+import kotlinx.datetime.Instant
 
 /**
  * Occupies a parking slot if the user is currently occupying no parking slot. If the user is
@@ -19,13 +21,16 @@ class OccupyParkingSlot(
         parkingSlotRepository.getCurrentParkingSlot()
             .flatMap {
                 if (it != null) {
-                    Either.Left(AppError.AlreadyParking)
-                } else {
-                    parkingSlotRepository.occupyParkingSlot(params.id)
+                    return@flatMap Either.Left(AppError.AlreadyParking)
                 }
+                if (params.stopEnd <= Clock.System.now()) {
+                    return@flatMap Either.Left(AppError.InvalidStopEnd)
+                }
+                parkingSlotRepository.occupyParkingSlot(params.id, params.stopEnd)
             }
 
     data class Params(
         val id: String,
+        val stopEnd: Instant
     )
 }

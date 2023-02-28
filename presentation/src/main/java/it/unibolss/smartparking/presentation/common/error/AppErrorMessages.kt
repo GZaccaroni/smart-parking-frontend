@@ -22,5 +22,6 @@ internal val AppError.message: String
             AppError.ParkingSlotOccupied -> R.string.app_error_parking_slot_occupied
             AppError.ParkingSlotNotFound -> R.string.app_error_parking_slot_not_found
             AppError.NoParkingSlotOccupied -> R.string.app_error_no_parking_slot_occupied
+            AppError.InvalidStopEnd -> R.string.app_error_invalid_stop_end
         }
     )
