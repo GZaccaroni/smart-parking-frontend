@@ -4,5 +4,8 @@ import kotlinx.datetime.Instant
 
 sealed interface ParkingSlotState {
     object Free : ParkingSlotState
-    data class Occupied(val freesAt: Instant) : ParkingSlotState
+    data class Occupied(
+        val freesAt: Instant,
+        val currentUser: Boolean,
+    ) : ParkingSlotState
 }
