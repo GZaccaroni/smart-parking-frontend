@@ -15,6 +15,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.CircularProgressIndicator
@@ -41,11 +43,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import it.unibolss.smartparking.domain.entities.geo.GeoPosition
+import it.unibolss.smartparking.domain.entities.parkingslot.ParkingSlot
 import it.unibolss.smartparking.domain.entities.parkingslot.ParkingSlotState
 import it.unibolss.smartparking.presentation.R
 import it.unibolss.smartparking.presentation.common.appalert.AppAlertState
 import it.unibolss.smartparking.presentation.common.appalert.Bind
 import it.unibolss.smartparking.presentation.common.date.formatted
+import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDateTime
 import org.jetbrains.annotations.TestOnly
 import org.koin.androidx.compose.koinViewModel
@@ -124,7 +128,8 @@ fun ParkingSlotLayout(
                 Column(
                     modifier = Modifier
                         .padding(32.dp)
-                        .fillMaxHeight(),
+                        .fillMaxHeight()
+                        .verticalScroll(rememberScrollState()),
                     verticalArrangement = Arrangement.spacedBy(
                         24.dp,
                     )
