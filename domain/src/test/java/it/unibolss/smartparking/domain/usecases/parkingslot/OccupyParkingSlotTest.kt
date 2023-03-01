@@ -13,8 +13,10 @@ import it.unibolss.smartparking.domain.repositories.parkingslot.ParkingSlotRepos
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
+import kotlinx.datetime.Clock
 import org.junit.Before
 import org.junit.Test
+import kotlin.time.Duration.Companion.days
 
 @ExperimentalCoroutinesApi
 class OccupyParkingSlotTest {
@@ -32,18 +34,19 @@ class OccupyParkingSlotTest {
     @Test
     fun testHappyCase() = runTest {
         val parkingSlotId = "1"
+        val stopEnd = Clock.System.now().plus(5.days)
 
         coEvery {
             parkingSlotRepository.getCurrentParkingSlot()
         } returns Either.Right(null)
         coEvery {
-            parkingSlotRepository.occupyParkingSlot(parkingSlotId)
+            parkingSlotRepository.occupyParkingSlot(parkingSlotId, stopEnd)
         } returns Either.Right(Unit)
-        val result = useCase(OccupyParkingSlot.Params(parkingSlotId))
+        val result = useCase(OccupyParkingSlot.Params(parkingSlotId, stopEnd))
         assertEquals(Either.Right(Unit), result)
 
         coVerify(exactly = 1) {
-            parkingSlotRepository.occupyParkingSlot(parkingSlotId)
+            parkingSlotRepository.occupyParkingSlot(parkingSlotId, stopEnd)
         }
     }
 
@@ -51,16 +54,17 @@ class OccupyParkingSlotTest {
     fun testAlreadyParked() = runTest {
         val newParkingSlotId = "1"
         val parkingSlot = mockk<ParkingSlot>()
+        val stopEnd = Clock.System.now().plus(5.days)
 
         coEvery {
             parkingSlotRepository.getCurrentParkingSlot()
         } returns Either.Right(parkingSlot)
 
-        val result = useCase(OccupyParkingSlot.Params(newParkingSlotId))
+        val result = useCase(OccupyParkingSlot.Params(newParkingSlotId, stopEnd))
         assertEquals(Either.Left(AppError.AlreadyParking), result)
 
         coVerify {
-            parkingSlotRepository.occupyParkingSlot(any()) wasNot Called
+            parkingSlotRepository.occupyParkingSlot(any(), any()) wasNot Called
         }
     }
 }
