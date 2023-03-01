@@ -1,5 +1,111 @@
 # Changelog
 
+## [2.0.0](https://github.com/GZaccaroni/smart-parking-frontend/compare/v1.0.0...v2.0.0) (2023-03-01)
+
+
+### ⚠ BREAKING CHANGES
+
+* incremented android min sdk version
+* Changed SignUpUser params
+* set DTOs visibility to internal
+* Corrected presentation layer classes visibility
+* Moved current parking slot away from User info
+* Fixed router bug due to StateFlow behavior (distinct)
+* Migrated to Kotlin Date from java.util.Date
+* Removed ObserveAuthState
+
+### Features
+
+* added AppAlertState to handle alert state ([84b88c6](https://github.com/GZaccaroni/smart-parking-frontend/commit/84b88c6123113ddae37c0c2cfe9f3a1f68b8712c))
+* Added Change Password Request Body ([a810550](https://github.com/GZaccaroni/smart-parking-frontend/commit/a810550b34e1656debdbc8f2595c482affdeff68))
+* Added delete user method to user data source ([bd0d132](https://github.com/GZaccaroni/smart-parking-frontend/commit/bd0d1328daac53ebda0c6c2ed596bc40c4f59d47))
+* added format date method for kotlinx instant ([a259f6f](https://github.com/GZaccaroni/smart-parking-frontend/commit/a259f6f64a9daa714b76ebaeb4b525b18c67720d))
+* Added get parking slots and get parking slot method ([09895a4](https://github.com/GZaccaroni/smart-parking-frontend/commit/09895a49213dab54ac09d8b5282afe0ad4067885))
+* Added get user method to user data source ([344b595](https://github.com/GZaccaroni/smart-parking-frontend/commit/344b5952d0da479894aa8fc7f71b75326ae75c95))
+* Added GetAuthState ([d63256b](https://github.com/GZaccaroni/smart-parking-frontend/commit/d63256b5e0506dde8c78b7391b91a243f9bafa4a))
+* added localized parking slot strings ([64b2cee](https://github.com/GZaccaroni/smart-parking-frontend/commit/64b2ceec32f06f726bdf8d6d47247a888a2e6647))
+* Added login method to user data source ([16e3749](https://github.com/GZaccaroni/smart-parking-frontend/commit/16e374926e1b35949dabe34116c02b2ca59b9581))
+* Added Login Request Body ([ff6f1b6](https://github.com/GZaccaroni/smart-parking-frontend/commit/ff6f1b64bd97f106cae997e7b87e820f4c351e2d))
+* Added logout and change password methods ([c3bec26](https://github.com/GZaccaroni/smart-parking-frontend/commit/c3bec26092be696212069683f08d6cb7c8c73a52))
+* Added missing errors in data layer ([a6ef778](https://github.com/GZaccaroni/smart-parking-frontend/commit/a6ef7781be22fe84eaf89c7a68e71c08dc6ef780))
+* Added Router for better navigation managemtn ([4cef809](https://github.com/GZaccaroni/smart-parking-frontend/commit/4cef8094b33c06e6e1708e23cbe978eeece04335))
+* Added sign up method to user data source ([5d52f97](https://github.com/GZaccaroni/smart-parking-frontend/commit/5d52f977f262bcddb644888c1980b40fb8e39dc0))
+* added state check in login and sign up screen view models ([e0e8091](https://github.com/GZaccaroni/smart-parking-frontend/commit/e0e809176b34ff74def2b826022ce2cdc7a8bdef))
+* added stop end to occupy and increment occupation ([77292a1](https://github.com/GZaccaroni/smart-parking-frontend/commit/77292a19dc0d9e05ab27b5ef7adfc4a5fc4f928f))
+* change password screen ([7aa921f](https://github.com/GZaccaroni/smart-parking-frontend/commit/7aa921fc5a405015c3aef8ac2b2b9505f38510f5))
+* change password screen view model ([f5915fb](https://github.com/GZaccaroni/smart-parking-frontend/commit/f5915fb791277fdf67bf43d2497eabc1b881f07f))
+* check if stop end is valid ([f7c8b62](https://github.com/GZaccaroni/smart-parking-frontend/commit/f7c8b62baeb37154571e25dd4283efa68496a430))
+* check new password is different from the old one ([a380911](https://github.com/GZaccaroni/smart-parking-frontend/commit/a3809112f664b76b2202466d18f23646931d759d))
+* connected login screen to navigation ([526c283](https://github.com/GZaccaroni/smart-parking-frontend/commit/526c283738c1ef1535ff50370c07faa98e980215))
+* Created LoginScreen route ([6b639bd](https://github.com/GZaccaroni/smart-parking-frontend/commit/6b639bdcbb13404275d10b08adeb917dffd1ee2e))
+* Created Parking Slot screen route ([2ab6152](https://github.com/GZaccaroni/smart-parking-frontend/commit/2ab61527459feba66b8569dd4f2ba2b147e99291))
+* Created parking slots screen route ([3918bbb](https://github.com/GZaccaroni/smart-parking-frontend/commit/3918bbba344125362f352b1467c233f729ca2f47))
+* Created Sign Up screen route ([7981898](https://github.com/GZaccaroni/smart-parking-frontend/commit/798189869cf57777fb4f538acac48813ce6ebf1d))
+* Implemented error handling with mapping to domain errors ([ad7d70e](https://github.com/GZaccaroni/smart-parking-frontend/commit/ad7d70e1f512d0e9dd3ddef8895bf7a16446e6ae))
+* Implemented get parking slot method in data source ([3231a31](https://github.com/GZaccaroni/smart-parking-frontend/commit/3231a319f4e6d54039d19aa2a125f10782bb641d))
+* Implemented increment parking slot occupation and  free parking slot ([8df7a8b](https://github.com/GZaccaroni/smart-parking-frontend/commit/8df7a8bbbab0fa70f5b0e5493edd9f13edf1969e))
+* implemented occupy parking slot method in datasource ([f5c4ae4](https://github.com/GZaccaroni/smart-parking-frontend/commit/f5c4ae4a82b772a7065bd8fc0e9c020bc9d10559))
+* Implemented Snackbar binder ([124666e](https://github.com/GZaccaroni/smart-parking-frontend/commit/124666ed5f8234387fc95e8ded4aec6a13f19e5d))
+* keep information of who is occupying a parking slot ([9e5584e](https://github.com/GZaccaroni/smart-parking-frontend/commit/9e5584e7c64496a2d0c60cbf0b989e9e9c0927fa))
+* localized app error messages ([c115b9a](https://github.com/GZaccaroni/smart-parking-frontend/commit/c115b9a3072144968b4d04b264bfcc69ea69015a))
+* Localized app error messages ([329961f](https://github.com/GZaccaroni/smart-parking-frontend/commit/329961fd2a10d7e78dd46bb6fdc1112f9a14c451))
+* login screen UI ([e153d99](https://github.com/GZaccaroni/smart-parking-frontend/commit/e153d99775c61d2628712596f1b41826acf0c016))
+* login view model with form submission ([4965b6c](https://github.com/GZaccaroni/smart-parking-frontend/commit/4965b6c998995809ac53ea4449c980115414fad3))
+* parking slot screen ([6198378](https://github.com/GZaccaroni/smart-parking-frontend/commit/6198378e4be4227b4a98b84da0316512ac91e648))
+* parking slot screen view model ([38e5738](https://github.com/GZaccaroni/smart-parking-frontend/commit/38e57382844c9191fb913f5dd09eb27bc5462474))
+* parking slot ui state ([bce4930](https://github.com/GZaccaroni/smart-parking-frontend/commit/bce49305cd95bd5ced9a011ec79f499a00da5185))
+* register parking slot view model in DI ([874ca34](https://github.com/GZaccaroni/smart-parking-frontend/commit/874ca3409b6c7a7f6683ec8a613e05e12218469a))
+* Registered call methods in retrofit ([05f4ae0](https://github.com/GZaccaroni/smart-parking-frontend/commit/05f4ae07ea3f9e3ce857f1eb1f08fe2425f79d90))
+* Registered data sources in dependency injection ([f4f11b2](https://github.com/GZaccaroni/smart-parking-frontend/commit/f4f11b2faea0a940bb6001e8ef749755a8f8e529))
+* registered parking slot route ([911295e](https://github.com/GZaccaroni/smart-parking-frontend/commit/911295e0c0f3d4c8f1362a107d8a2475c10d1367))
+* Registered routes and updated activity creation ([d7be52b](https://github.com/GZaccaroni/smart-parking-frontend/commit/d7be52b2473c0d44c37d9ffee71dd413dfda64c7))
+* registered sign up screen view model in DI ([07e9f71](https://github.com/GZaccaroni/smart-parking-frontend/commit/07e9f71ea1853082dc66cac5fbd16b190cb953c8))
+* show content in snackbar ([74188db](https://github.com/GZaccaroni/smart-parking-frontend/commit/74188db8b9fd3150208e8dea37ca549b443b40d7))
+* sign up screen ([3741667](https://github.com/GZaccaroni/smart-parking-frontend/commit/37416674ab1a9ccdd79e63f6c720109de8270cb5))
+* sign up screen view model ([01e186a](https://github.com/GZaccaroni/smart-parking-frontend/commit/01e186a30d92be1fc5d69144ead7a27b4fc49ac8))
+* Updated password validation logic ([93295f4](https://github.com/GZaccaroni/smart-parking-frontend/commit/93295f43f8318bdac74ca6a64f51a025f1a5979f))
+
+
+### Bug Fixes
+
+* added missing sign up screen strings ([adf7b71](https://github.com/GZaccaroni/smart-parking-frontend/commit/adf7b719d786995121d0c5211c3b4e8baa6104d4))
+* added missing strings for change password screen ([960f4e8](https://github.com/GZaccaroni/smart-parking-frontend/commit/960f4e8c34ac21565108bc08bbd5944b448b72be))
+* app alert equals code smell ([6247fa8](https://github.com/GZaccaroni/smart-parking-frontend/commit/6247fa8272f9178427ca33941db78881a439e48d))
+* Avoid exposing MutableStateFlow in RouterImpl ([7cec491](https://github.com/GZaccaroni/smart-parking-frontend/commit/7cec491149924e88578069d56f88cf5beba7e1c0))
+* Corrected GetParking slots body ([2a60d38](https://github.com/GZaccaroni/smart-parking-frontend/commit/2a60d38efb0752c721f8d8de72803d1f4b8e78d9))
+* Corrected presentation layer classes visibility ([c6ca809](https://github.com/GZaccaroni/smart-parking-frontend/commit/c6ca8091d2996db63f8191b27f2125593d6d2b27))
+* Fixed GetAuthState test ([dba41ee](https://github.com/GZaccaroni/smart-parking-frontend/commit/dba41ee81682f38528714ff027617b27949e676b))
+* Fixed router bug due to StateFlow behavior (distinct) ([9446709](https://github.com/GZaccaroni/smart-parking-frontend/commit/9446709d9c3efc0aebb6f1911fea941c452cd227))
+* form field errors ([d7f2fb2](https://github.com/GZaccaroni/smart-parking-frontend/commit/d7f2fb2afd121d1b14c826bea3708a042aa59667))
+* handle new password equals to current error ([caa90f4](https://github.com/GZaccaroni/smart-parking-frontend/commit/caa90f439df47182e66fd40df3cbb8948c39c0ac))
+* improved test to check for valid state behavior ([39e6b7e](https://github.com/GZaccaroni/smart-parking-frontend/commit/39e6b7ecfff93e5c2afee3b06cc0de5928e6f282))
+* lowered app alert duration ([1e77638](https://github.com/GZaccaroni/smart-parking-frontend/commit/1e776389d3b012a9a6dd904c6f7f851a41342c9d))
+* registered login screen in koin ([5343bb7](https://github.com/GZaccaroni/smart-parking-frontend/commit/5343bb73c3da59a298ea5bd753a74291a242294c))
+* Route to correct route based on auth state ([b716ab5](https://github.com/GZaccaroni/smart-parking-frontend/commit/b716ab57d843e46d5d8435c0de3d525b84edd351))
+* Router duplicated routes fix ([41c522a](https://github.com/GZaccaroni/smart-parking-frontend/commit/41c522ad8102d269889a2ffb253eda19caa34519))
+* set app alert data class ([91e27c5](https://github.com/GZaccaroni/smart-parking-frontend/commit/91e27c5a117f857481e6c10eda019e2c032a166a))
+* set DTOs visibility to internal ([9f0457d](https://github.com/GZaccaroni/smart-parking-frontend/commit/9f0457ddcd53c93d1680d1f1c1c4c4dc0273b68a))
+* set parking slot screen to be scrollable to support small screens ([e9100d1](https://github.com/GZaccaroni/smart-parking-frontend/commit/e9100d124a5dc8c08d3af9666c812aaec53ab8e1))
+* set public visibility to change password screen view model ([673d892](https://github.com/GZaccaroni/smart-parking-frontend/commit/673d892271bdf320d30c7a416a31ff41899f0bfd))
+* sign up screen view model ([099f53f](https://github.com/GZaccaroni/smart-parking-frontend/commit/099f53f38931abeb4c9d571253bdd3d4d9ec5fb9))
+* sonarcloud code smells ([9ae9690](https://github.com/GZaccaroni/smart-parking-frontend/commit/9ae9690c817a52d388f95bd4cf047fccb4de9857))
+* Updated parking slot datasource implementation to match API ([770f731](https://github.com/GZaccaroni/smart-parking-frontend/commit/770f731d90ae00fc0c2d506cfc22e0158d061b17))
+* updated usages of snackbarcontent to app alert ([9881734](https://github.com/GZaccaroni/smart-parking-frontend/commit/98817349e14faeae1b8eb36b421045f4ed346cf1))
+* Updated user datasource implementation to match API ([dd594e9](https://github.com/GZaccaroni/smart-parking-frontend/commit/dd594e9acb0b0c61af1228c9326a8a0df3b0c59e))
+
+
+### Code Refactoring
+
+* Changed SignUpUser params ([0369e10](https://github.com/GZaccaroni/smart-parking-frontend/commit/0369e10625cb77cbabe00763717f506f3016a695))
+* Migrated to Kotlin Date from java.util.Date ([e953680](https://github.com/GZaccaroni/smart-parking-frontend/commit/e953680fd62b6f92d4bde99a45a36231b2af9e60))
+* Moved current parking slot away from User info ([2ae2152](https://github.com/GZaccaroni/smart-parking-frontend/commit/2ae2152046bb7f75cec224dfd3b526711e6c55a1))
+* Removed ObserveAuthState ([5da942a](https://github.com/GZaccaroni/smart-parking-frontend/commit/5da942af5e1bce9266415510631dc4fba558130f))
+
+
+### Build System
+
+* incremented android min sdk version ([13364d1](https://github.com/GZaccaroni/smart-parking-frontend/commit/13364d1cfa67d5e23cea6f881867c751d844d24d))
+
 ## 1.0.0 (2023-02-13)
 
 
