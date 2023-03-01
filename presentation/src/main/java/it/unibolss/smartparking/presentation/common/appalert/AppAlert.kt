@@ -23,7 +23,7 @@ sealed interface AppAlert {
             @Composable
             get() = error.message
     }
-    class Text(
+    data class Text(
         @get:TestOnly
         @StringRes
         val text: Int,
