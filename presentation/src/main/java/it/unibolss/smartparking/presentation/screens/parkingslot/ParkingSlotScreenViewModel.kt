@@ -39,6 +39,7 @@ class ParkingSlotScreenViewModel(
     init {
         refresh()
     }
+
     fun occupy(stopEnd: LocalDateTime) {
         val currentUiState = _uiState.value
         check(!currentUiState.loading) {
