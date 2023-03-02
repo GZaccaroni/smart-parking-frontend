@@ -23,6 +23,7 @@
     <string name="current_parking_slot_cta">Current parking slot</string>
 
     <string name="go_to_sign_up_cta">Don\'t have an account yet? Sign Up!</string>
+    <string name="request_permission_cta">Request permission</string>
     <string name="change_password_cta">Change password</string>
     <string name="login_cta">Login</string>
     <string name="logout_cta">Logout</string>
@@ -31,6 +32,8 @@
     <string name="go_back_cta">Go back</string>
     <string name="refresh_cta">Refresh</string>
     <string name="more_cta">More</string>
+
+    <string name="location_permission_message">Location permission is required to see the map with parking slots</string>
 
     <!-- App Success -->
     <string name="app_success_change_password">Your password has been successfully changed.</string>
