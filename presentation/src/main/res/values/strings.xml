@@ -3,6 +3,7 @@
     <string name="screen_title_sign_up">Sign Up</string>
     <string name="screen_title_change_password">Change password</string>
     <string name="screen_title_parking_slot">Parking slot</string>
+    <string name="screen_title_parking_slots">Parking slots</string>
 
     <string name="user_name">Name</string>
     <string name="user_email">Email</string>
@@ -19,16 +20,22 @@
     <string name="occupy_parking_slot_cta">Occupy parking slot</string>
     <string name="increment_parking_slot_occupation_cta">Increment occupation</string>
     <string name="free_parking_slot_cta">Free parking slot</string>
+    <string name="current_parking_slot_cta">Current parking slot</string>
 
     <string name="go_to_sign_up_cta">Don\'t have an account yet? Sign Up!</string>
-    <string name="change_password_cta">Change Password</string>
+    <string name="change_password_cta">Change password</string>
     <string name="login_cta">Login</string>
+    <string name="logout_cta">Logout</string>
+    <string name="delete_user_cta">Delete user</string>
     <string name="sign_up_cta">Sign Up</string>
     <string name="go_back_cta">Go back</string>
     <string name="refresh_cta">Refresh</string>
+    <string name="more_cta">More</string>
 
     <!-- App Success -->
     <string name="app_success_change_password">Your password has been successfully changed.</string>
+    <string name="app_success_logout_user">Your user has been successfully logged out.</string>
+    <string name="app_success_delete_user">Your user has been successfully deleted.</string>
     <string name="app_success_parking_slot_occupy">You have successfully occupied the parking slot.</string>
     <string name="app_success_parking_slot_increment_occupation">You have successfully incremented the occupation of the parking slot.</string>
     <string name="app_success_parking_slot_free">You have successfully freed the parking slot.</string>
