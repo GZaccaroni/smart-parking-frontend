@@ -60,7 +60,6 @@ internal fun Modifier.onVisibilityChanged(
         }
         // Fire the event if we are resumed, visible, and it hasn't already been seen.
         DisposableEffect(isResumed, isVisible, seenVisible, seenHidden, onVisibilityChanged) {
-            println("Current status: ${isResumed} ${isVisible}")
             if (isResumed && isVisible == true) {
                 if (!seenVisible) {
                     seenVisible = true
