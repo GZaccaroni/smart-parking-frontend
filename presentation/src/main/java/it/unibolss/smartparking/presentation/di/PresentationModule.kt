@@ -2,11 +2,11 @@ package it.unibolss.smartparking.presentation.di
 
 import it.unibolss.smartparking.presentation.navigation.Router
 import it.unibolss.smartparking.presentation.navigation.RouterImpl
-import it.unibolss.smartparking.presentation.screens.changepassword.ChangePasswordScreenViewModel
-import it.unibolss.smartparking.presentation.screens.login.LoginScreenViewModel
-import it.unibolss.smartparking.presentation.screens.parkingslot.ParkingSlotScreenViewModel
-import it.unibolss.smartparking.presentation.screens.parkingslots.ParkingSlotsScreenViewModel
-import it.unibolss.smartparking.presentation.screens.signup.SignUpScreenViewModel
+import it.unibolss.smartparking.presentation.screens.user.changepassword.ChangePasswordScreenViewModel
+import it.unibolss.smartparking.presentation.screens.user.login.LoginScreenViewModel
+import it.unibolss.smartparking.presentation.screens.parkingslot.parkingslot.ParkingSlotScreenViewModel
+import it.unibolss.smartparking.presentation.screens.parkingslot.parkingslots.ParkingSlotsScreenViewModel
+import it.unibolss.smartparking.presentation.screens.user.signup.SignUpScreenViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.module.dsl.singleOf
