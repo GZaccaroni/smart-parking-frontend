@@ -5,6 +5,7 @@ import it.unibolss.smartparking.presentation.navigation.RouterImpl
 import it.unibolss.smartparking.presentation.screens.changepassword.ChangePasswordScreenViewModel
 import it.unibolss.smartparking.presentation.screens.login.LoginScreenViewModel
 import it.unibolss.smartparking.presentation.screens.parkingslot.ParkingSlotScreenViewModel
+import it.unibolss.smartparking.presentation.screens.parkingslots.ParkingSlotsScreenViewModel
 import it.unibolss.smartparking.presentation.screens.signup.SignUpScreenViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.androidx.viewmodel.dsl.viewModelOf
@@ -24,6 +25,7 @@ internal val viewModelsModule = module {
     viewModel { parameters ->
         ParkingSlotScreenViewModel(parkingSlotId = parameters.get(), get(), get(), get(), get(), get())
     }
+    viewModelOf(::ParkingSlotsScreenViewModel)
 }
 
 val presentationModule get() = navigationModule + viewModelsModule
