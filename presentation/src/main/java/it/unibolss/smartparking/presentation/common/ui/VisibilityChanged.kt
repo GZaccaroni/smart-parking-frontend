@@ -60,28 +60,24 @@ internal fun Modifier.onVisibilityChanged(
         }
         // Fire the event if we are resumed, visible, and it hasn't already been seen.
         DisposableEffect(isResumed, isVisible, seenVisible, seenHidden, onVisibilityChanged) {
-            if (isResumed && isVisible == true) {
-                if (!seenVisible) {
-                    seenVisible = true
-                    // Remember the visible value to prevent re-sending on configuration changes.
-                    seenVisibleMap.put(hash, true)
+            if ((isResumed && isVisible == true) && !seenVisible) {
+                seenVisible = true
+                // Remember the visible value to prevent re-sending on configuration changes.
+                seenVisibleMap.put(hash, true)
 
-                    seenHidden = false
-                    seenHiddenMap.delete(hash)
+                seenHidden = false
+                seenHiddenMap.delete(hash)
 
-                    onVisibilityChanged(true)
-                }
-            } else if (!isResumed || isVisible == false) {
-                if (!seenHidden) {
-                    seenHidden = true
-                    // Remember the hidden value to prevent re-sending on configuration changes.
-                    seenHiddenMap.put(hash, true)
+                onVisibilityChanged(true)
+            } else if ((!isResumed || isVisible == false) && !seenHidden) {
+                seenHidden = true
+                // Remember the hidden value to prevent re-sending on configuration changes.
+                seenHiddenMap.put(hash, true)
 
-                    seenVisible = false
-                    seenVisibleMap.delete(hash)
+                seenVisible = false
+                seenVisibleMap.delete(hash)
 
-                    onVisibilityChanged(false)
-                }
+                onVisibilityChanged(false)
             }
             onDispose { }
         }
