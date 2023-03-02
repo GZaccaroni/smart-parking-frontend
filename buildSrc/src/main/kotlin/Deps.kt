@@ -12,6 +12,7 @@ object Deps {
             const val dokka = "1.7.20"
             const val sonarqube = "4.0.0.2929"
             const val compilerExtensionVersion = "1.4.0"
+            const val googleMapsSecrets = "2.0.1"
         }
         const val androidApplication = "com.android.application"
         const val buildTools = "com.android.tools.build:gradle"
@@ -20,6 +21,7 @@ object Deps {
         const val dokka = "org.jetbrains.dokka"
         const val sonarqube = "org.sonarqube"
         const val kotlinSerialization = "org.jetbrains.kotlin.plugin.serialization";
+        const val googleMapsSecrets = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin";
     }
 
     object Libraries {
@@ -30,6 +32,7 @@ object Deps {
             const val androidXCompose = "1.3.3"
             const val androidXComposeMaterial = "1.3.1"
             const val androidXComposeNavigation = "2.5.3"
+            const val androidLifecycleCompose = "2.5.1"
 
             const val koin = "3.3.3"
             const val koinAndroidCompose = "3.4.2"
@@ -39,6 +42,11 @@ object Deps {
             const val retrofit = "2.9.0"
             const val kotlinSerializationJson = "1.4.1"
             const val kotlinRetrofitSerialization = "0.8.0"
+
+            const val googleMaps = "2.10.0"
+            const val playServicesMaps = "18.1.0"
+            const val playServicesLocation = "21.0.1"
+            const val accompanistPermissions = "0.28.0"
         }
         const val androidXCore = "androidx.core:core-ktx:${Versions.androidXCore}"
         const val androidXLifecycleRuntime = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.androidXLifecycleRuntime}"
@@ -47,6 +55,7 @@ object Deps {
         const val androidXComposeUiToolingPreview = "androidx.compose.ui:ui-tooling-preview:${Versions.androidXCompose}"
         const val androidXComposeMaterial = "androidx.compose.material:material:${Versions.androidXComposeMaterial}"
         const val androidXComposeNavigation = "androidx.navigation:navigation-compose:${Versions.androidXComposeNavigation}"
+        const val androidLifecycleCompose = "androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.androidLifecycleCompose}";
 
         const val koin = "io.insert-koin:koin-core:${Versions.koin}"
         const val koinAndroid = "io.insert-koin:koin-android:${Versions.koin}"
@@ -59,6 +68,11 @@ object Deps {
         const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}";
         const val kotlinSerializationJson = "org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.kotlinSerializationJson}"
         const val kotlinRetrofitSerialization = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:${Versions.kotlinRetrofitSerialization}"
+
+        const val googleMaps = "com.google.maps.android:maps-compose:${Versions.googleMaps}"
+        const val playServicesMaps = "com.google.android.gms:play-services-maps:${Versions.playServicesMaps}"
+        const val playServicesLocation = "com.google.android.gms:play-services-location:${Versions.playServicesLocation}"
+        const val accompanistPermissions = "com.google.accompanist:accompanist-permissions:${Versions.accompanistPermissions}"
     }
 
     object TestLibraries {

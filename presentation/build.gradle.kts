@@ -2,6 +2,7 @@
 
 plugins {
     `android-base-lib`
+    id(Deps.BuildPlugins.googleMapsSecrets)
 }
 
 android {
@@ -49,6 +50,12 @@ dependencies {
     implementation(Deps.Libraries.androidXComposeUiToolingPreview)
     implementation(Deps.Libraries.androidXComposeMaterial)
     implementation(Deps.Libraries.androidXComposeNavigation)
+    implementation(Deps.Libraries.androidLifecycleCompose)
+
+    implementation(Deps.Libraries.googleMaps)
+    implementation(Deps.Libraries.playServicesMaps)
+    implementation(Deps.Libraries.playServicesLocation)
+    implementation(Deps.Libraries.accompanistPermissions)
 
     testImplementation(Deps.TestLibraries.junit)
     testImplementation(Deps.TestLibraries.kotlinCoroutines)
