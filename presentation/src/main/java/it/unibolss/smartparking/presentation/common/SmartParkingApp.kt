@@ -12,13 +12,12 @@ import androidx.navigation.compose.rememberNavController
 import it.unibolss.smartparking.presentation.common.theme.SmartParkingTheme
 import it.unibolss.smartparking.presentation.navigation.Router
 import it.unibolss.smartparking.presentation.navigation.RouterCommand
-import it.unibolss.smartparking.presentation.screens.changepassword.changePasswordScreen
-import it.unibolss.smartparking.presentation.screens.login.LoginRoute
-import it.unibolss.smartparking.presentation.screens.login.loginScreen
-import it.unibolss.smartparking.presentation.screens.parkingslot.parkingSlotScreen
-import it.unibolss.smartparking.presentation.screens.parkingslots.ParkingSlotsRoute
-import it.unibolss.smartparking.presentation.screens.parkingslots.parkingSlotsScreen
-import it.unibolss.smartparking.presentation.screens.signup.signUpScreen
+import it.unibolss.smartparking.presentation.screens.user.changepassword.changePasswordScreen
+import it.unibolss.smartparking.presentation.screens.user.login.loginScreen
+import it.unibolss.smartparking.presentation.screens.parkingslot.parkingslot.parkingSlotScreen
+import it.unibolss.smartparking.presentation.screens.parkingslot.parkingslots.ParkingSlotsRoute
+import it.unibolss.smartparking.presentation.screens.parkingslot.parkingslots.parkingSlotsScreen
+import it.unibolss.smartparking.presentation.screens.user.signup.signUpScreen
 import org.koin.androidx.compose.get
 
 @Composable
