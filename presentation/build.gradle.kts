@@ -3,6 +3,11 @@
 plugins {
     `android-base-lib`
     id(Deps.BuildPlugins.googleMapsSecrets)
+    jacoco
+}
+
+jacoco {
+    toolVersion = "0.8.8"
 }
 
 android {
@@ -32,7 +37,16 @@ android {
     testOptions {
         unitTests {
             isIncludeAndroidResources = true
+            testCoverage {
+                jacocoVersion = "0.8.8"
+            }
         }
+    }
+}
+tasks.withType<Test> {
+    configure<JacocoTaskExtension> {
+        isIncludeNoLocationClasses = true
+        excludes = listOf("jdk.internal.*")
     }
 }
 
