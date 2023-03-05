@@ -44,8 +44,10 @@ class ParkingSlotRepositoryImpl : ParkingSlotRepository {
     )*/
 
     override suspend fun getParkingSlots(
-        center: GeoPosition,
-        radius: Double
+        center: GetParkingSlotsBody(
+            position: GeoPosition,
+            radius: Double
+        )
     ): Either<AppError, List<ParkingSlot>> {
         delay(4000)
         return Either.Right(
@@ -69,7 +71,8 @@ class ParkingSlotRepositoryImpl : ParkingSlotRepository {
 
     override suspend fun occupyParkingSlot(
         id: String,
-        stopEnd: Instant
+        //stopEnd: Instant
+        stopEnd: String
     ): Either<AppError, Unit> {
         delay(3000)
         return Either.Right(Unit)
@@ -77,7 +80,8 @@ class ParkingSlotRepositoryImpl : ParkingSlotRepository {
 
     override suspend fun incrementParkingSlotOccupation(
         id: String,
-        stopEnd: Instant
+        //stopEnd: Instant
+        stopEnd: String
     ): Either<AppError, Unit> {
         delay(3000)
         return Either.Right(Unit)
