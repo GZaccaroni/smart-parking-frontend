@@ -10,7 +10,7 @@ internal data class GetParkingSlotsBody(
 */
 
 @Serializable
-internal data class Center(
-    val position: Position
+internal data class GetParkingSlotsBody(
+    val position: GeoPositionDto
     val radius: Double
 )
