@@ -6,6 +6,7 @@ import it.unibolss.smartparking.domain.entities.geo.GeoPosition
 import it.unibolss.smartparking.domain.entities.parkingslot.ParkingSlot
 import it.unibolss.smartparking.domain.entities.parkingslot.ParkingSlotState
 import it.unibolss.smartparking.domain.repositories.parkingslot.ParkingSlotRepository
+import it.unibolss.smartparking.data.models.StopEnd
 import kotlinx.coroutines.delay
 import kotlinx.datetime.Clock
 import kotlinx.datetime.DateTimePeriod
@@ -72,7 +73,7 @@ class ParkingSlotRepositoryImpl : ParkingSlotRepository {
     override suspend fun occupyParkingSlot(
         id: String,
         //stopEnd: Instant
-        stopEnd: String
+        stopEnd: StopEnd
     ): Either<AppError, Unit> {
         delay(3000)
         return Either.Right(Unit)
@@ -81,7 +82,7 @@ class ParkingSlotRepositoryImpl : ParkingSlotRepository {
     override suspend fun incrementParkingSlotOccupation(
         id: String,
         //stopEnd: Instant
-        stopEnd: String
+        stopEnd: StopEnd
     ): Either<AppError, Unit> {
         delay(3000)
         return Either.Right(Unit)
