@@ -14,5 +14,5 @@ enum class AppError {
     ParkingSlotOccupied,
     ParkingSlotNotFound,
     NoParkingSlotOccupied,
-    InvalidStopEnd
+    InvalidParkingSlotStopEnd
 }
