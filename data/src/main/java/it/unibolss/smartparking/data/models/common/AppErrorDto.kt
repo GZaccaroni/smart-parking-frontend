@@ -8,6 +8,7 @@ internal enum class AppErrorDto {
     AlreadyRegistered,
     ParkingSlotNotFound,
     ParkingSlotOccupied,
+    InvalidParkingSlotStopEnd,
     InvalidUserName,
     InvalidUserEmail,
     InvalidUserPassword,
