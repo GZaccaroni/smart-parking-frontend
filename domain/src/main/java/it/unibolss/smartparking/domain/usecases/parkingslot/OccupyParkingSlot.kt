@@ -24,7 +24,7 @@ class OccupyParkingSlot(
                     return@flatMap Either.Left(AppError.AlreadyParking)
                 }
                 if (params.stopEnd <= Clock.System.now()) {
-                    return@flatMap Either.Left(AppError.InvalidStopEnd)
+                    return@flatMap Either.Left(AppError.InvalidParkingSlotStopEnd)
                 }
                 parkingSlotRepository.occupyParkingSlot(params.id, params.stopEnd)
             }

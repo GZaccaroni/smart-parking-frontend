@@ -24,7 +24,7 @@ class IncrementParkingSlotOccupation(
                     return@flatMap Either.Left(AppError.NoParkingSlotOccupied)
                 }
                 if (params.stopEnd <= it.state.freesAt || params.stopEnd <= Clock.System.now()) {
-                    return@flatMap Either.Left(AppError.InvalidStopEnd)
+                    return@flatMap Either.Left(AppError.InvalidParkingSlotStopEnd)
                 }
                 parkingSlotRepository.incrementParkingSlotOccupation(it.id, params.stopEnd)
             }
