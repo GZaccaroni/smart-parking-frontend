@@ -68,14 +68,14 @@ class ParkingSlotsScreenViewModel(
                     _uiState.value = _uiState.value.copy(
                         loading = false
                     )
-                    _alertState.show(AppAlert.Error(result.value))
+                    handleAppError(result.value, _alertState, router)
                 }
                 is Either.Right -> {
-                    _alertState.show(AppAlert.Text(R.string.app_success_logout_user))
                     router.navigateTo(
                         LoginRoute,
                         NavOptions.Builder().setPopUpTo(0, true).build(),
                     )
+                    _alertState.show(AppAlert.Text(R.string.app_success_logout_user))
                 }
             }
         }
@@ -97,11 +97,11 @@ class ParkingSlotsScreenViewModel(
                     _alertState.show(AppAlert.Error(result.value))
                 }
                 is Either.Right -> {
-                    _alertState.show(AppAlert.Text(R.string.app_success_delete_user))
                     router.navigateTo(
                         LoginRoute,
                         NavOptions.Builder().setPopUpTo(0, true).build(),
                     )
+                    _alertState.show(AppAlert.Text(R.string.app_success_delete_user))
                 }
             }
         }
@@ -135,8 +135,8 @@ class ParkingSlotsScreenViewModel(
                 )
                 result.fold(
                     {
-                        _alertState.show(AppAlert.Error(it))
                         latestPositionRequested = null
+                        handleAppError(it, _alertState, router)
                     },
                     {
                         _uiState.value = _uiState.value.copy(
@@ -161,8 +161,10 @@ class ParkingSlotsScreenViewModel(
             val result = viewCurrentParkingSlot(Unit)
             result.fold(
                 {
-                    _alertState.show(AppAlert.Error(it))
-                    router.popBackStack()
+                    _uiState.value = _uiState.value.copy(
+                        loading = false,
+                    )
+                    handleAppError(it, _alertState, router)
                 },
                 {
                     _uiState.value = _uiState.value.copy(
