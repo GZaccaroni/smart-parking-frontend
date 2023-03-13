@@ -26,6 +26,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
@@ -39,6 +40,10 @@ import it.unibolss.smartparking.presentation.common.appalert.Bind
 import org.jetbrains.annotations.TestOnly
 import org.koin.androidx.compose.koinViewModel
 
+/**
+ * UI of the login screen.
+ * @param vm view model of login screen.
+ */
 @Composable
 fun LoginScreen(
     vm: LoginScreenViewModel = koinViewModel()
@@ -128,11 +133,15 @@ private fun SubmitButton(
     uiState: LoginUiState,
     onSubmit: () -> Unit
 ) {
+    val focusManager = LocalFocusManager.current
     Button(
         modifier = Modifier
             .height(48.dp)
             .fillMaxWidth(),
-        onClick = onSubmit,
+        onClick = {
+            focusManager.clearFocus()
+            onSubmit()
+        },
         enabled = uiState.submitEnabled && !uiState.loading,
     ) {
         if (!uiState.loading) {
