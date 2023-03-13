@@ -14,12 +14,13 @@ import it.unibolss.smartparking.presentation.R
 import it.unibolss.smartparking.presentation.common.appalert.AppAlert
 import it.unibolss.smartparking.presentation.common.appalert.AppAlertState
 import it.unibolss.smartparking.presentation.common.appalert.show
+import it.unibolss.smartparking.presentation.common.error.handleAppError
 import it.unibolss.smartparking.presentation.common.flow.tickerFlow
 import it.unibolss.smartparking.presentation.common.position.distanceFrom
 import it.unibolss.smartparking.presentation.navigation.Router
+import it.unibolss.smartparking.presentation.screens.parkingslot.parkingslot.ParkingSlotRoute
 import it.unibolss.smartparking.presentation.screens.user.changepassword.ChangePasswordRoute
 import it.unibolss.smartparking.presentation.screens.user.login.LoginRoute
-import it.unibolss.smartparking.presentation.screens.parkingslot.parkingslot.ParkingSlotRoute
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.ObsoleteCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
