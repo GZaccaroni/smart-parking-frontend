@@ -30,11 +30,9 @@ class DeleteUserTest {
 
     @Test
     fun testHappyCase() = runTest {
-        val userId = "id"
-
         coEvery {
             userRepository.authState
-        } returns AuthState.LoggedIn(userId)
+        } returns AuthState.LoggedIn
 
         coEvery {
             userRepository.deleteUser()

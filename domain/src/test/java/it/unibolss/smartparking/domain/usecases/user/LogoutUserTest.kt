@@ -5,10 +5,7 @@ import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.impl.annotations.MockK
-import io.mockk.mockk
-import it.unibolss.smartparking.domain.entities.common.AppError
 import it.unibolss.smartparking.domain.entities.user.AuthState
-import it.unibolss.smartparking.domain.entities.user.User
 import it.unibolss.smartparking.domain.repositories.user.UserRepository
 import it.unibolss.smartparking.domain.usecases.common.invoke
 import junit.framework.TestCase.assertEquals
@@ -32,11 +29,9 @@ class LogoutUserTest {
 
     @Test
     fun testHappyCase() = runTest {
-        val userId = "id"
-
         coEvery {
             userRepository.authState
-        } returns AuthState.LoggedIn(userId)
+        } returns AuthState.LoggedIn
 
         coEvery {
             userRepository.logout()

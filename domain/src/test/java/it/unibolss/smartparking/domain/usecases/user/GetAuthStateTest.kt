@@ -28,8 +28,7 @@ class GetAuthStateTest {
 
     @Test
     fun testHappyCase() = runTest {
-        val userId = "id"
-        val loggedIn = AuthState.LoggedIn(userId)
+        val loggedIn = AuthState.LoggedIn
 
         coEvery {
             userRepository.authState
