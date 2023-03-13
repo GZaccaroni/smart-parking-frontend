@@ -12,11 +12,15 @@ import it.unibolss.smartparking.presentation.common.appalert.AppAlertState
 import it.unibolss.smartparking.presentation.common.appalert.show
 import it.unibolss.smartparking.presentation.navigation.Router
 import it.unibolss.smartparking.presentation.screens.parkingslot.parkingslots.ParkingSlotsRoute
+import it.unibolss.smartparking.presentation.screens.user.login.LoginUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
+/**
+ * View Model of the sign up screen
+ */
 class SignUpScreenViewModel(
     private val signUpUser: SignUpUser,
     private val validateUserName: ValidateUserName,
@@ -26,26 +30,51 @@ class SignUpScreenViewModel(
 ) : ViewModel() {
 
     private val _alertState = MutableStateFlow<AppAlertState>(AppAlertState.None)
+
+    /**
+     * Current state of UI alerts
+     */
     val alertState: StateFlow<AppAlertState> = _alertState.asStateFlow()
 
     private val _uiState = MutableStateFlow(SignUpUiState.initial())
+
+    /**
+     * Current state of the UI
+     */
     val uiState: StateFlow<SignUpUiState> = _uiState.asStateFlow()
 
+    /**
+     * Sets the [name] to use for signing up the user with the [submit] method
+     */
     fun setName(name: String) {
         val newName = name.trim()
         _uiState.value =
             _uiState.value.copy(name = newName).validated()
     }
+
+    /**
+     * Sets the [email] to use for signing up the user with the [submit] method
+     */
     fun setEmail(email: String) {
         val newEmail = email.trim()
         _uiState.value =
             _uiState.value.copy(email = newEmail).validated()
     }
+
+    /**
+     * Sets the [password] to use for signing up the user with the [submit] method
+     */
     fun setPassword(password: String) {
         _uiState.value =
             _uiState.value.copy(password = password).validated()
     }
 
+    /**
+     * Submits the login form using the name, email and password provided with
+     * [setName], [setEmail] and [setPassword].
+     * @throws IllegalStateException if [uiState] is loading ([LoginUiState.loading]) or submit
+     * is not enabled ([LoginUiState.submitEnabled])
+     */
     fun submit() {
         val currentUiState = _uiState.value
         check(currentUiState.submitEnabled) {
