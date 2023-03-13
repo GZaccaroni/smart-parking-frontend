@@ -25,19 +25,40 @@ class LoginScreenViewModel(
 ) : ViewModel() {
 
     private val _alertState = MutableStateFlow<AppAlertState>(AppAlertState.None)
+
+    /**
+     * Current state of UI alerts
+     */
     val alertState: StateFlow<AppAlertState> = _alertState.asStateFlow()
 
     private val _uiState = MutableStateFlow(LoginUiState.initial())
+
+    /**
+     * Current state of the UI
+     */
     val uiState: StateFlow<LoginUiState> = _uiState.asStateFlow()
 
-    fun setEmail(value: String) {
-        val trimmedValue = value.trim()
+    /**
+     * Sets the [email] to use for logging in the user with the [submit] method
+     */
+    fun setEmail(email: String) {
+        val trimmedValue = email.trim()
         _uiState.value = _uiState.value.copy(email = trimmedValue).validated()
     }
-    fun setPassword(value: String) {
-        _uiState.value = _uiState.value.copy(password = value).validated()
+
+    /**
+     * Sets the [password] to use for logging in the user with the [submit] method
+     */
+    fun setPassword(password: String) {
+        _uiState.value = _uiState.value.copy(password = password).validated()
     }
 
+    /**
+     * Submits the login form using the email and password provided with
+     * [setEmail] and [setPassword].
+     * @throws IllegalStateException if [uiState] is loading ([LoginUiState.loading]) or submit
+     * is not enabled ([LoginUiState.submitEnabled])
+     */
     fun submit() {
         val currentUiState = _uiState.value
         check(currentUiState.submitEnabled) {
@@ -67,7 +88,15 @@ class LoginScreenViewModel(
             )
         }
     }
+
+    /**
+     * Navigates to the sign up screen
+     * @throws IllegalStateException if [uiState] is loading ([LoginUiState.loading])
+     */
     fun signUp() {
+        check(!uiState.value.loading) {
+            "signUp method should not be called if loading is true"
+        }
         router.navigateTo(SignUpRoute)
     }
 
