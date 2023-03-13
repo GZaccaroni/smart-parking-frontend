@@ -38,6 +38,10 @@ import it.unibolss.smartparking.presentation.common.appalert.Bind
 import org.jetbrains.annotations.TestOnly
 import org.koin.androidx.compose.koinViewModel
 
+/**
+ * UI of the change password screen.
+ * @param vm view model of the change password screen.
+ */
 @Composable
 fun ChangePasswordScreen(
     vm: ChangePasswordScreenViewModel = koinViewModel()
