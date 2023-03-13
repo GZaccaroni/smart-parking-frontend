@@ -39,6 +39,10 @@ import it.unibolss.smartparking.presentation.common.appalert.Bind
 import org.jetbrains.annotations.TestOnly
 import org.koin.androidx.compose.koinViewModel
 
+/**
+ * UI of the Sign Up Screen.
+ * @param vm view model of the sign up screen.
+ */
 @Composable
 fun SignUpScreen(
     vm: SignUpScreenViewModel = koinViewModel()
