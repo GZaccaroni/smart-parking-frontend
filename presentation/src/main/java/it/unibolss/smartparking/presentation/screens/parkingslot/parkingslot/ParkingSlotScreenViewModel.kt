@@ -66,7 +66,7 @@ class ParkingSlotScreenViewModel(
                     _uiState.value = _uiState.value.copy(
                         loading = false
                     )
-                    _alertState.show(AppAlert.Error(result.value))
+                    handleAppError(result.value, _alertState, router)
                 }
                 is Either.Right -> {
                     _uiState.value = _uiState.value.copy(
@@ -112,7 +112,7 @@ class ParkingSlotScreenViewModel(
                     _uiState.value = _uiState.value.copy(
                         loading = false
                     )
-                    _alertState.show(AppAlert.Error(result.value))
+                    handleAppError(result.value, _alertState, router)
                 }
                 is Either.Right -> {
                     _uiState.value = _uiState.value.copy(
@@ -151,7 +151,7 @@ class ParkingSlotScreenViewModel(
                     _uiState.value = _uiState.value.copy(
                         loading = false
                     )
-                    _alertState.show(AppAlert.Error(result.value))
+                    handleAppError(result.value, _alertState, router)
                 }
                 is Either.Right -> {
                     _uiState.value = _uiState.value.copy(
@@ -174,7 +174,7 @@ class ParkingSlotScreenViewModel(
             val result = viewParkingSlot(ViewParkingSlot.Params(parkingSlotId))
             result.fold(
                 {
-                    _alertState.show(AppAlert.Error(it))
+                    handleAppError(it, _alertState, router)
                     router.popBackStack()
                 },
                 {
