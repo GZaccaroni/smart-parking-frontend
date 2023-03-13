@@ -40,4 +40,5 @@ private fun AppErrorDto.toDomainError(): AppError =
         AppErrorDto.InvalidUserEmail -> AppError.InvalidUserEmail
         AppErrorDto.InvalidUserPassword -> AppError.InvalidUserPassword
         AppErrorDto.WrongCredentials -> AppError.WrongCredentials
+        AppErrorDto.InvalidParkingSlotStopEnd -> AppError.InvalidParkingSlotStopEnd
     }
