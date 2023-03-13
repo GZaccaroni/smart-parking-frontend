@@ -33,11 +33,10 @@ class GetUserTest {
     @Test
     fun testHappyCase() = runTest {
         val user = mockk<User>()
-        val userId = "id"
 
         coEvery {
             userRepository.authState
-        } returns AuthState.LoggedIn(userId)
+        } returns AuthState.LoggedIn
 
         coEvery {
             userRepository.getUser()

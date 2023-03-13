@@ -32,13 +32,12 @@ class ChangeUserPasswordTest {
 
     @Test
     fun testHappyCase() = runTest {
-        val userId = "id"
         val currentPassword = "current"
         val newPassword = "new"
 
         coEvery {
             userRepository.authState
-        } returns AuthState.LoggedIn(userId)
+        } returns AuthState.LoggedIn
 
         coEvery {
             userRepository.changeUserPassword(currentPassword, newPassword)
@@ -58,13 +57,12 @@ class ChangeUserPasswordTest {
 
     @Test
     fun testInvalidPassword() = runTest {
-        val userId = "id"
         val currentPassword = "current"
         val newPassword = "new"
 
         coEvery {
             userRepository.authState
-        } returns AuthState.LoggedIn(userId)
+        } returns AuthState.LoggedIn
 
         every {
             validateUserPassword(ValidateUserPassword.Params(newPassword))
@@ -80,13 +78,12 @@ class ChangeUserPasswordTest {
 
     @Test
     fun testInvalidNewPasswordEqualToOld() = runTest {
-        val userId = "id"
         val currentPassword = "current"
         val newPassword = "current"
 
         coEvery {
             userRepository.authState
-        } returns AuthState.LoggedIn(userId)
+        } returns AuthState.LoggedIn
 
         every {
             validateUserPassword(ValidateUserPassword.Params(newPassword))
