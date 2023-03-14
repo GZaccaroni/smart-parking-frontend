@@ -32,6 +32,7 @@ object Deps {
             const val androidXCompose = "1.3.3"
             const val androidXComposeMaterial = "1.3.1"
             const val androidXComposeNavigation = "2.5.3"
+            const val androidXSecurity = "1.1.0-alpha05"
             const val androidLifecycleCompose = "2.5.1"
 
             const val koin = "3.3.3"
@@ -55,6 +56,7 @@ object Deps {
         const val androidXComposeUiToolingPreview = "androidx.compose.ui:ui-tooling-preview:${Versions.androidXCompose}"
         const val androidXComposeMaterial = "androidx.compose.material:material:${Versions.androidXComposeMaterial}"
         const val androidXComposeNavigation = "androidx.navigation:navigation-compose:${Versions.androidXComposeNavigation}"
+        const val androidXSecurity = "androidx.security:security-crypto-ktx:${Versions.androidXSecurity}"
         const val androidLifecycleCompose = "androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.androidLifecycleCompose}";
 
         const val koin = "io.insert-koin:koin-core:${Versions.koin}"

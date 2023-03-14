@@ -1,14 +1,26 @@
 package it.unibolss.smartparking.data.datasources.user
 
 import android.content.Context
+import android.content.SharedPreferences
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKey
 import it.unibolss.smartparking.data.models.user.AuthenticationInfo
 
 internal class AuthenticationDataSourceImpl(
     context: Context,
 ) : AuthenticationDataSource {
 
-    private val sharedPreferences =
-        context.getSharedPreferences(prefsName, Context.MODE_PRIVATE)
+    private val masterKeyAlias: MasterKey =
+        MasterKey.Builder(context).setKeyScheme(MasterKey.KeyScheme.AES256_GCM).build()
+
+    private val sharedPreferences: SharedPreferences =
+        EncryptedSharedPreferences.create(
+            context,
+            prefsName,
+            masterKeyAlias,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+        )
 
     override fun getCurrentAuthInfo(): AuthenticationInfo? {
         val currentAuthToken =
