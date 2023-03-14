@@ -6,6 +6,7 @@ import it.unibolss.smartparking.data.common.AppJson
 import it.unibolss.smartparking.data.models.common.AppErrorDto
 import it.unibolss.smartparking.data.models.common.ErrorResponseDto
 import it.unibolss.smartparking.domain.entities.common.AppError
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.SerializationException
@@ -14,8 +15,9 @@ import retrofit2.HttpException
 
 internal suspend inline fun <reified T> apiCall(
     crossinline block: suspend () -> T,
+    dispatcher: CoroutineDispatcher = Dispatchers.IO
 ): Either<AppError, T> =
-    withContext(Dispatchers.IO) {
+    withContext(dispatcher) {
         try {
             Either.Right(block())
         } catch (e: HttpException) {
