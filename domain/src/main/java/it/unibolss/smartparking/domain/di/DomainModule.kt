@@ -16,6 +16,7 @@ import it.unibolss.smartparking.domain.usecases.user.SignUpUser
 import it.unibolss.smartparking.domain.usecases.user.ValidateUserEmail
 import it.unibolss.smartparking.domain.usecases.user.ValidateUserName
 import it.unibolss.smartparking.domain.usecases.user.ValidateUserPassword
+import org.koin.core.module.Module
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
@@ -38,4 +39,7 @@ internal val useCaseModule = module {
     singleOf(::ValidateUserPassword)
 }
 
+/**
+ * Koin [Module] containing the dependencies injected by the domain layer
+ */
 val domainModule get() = useCaseModule
