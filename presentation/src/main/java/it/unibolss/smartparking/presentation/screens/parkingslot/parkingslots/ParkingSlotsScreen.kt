@@ -67,6 +67,10 @@ import org.jetbrains.annotations.TestOnly
 import org.koin.androidx.compose.koinViewModel
 import java.time.format.FormatStyle
 
+/**
+ * UI of the parking slots screen.
+ * @param vm view model of the parking slots screen.
+ */
 @Composable
 fun ParkingSlotsScreen(
     vm: ParkingSlotsScreenViewModel = koinViewModel()

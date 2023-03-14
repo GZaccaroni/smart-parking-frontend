@@ -30,6 +30,9 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
+/**
+ * View Model of the
+ */
 @OptIn(ObsoleteCoroutinesApi::class)
 class ParkingSlotsScreenViewModel(
     private val viewCurrentParkingSlot: ViewCurrentParkingSlot,
@@ -40,21 +43,45 @@ class ParkingSlotsScreenViewModel(
 ) : ViewModel() {
 
     private val _alertState = MutableStateFlow<AppAlertState>(AppAlertState.None)
+
+    /**
+     * Current state of UI alerts
+     */
     val alertState: StateFlow<AppAlertState> = _alertState.asStateFlow()
 
     private val _uiState = MutableStateFlow(ParkingSlotsUiState.initial())
+
+    /**
+     * Current state of the UI
+     */
     val uiState: StateFlow<ParkingSlotsUiState> = _uiState.asStateFlow()
 
-    init {
-        loadCurrentParkingSlot()
-    }
-
+    /**
+     * Navigates to the screen with the details of the [parkingSlot]
+     * @throws IllegalStateException if [uiState] is loading ([ParkingSlotsUiState.loading])
+     */
     fun viewParkingSlot(parkingSlot: ParkingSlot) {
+        check(!_uiState.value.loading) {
+            "viewParkingSlot method should not be called if loading is true"
+        }
         router.navigateTo(ParkingSlotRoute(parkingSlot.id))
     }
+
+    /**
+     * Navigates to the change password screen
+     * @throws IllegalStateException if [uiState] is loading ([ParkingSlotsUiState.loading])
+     */
     fun changePassword() {
+        check(!_uiState.value.loading) {
+            "changePassword method should not be called if loading is true"
+        }
         router.navigateTo(ChangePasswordRoute)
     }
+
+    /**
+     * Logs out the currently logged in user
+     * @throws IllegalStateException if [uiState] is loading ([ParkingSlotsUiState.loading])
+     */
     fun logout() {
         val currentUiState = _uiState.value
         check(!currentUiState.loading) {
@@ -81,6 +108,11 @@ class ParkingSlotsScreenViewModel(
             }
         }
     }
+
+    /**
+     * Deletes the currently logged in user
+     * @throws IllegalStateException if [uiState] is loading ([ParkingSlotsUiState.loading])
+     */
     fun deleteUser() {
         val currentUiState = _uiState.value
         check(!currentUiState.loading) {
@@ -111,6 +143,9 @@ class ParkingSlotsScreenViewModel(
     private var latestPositionRequested: GeoPosition? = null
     private var loadParkingSlotsJob: Job? = null
 
+    /**
+     * Loads the data of all the parking slot near [position]
+     */
     fun loadParkingSlots(position: GeoPosition) {
         val curLatestPositionRequested = this.latestPositionRequested
         if (curLatestPositionRequested != null &&
@@ -150,8 +185,13 @@ class ParkingSlotsScreenViewModel(
         }
     }
 
+    /**
+     * Informs the view model that the visibility of the view is changed
+     */
     fun visibilityChanged(visible: Boolean) {
-        if (!visible) {
+        if (visible) {
+            loadCurrentParkingSlot()
+        } else {
             cancelParkingSlotRefreshJob()
         }
     }
@@ -169,8 +209,8 @@ class ParkingSlotsScreenViewModel(
                 },
                 {
                     _uiState.value = _uiState.value.copy(
-                        loading = false,
                         currentParkingSlot = it,
+                        loading = false
                     )
                 }
             )
