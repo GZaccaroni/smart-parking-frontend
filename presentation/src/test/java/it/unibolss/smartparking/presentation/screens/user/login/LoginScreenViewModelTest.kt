@@ -19,7 +19,7 @@ import it.unibolss.smartparking.presentation.common.appalert.AppAlert
 import it.unibolss.smartparking.presentation.common.appalert.AppAlertState
 import it.unibolss.smartparking.presentation.navigation.Router
 import it.unibolss.smartparking.presentation.screens.parkingslot.parkingslots.ParkingSlotsRoute
-import it.unibolss.smartparking.presentation.screens.user.login.LoginScreenViewModel
+import it.unibolss.smartparking.presentation.screens.user.signup.SignUpRoute
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertFalse
 import junit.framework.TestCase.assertTrue
@@ -139,6 +139,19 @@ internal class LoginScreenViewModelTest {
     @Test(expected = IllegalStateException::class)
     fun testSubmitWithEmptyFields() = runTest {
         viewModel.submit()
+    }
+
+    @Test
+    fun testSignUp() = runTest {
+        coEvery {
+            router.navigateTo(SignUpRoute, any())
+        } just Runs
+
+        viewModel.signUp()
+
+        coVerify(exactly = 1) {
+            router.navigateTo(SignUpRoute, any())
+        }
     }
 
     private fun mockCommon() {

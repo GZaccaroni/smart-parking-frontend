@@ -13,8 +13,6 @@ import io.mockk.MockKAnnotations
 import it.unibolss.smartparking.common.withRole
 import it.unibolss.smartparking.presentation.R
 import it.unibolss.smartparking.presentation.common.appalert.AppAlertState
-import it.unibolss.smartparking.presentation.screens.user.login.LoginLayout
-import it.unibolss.smartparking.presentation.screens.user.login.LoginUiState
 import junit.framework.TestCase.assertFalse
 import junit.framework.TestCase.assertTrue
 import kotlinx.coroutines.ExperimentalCoroutinesApi
