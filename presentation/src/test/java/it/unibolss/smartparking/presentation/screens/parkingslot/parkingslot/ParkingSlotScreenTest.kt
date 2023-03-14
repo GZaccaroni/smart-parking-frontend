@@ -133,7 +133,6 @@ class ParkingSlotScreenTest {
             .performScrollTo()
             .assertIsDisplayed()
             .assertIsEnabled()
-            .performClick()
         composeTestRule
             .onNode(withRole(Role.Button).and(hasText(freeLabel)))
             .performScrollTo()
