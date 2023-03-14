@@ -24,7 +24,6 @@ import it.unibolss.smartparking.presentation.R
 import it.unibolss.smartparking.presentation.common.appalert.AppAlert
 import it.unibolss.smartparking.presentation.common.appalert.AppAlertState
 import it.unibolss.smartparking.presentation.navigation.Router
-import it.unibolss.smartparking.presentation.screens.parkingslot.parkingslot.ParkingSlotScreenViewModel
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.TestScope
@@ -250,6 +249,20 @@ internal class ParkingSlotScreenViewModelTest {
         preloadParkingSlot(parkingSlotOccupied)
         viewModel.free()
     }
+
+    @Test
+    fun testGoBack() = runTest {
+        coEvery {
+            router.popBackStack()
+        } just Runs
+
+        viewModel.goBack()
+
+        coVerify(exactly = 1) {
+            router.popBackStack()
+        }
+    }
+
     private fun TestScope.preloadParkingSlot(parkingSlot: ParkingSlot) {
         coEvery {
             viewParkingSlot(ViewParkingSlot.Params(parkingSlotId))
