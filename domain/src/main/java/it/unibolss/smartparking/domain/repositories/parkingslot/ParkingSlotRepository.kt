@@ -6,6 +6,10 @@ import it.unibolss.smartparking.domain.entities.geo.GeoPosition
 import it.unibolss.smartparking.domain.entities.parkingslot.ParkingSlot
 import kotlinx.datetime.Instant
 
+/**
+ * An interface representing a parking slot repository for accessing and manipulating parking slot
+ *  data.
+ */
 interface ParkingSlotRepository {
     /**
      * Finds all the parking slots in a radius of [radius] meters from [center]
