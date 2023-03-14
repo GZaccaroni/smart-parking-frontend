@@ -56,6 +56,10 @@ import org.koin.core.parameter.parametersOf
 import java.time.format.FormatStyle
 import java.util.Calendar
 
+/**
+ * UI of the parking slot screen.
+ * @param vm view model of the parking slot screen.
+ */
 @Composable
 fun ParkingSlotScreen(
     parkingSlotId: String,

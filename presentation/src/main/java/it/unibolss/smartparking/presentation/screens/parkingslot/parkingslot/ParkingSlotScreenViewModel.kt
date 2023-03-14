@@ -32,15 +32,29 @@ class ParkingSlotScreenViewModel(
 ) : ViewModel() {
 
     private val _alertState = MutableStateFlow<AppAlertState>(AppAlertState.None)
+
+    /**
+     * Current state of UI alerts
+     */
     val alertState: StateFlow<AppAlertState> = _alertState.asStateFlow()
 
     private val _uiState = MutableStateFlow(ParkingSlotUiState.initial())
+
+    /**
+     * Current state of the UI
+     */
     val uiState: StateFlow<ParkingSlotUiState> = _uiState.asStateFlow()
 
     init {
         refresh()
     }
 
+    /**
+     * Increments the occupation of the current parking slot
+     * @throws IllegalStateException if [uiState] is loading ([ParkingSlotUiState.loading])
+     * @throws IllegalStateException if [uiState] has no parking slot set ([ParkingSlotUiState.parkingSlot])
+     * @throws IllegalStateException if [uiState] parking slot ([ParkingSlotUiState.parkingSlot]) is not free
+     */
     fun occupy(stopEnd: LocalDateTime) {
         val currentUiState = _uiState.value
         check(!currentUiState.loading) {
@@ -81,6 +95,12 @@ class ParkingSlotScreenViewModel(
             }
         }
     }
+
+    /**
+     * Increments the occupation of the current parking slot
+     * @throws IllegalStateException if [uiState] is loading ([ParkingSlotUiState.loading])
+     * @throws IllegalStateException if [uiState] has no parking slot set ([ParkingSlotUiState.parkingSlot])
+     */
     fun incrementOccupation(stopEnd: LocalDateTime) {
         val currentUiState = _uiState.value
         check(!currentUiState.loading) {
@@ -127,6 +147,12 @@ class ParkingSlotScreenViewModel(
             }
         }
     }
+
+    /**
+     * Frees the shown parking slot
+     * @throws IllegalStateException if [uiState] is loading ([ParkingSlotUiState.loading])
+     * @throws IllegalStateException if [uiState] has no parking slot set ([ParkingSlotUiState.parkingSlot])
+     */
     fun free() {
         val currentUiState = _uiState.value
         check(!currentUiState.loading) {
@@ -166,6 +192,11 @@ class ParkingSlotScreenViewModel(
             }
         }
     }
+
+    /**
+     * Refreshes the details of the parking slot
+     * @throws IllegalStateException if [uiState] is loading ([ParkingSlotUiState.loading])
+     */
     fun refresh() {
         check(!_uiState.value.loading) {
             "Refresh should not be called if view model is already loading"
@@ -185,6 +216,11 @@ class ParkingSlotScreenViewModel(
             )
         }
     }
+
+    /**
+     * Goes back to the previous screen
+     * @throws IllegalStateException if [uiState] is loading ([ParkingSlotUiState.loading])
+     */
     fun goBack() {
         router.popBackStack()
     }
