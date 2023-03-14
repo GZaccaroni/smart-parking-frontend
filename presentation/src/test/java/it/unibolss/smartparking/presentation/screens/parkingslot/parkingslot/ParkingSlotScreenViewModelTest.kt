@@ -103,6 +103,7 @@ internal class ParkingSlotScreenViewModelTest {
 
         advanceUntilIdle()
         assertEquals(parkingSlot, viewModel.uiState.value.parkingSlot)
+        assertEquals(false, viewModel.uiState.value.loading)
         coVerify(exactly = 1) {
             viewParkingSlot(ViewParkingSlot.Params(parkingSlotId))
         }
@@ -124,6 +125,7 @@ internal class ParkingSlotScreenViewModelTest {
 
         advanceUntilIdle()
         alertTurbine.skipItems(1)
+        assertEquals(false, viewModel.uiState.value.loading)
         assertEquals(AppAlertState.Some(AppAlert.Error(appError)), alertTurbine.awaitItem())
 
         coVerify(exactly = 1) {
@@ -155,6 +157,7 @@ internal class ParkingSlotScreenViewModelTest {
             AppAlertState.Some(AppAlert.Text(R.string.app_success_parking_slot_occupy)),
             alertTurbine.awaitItem()
         )
+        assertEquals(false, viewModel.uiState.value.loading)
 
         coVerify(ordering = Ordering.SEQUENCE) {
             viewParkingSlot(ViewParkingSlot.Params(parkingSlotId))
@@ -191,6 +194,7 @@ internal class ParkingSlotScreenViewModelTest {
             AppAlertState.Some(AppAlert.Text(R.string.app_success_parking_slot_increment_occupation)),
             alertTurbine.awaitItem()
         )
+        assertEquals(false, viewModel.uiState.value.loading)
 
         coVerify(ordering = Ordering.SEQUENCE) {
             viewParkingSlot(ViewParkingSlot.Params(parkingSlotId))
@@ -225,6 +229,7 @@ internal class ParkingSlotScreenViewModelTest {
             AppAlertState.Some(AppAlert.Text(R.string.app_success_parking_slot_free)),
             alertTurbine.awaitItem()
         )
+        assertEquals(false, viewModel.uiState.value.loading)
 
         coVerify(ordering = Ordering.SEQUENCE) {
             viewParkingSlot(ViewParkingSlot.Params(parkingSlotId))

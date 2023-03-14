@@ -175,6 +175,7 @@ class ParkingSlotScreenViewModel(
             val result = viewParkingSlot(ViewParkingSlot.Params(parkingSlotId))
             result.fold(
                 {
+                    _uiState.value = _uiState.value.copy(loading = false)
                     handleAppError(it, _alertState, router)
                     router.popBackStack()
                 },
