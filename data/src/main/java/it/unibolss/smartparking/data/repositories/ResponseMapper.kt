@@ -1,35 +1,42 @@
 package it.unibolss.smartparking.data.repositories
 
+import android.util.Log
 import arrow.core.Either
+import it.unibolss.smartparking.data.common.AppJson
 import it.unibolss.smartparking.data.models.common.AppErrorDto
 import it.unibolss.smartparking.data.models.common.ErrorResponseDto
 import it.unibolss.smartparking.domain.entities.common.AppError
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import kotlinx.serialization.SerializationException
 import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.json.Json
-import retrofit2.Response
+import retrofit2.HttpException
 
-internal inline fun <reified T> Response<T>.toEither(): Either<AppError, T> {
-    return if (isSuccessful) {
-        val body = body()
-        if (body != null) {
-            Either.Right(body)
-        } else {
-            Either.Left(AppError.SerializationFailed)
-        }
-    } else {
-        val response = errorBody()?.string()
-        if (response != null) {
-            try {
-                val errorResponseDto = Json.decodeFromString<ErrorResponseDto>(response)
-                Either.Left(errorResponseDto.errorCode.toDomainError())
-            } catch (e: Exception) {
+internal suspend inline fun <reified T> apiCall(
+    crossinline block: suspend () -> T,
+): Either<AppError, T> =
+    withContext(Dispatchers.IO) {
+        try {
+            Either.Right(block())
+        } catch (e: HttpException) {
+            val errorBody = e.response()?.errorBody()?.string()
+            if (errorBody != null) {
+                try {
+                    val errorResponseDto = AppJson.instance.decodeFromString<ErrorResponseDto>(errorBody)
+                    Either.Left(errorResponseDto.errorCode.toDomainError())
+                } catch (e: SerializationException) {
+                    Log.e("API_CALL", "Error serialization threw an exception", e)
+                    Either.Left(AppError.Generic)
+                }
+            } else {
                 Either.Left(AppError.Generic)
             }
-        } else {
+        } catch (e: Exception) {
+            Log.e("API_CALL", "Api call threw an exception", e)
             Either.Left(AppError.Generic)
         }
     }
-}
+
 private fun AppErrorDto.toDomainError(): AppError =
     when (this) {
         AppErrorDto.Unauthorized -> AppError.Unauthorized
