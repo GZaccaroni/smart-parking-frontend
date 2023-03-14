@@ -10,6 +10,7 @@ import io.mockk.impl.annotations.MockK
 import io.mockk.just
 import io.mockk.mockk
 import it.unibolss.smartparking.common.MainDispatcherRule
+import it.unibolss.smartparking.domain.entities.geo.GeoPosition
 import it.unibolss.smartparking.domain.entities.parkingslot.ParkingSlot
 import it.unibolss.smartparking.domain.usecases.parkingslot.FindParkingSlots
 import it.unibolss.smartparking.domain.usecases.parkingslot.ViewCurrentParkingSlot
@@ -76,6 +77,25 @@ internal class ParkingSlotsScreenViewModelTest {
         coVerify(exactly = 1) {
             viewCurrentParkingSlot(Unit)
         }
+    }
+
+    @Test
+    fun testLoadParkingSlotsGoingHidden() = runTest {
+        val position = GeoPosition(0.0, 0.0)
+        val parkingSlot = mockk<ParkingSlot>()
+        val parkingSlots = listOf(parkingSlot)
+
+        coEvery {
+            viewCurrentParkingSlot(Unit)
+        } returns Either.Right(parkingSlot)
+        coEvery {
+            findParkingSlots(any())
+        } returns Either.Right(parkingSlots)
+
+        viewModel.loadParkingSlots(position)
+        viewModel.visibilityChanged(false)
+        advanceUntilIdle()
+        assertEquals(emptyList<ParkingSlot>(), viewModel.uiState.value.parkingSlots)
     }
 
     @Test
