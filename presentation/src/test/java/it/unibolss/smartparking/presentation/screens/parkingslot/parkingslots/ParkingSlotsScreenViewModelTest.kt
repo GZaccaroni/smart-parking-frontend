@@ -74,6 +74,7 @@ internal class ParkingSlotsScreenViewModelTest {
 
         advanceUntilIdle()
         assertEquals(parkingSlot, viewModel.uiState.value.currentParkingSlot)
+        assertEquals(false, viewModel.uiState.value.loading)
         coVerify(exactly = 1) {
             viewCurrentParkingSlot(Unit)
         }
@@ -95,6 +96,7 @@ internal class ParkingSlotsScreenViewModelTest {
         viewModel.loadParkingSlots(position)
         viewModel.visibilityChanged(false)
         advanceUntilIdle()
+        assertEquals(false, viewModel.uiState.value.loading)
         assertEquals(emptyList<ParkingSlot>(), viewModel.uiState.value.parkingSlots)
     }
 
@@ -178,7 +180,7 @@ internal class ParkingSlotsScreenViewModelTest {
 
         viewModel.deleteUser()
         advanceUntilIdle()
-
+        assertEquals(true, viewModel.uiState.value.loading)
         coVerify(exactly = 1) {
             router.navigateTo(LoginRoute, any())
         }
