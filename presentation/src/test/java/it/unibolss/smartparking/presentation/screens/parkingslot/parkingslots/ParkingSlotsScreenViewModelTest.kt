@@ -71,10 +71,11 @@ internal class ParkingSlotsScreenViewModelTest {
 
         assertEquals(emptyList<ParkingSlot>(), viewModel.uiState.value.parkingSlots)
         assertEquals(null, viewModel.uiState.value.currentParkingSlot)
+        viewModel.visibilityChanged(true)
 
         advanceUntilIdle()
-        assertEquals(parkingSlot, viewModel.uiState.value.currentParkingSlot)
         assertEquals(false, viewModel.uiState.value.loading)
+        assertEquals(parkingSlot, viewModel.uiState.value.currentParkingSlot)
         coVerify(exactly = 1) {
             viewCurrentParkingSlot(Unit)
         }
