@@ -29,4 +29,7 @@ internal val dataSourceModule = module {
 internal val repositoryModule = module {
 }
 
+/**
+ * Koin [Module] containing the dependencies injected by the data layer
+ */
 val dataModule get() = dataSourceModule + repositoryModule
