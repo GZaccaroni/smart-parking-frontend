@@ -222,6 +222,9 @@ class ParkingSlotScreenViewModel(
      * @throws IllegalStateException if [uiState] is loading ([ParkingSlotUiState.loading])
      */
     fun goBack() {
+        check(!uiState.value.loading) {
+            "goBack method should not be called if loading is true"
+        }
         router.popBackStack()
     }
 }
