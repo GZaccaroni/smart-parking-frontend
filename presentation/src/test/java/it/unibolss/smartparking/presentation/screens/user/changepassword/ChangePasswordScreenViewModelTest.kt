@@ -1,14 +1,13 @@
 package it.unibolss.smartparking.presentation.screens.user.changepassword
 
+import androidx.navigation.NavOptions
 import app.cash.turbine.testIn
 import arrow.core.Either
 import io.mockk.MockKAnnotations
-import io.mockk.Runs
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
-import io.mockk.just
 import io.mockk.mockk
 import it.unibolss.smartparking.common.MainDispatcherRule
 import it.unibolss.smartparking.domain.entities.common.AppError
@@ -17,7 +16,7 @@ import it.unibolss.smartparking.domain.usecases.user.ValidateUserPassword
 import it.unibolss.smartparking.presentation.common.appalert.AppAlert
 import it.unibolss.smartparking.presentation.common.appalert.AppAlertState
 import it.unibolss.smartparking.presentation.navigation.Router
-import it.unibolss.smartparking.presentation.screens.parkingslot.parkingslots.ParkingSlotsRoute
+import it.unibolss.smartparking.presentation.screens.user.login.LoginRoute
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertFalse
 import junit.framework.TestCase.assertTrue
@@ -39,7 +38,7 @@ internal class ChangePasswordScreenViewModelTest {
     @MockK
     lateinit var validateUserPassword: ValidateUserPassword
 
-    @MockK
+    @MockK(relaxUnitFun = true)
     lateinit var router: Router
 
     lateinit var viewModel: ChangePasswordScreenViewModel
@@ -137,6 +136,37 @@ internal class ChangePasswordScreenViewModelTest {
         assertEquals(AppAlertState.Some(AppAlert.Error(appError)), alertTurbine.awaitItem())
     }
 
+    @Test
+    fun testUnauthorizedFailingCase() = runTest {
+        val appError = AppError.Unauthorized
+        val alertTurbine = viewModel.alertState.testIn(backgroundScope)
+        viewModel.setCurrentPassword(validPassword)
+        viewModel.setNewPassword(validPassword)
+
+        advanceUntilIdle()
+        coEvery {
+            changeUserPassword(
+                ChangeUserPassword.Params(
+                    currentPassword = validPassword,
+                    newPassword = validPassword,
+                )
+            )
+        } returns Either.Left(appError)
+
+        viewModel.submit()
+        advanceUntilIdle()
+
+        alertTurbine.skipItems(1)
+        assertEquals(AppAlertState.Some(AppAlert.Error(appError)), alertTurbine.awaitItem())
+
+        coVerify(exactly = 1) {
+            router.navigateTo(
+                LoginRoute,
+                NavOptions.Builder().setPopUpTo(0, true).build(),
+            )
+        }
+    }
+
     @Test(expected = IllegalStateException::class)
     fun testSubmitWithEmptyFields() = runTest {
         viewModel.submit()
@@ -144,10 +174,6 @@ internal class ChangePasswordScreenViewModelTest {
 
     @Test
     fun testGoBack() = runTest {
-        coEvery {
-            router.popBackStack()
-        } just Runs
-
         viewModel.goBack()
 
         coVerify(exactly = 1) {
@@ -162,8 +188,5 @@ internal class ChangePasswordScreenViewModelTest {
         every {
             validateUserPassword.invoke(neq(ValidateUserPassword.Params(validPassword)))
         } returns false
-        every {
-            router.navigateTo(ParkingSlotsRoute, any())
-        } just Runs
     }
 }
