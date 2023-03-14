@@ -22,6 +22,7 @@ dependencies {
     implementation(Deps.Libraries.retrofit)
     implementation(Deps.Libraries.kotlinSerializationJson)
     implementation(Deps.Libraries.kotlinRetrofitSerialization)
+    implementation(Deps.Libraries.androidXSecurity)
 
     testImplementation(Deps.TestLibraries.junit)
     testImplementation(Deps.TestLibraries.kotlinCoroutines)
