@@ -49,12 +49,16 @@ import it.unibolss.smartparking.presentation.R
 import it.unibolss.smartparking.presentation.common.appalert.AppAlertState
 import it.unibolss.smartparking.presentation.common.appalert.Bind
 import it.unibolss.smartparking.presentation.common.date.formatted
+import kotlinx.datetime.Clock
+import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
 import org.jetbrains.annotations.TestOnly
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 import java.time.format.FormatStyle
-import java.util.Calendar
+import kotlin.time.Duration.Companion.hours
 
 /**
  * UI of the parking slot screen.
@@ -143,10 +147,14 @@ fun ParkingSlotLayout(
                     Spacer(modifier = Modifier.height(16.dp))
 
                     val parkingSlotState = uiState.parkingSlot.state
+                    val minDatePickerDate = minDatePickerDate(parkingSlotState)
+                    val defaultDatePickerDate = defaultDatePickerDate(parkingSlotState)
                     when (parkingSlotState) {
                         is ParkingSlotState.Occupied ->
                             if (parkingSlotState.currentUser) {
                                 IncrementOccupationButton(
+                                    minDate = minDatePickerDate,
+                                    defaultDate = defaultDatePickerDate,
                                     onIncrementOccupationClicked = onIncrementOccupationClicked
                                 )
                                 FreeButton(
@@ -155,6 +163,8 @@ fun ParkingSlotLayout(
                             }
                         ParkingSlotState.Free -> {
                             OccupyButton(
+                                minDate = minDatePickerDate,
+                                defaultDate = defaultDatePickerDate,
                                 onOccupyClicked = onOccupyClicked
                             )
                         }
@@ -192,6 +202,8 @@ private fun FreeButton(
 
 @Composable
 private fun IncrementOccupationButton(
+    minDate: Instant,
+    defaultDate: Instant,
     onIncrementOccupationClicked: (LocalDateTime) -> Unit,
 ) {
     val context = LocalContext.current
@@ -200,7 +212,12 @@ private fun IncrementOccupationButton(
             .height(48.dp)
             .fillMaxWidth(),
         onClick = {
-            showDatePicker(context, onIncrementOccupationClicked)
+            showDatePicker(
+                context = context,
+                minDate = minDate,
+                defaultDate = defaultDate,
+                callback = onIncrementOccupationClicked,
+            )
         },
     ) {
         Text(text = stringResource(R.string.increment_parking_slot_occupation_cta))
@@ -209,6 +226,8 @@ private fun IncrementOccupationButton(
 
 @Composable
 private fun OccupyButton(
+    minDate: Instant,
+    defaultDate: Instant,
     onOccupyClicked: (LocalDateTime) -> Unit,
 ) {
     val context = LocalContext.current
@@ -217,7 +236,12 @@ private fun OccupyButton(
             .height(48.dp)
             .fillMaxWidth(),
         onClick = {
-            showDatePicker(context, onOccupyClicked)
+            showDatePicker(
+                context = context,
+                minDate = minDate,
+                defaultDate = defaultDate,
+                callback = onOccupyClicked,
+            )
         },
     ) {
         Text(text = stringResource(R.string.occupy_parking_slot_cta))
@@ -236,8 +260,8 @@ private fun IdRow(id: String) {
 private fun PositionRow(
     position: GeoPosition
 ) {
-    val latitude = Location.convert(position.latitude, Location.FORMAT_SECONDS)
-    val longitude = Location.convert(position.latitude, Location.FORMAT_SECONDS)
+    val latitude = Location.convert(position.latitude, Location.FORMAT_DEGREES)
+    val longitude = Location.convert(position.longitude, Location.FORMAT_DEGREES)
     InfoRow(
         key = stringResource(R.string.parking_slot_position),
         value = "$latitude, $longitude"
@@ -291,14 +315,16 @@ private fun InfoRow(
 
 private fun showDatePicker(
     context: Context,
+    minDate: Instant,
+    defaultDate: Instant,
     callback: (LocalDateTime) -> Unit
 ) {
-    val calendar = Calendar.getInstance()
-    val year = calendar[Calendar.YEAR]
-    val month = calendar[Calendar.MONTH]
-    val dayOfMonth = calendar[Calendar.DAY_OF_MONTH]
-    val hour = calendar[Calendar.HOUR_OF_DAY]
-    val minute = calendar[Calendar.MINUTE]
+    val localDefaultDate = defaultDate.toLocalDateTime(TimeZone.currentSystemDefault())
+    val year = localDefaultDate.year
+    val month = localDefaultDate.monthNumber - 1
+    val dayOfMonth = localDefaultDate.dayOfMonth
+    val hour = localDefaultDate.hour
+    val minute = localDefaultDate.minute
 
     val datePicker = DatePickerDialog(
         context,
@@ -309,7 +335,7 @@ private fun showDatePicker(
                     callback(
                         LocalDateTime(
                             year = selectedYear,
-                            monthNumber = selectedMonth,
+                            monthNumber = selectedMonth + 1,
                             dayOfMonth = selectedDayOfMonth,
                             hour = selectedHour,
                             minute = selectedMinute
@@ -326,6 +352,22 @@ private fun showDatePicker(
         month,
         dayOfMonth
     )
-    datePicker.datePicker.minDate = calendar.timeInMillis
+    datePicker.datePicker.minDate = minDate.toEpochMilliseconds()
     datePicker.show()
 }
+
+private fun minDatePickerDate(parkingSlotState: ParkingSlotState): Instant =
+    when (parkingSlotState) {
+        ParkingSlotState.Free ->
+            Clock.System.now()
+        is ParkingSlotState.Occupied ->
+            parkingSlotState.freesAt
+    }
+
+private fun defaultDatePickerDate(parkingSlotState: ParkingSlotState): Instant =
+    when (parkingSlotState) {
+        ParkingSlotState.Free ->
+            Clock.System.now().plus(1.hours)
+        is ParkingSlotState.Occupied ->
+            parkingSlotState.freesAt.plus(1.hours)
+    }
