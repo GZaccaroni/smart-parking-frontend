@@ -4,5 +4,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 internal data class AuthenticationResult(
-    val token: String
+    val token: String,
+    val userId: String
 )
