@@ -14,8 +14,8 @@ import kotlinx.serialization.decodeFromString
 import retrofit2.HttpException
 
 internal suspend inline fun <reified T> apiCall(
+    dispatcher: CoroutineDispatcher = Dispatchers.IO,
     crossinline block: suspend () -> T,
-    dispatcher: CoroutineDispatcher = Dispatchers.IO
 ): Either<AppError, T> =
     withContext(dispatcher) {
         try {
