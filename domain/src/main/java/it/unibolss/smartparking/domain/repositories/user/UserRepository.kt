@@ -7,6 +7,10 @@ import it.unibolss.smartparking.domain.entities.user.NewUser
 import it.unibolss.smartparking.domain.entities.user.User
 import it.unibolss.smartparking.domain.entities.user.UserCredentials
 
+/**
+ * An interface representing a user repository, which provides methods to interact with user data
+ *  and authentication.
+ */
 interface UserRepository {
     /**
      * Returns the current [AuthState]: if the user is logged in or not (guest)
