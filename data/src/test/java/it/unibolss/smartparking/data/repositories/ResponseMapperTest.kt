@@ -9,6 +9,7 @@ import kotlinx.coroutines.test.runTest
 import okhttp3.MediaType
 import okhttp3.ResponseBody
 import org.junit.Test
+import retrofit2.HttpException
 import retrofit2.Response
 
 @ExperimentalCoroutinesApi
@@ -17,9 +18,10 @@ class ResponseMapperTest {
     @Test
     fun testSuccessCase() = runTest {
         val sampleResult = "sample"
-        val response = Response.success(sampleResult)
 
-        val either = response.toEither()
+        val either = apiCall {
+            sampleResult
+        }
         assertTrue(either.isRight())
         assertEquals(sampleResult, (either as Either.Right).value)
     }
@@ -28,7 +30,9 @@ class ResponseMapperTest {
     fun testErrorCase() = runTest {
         val response = Response.error<String>(500, sampleErrorResponseBody())
 
-        val either = response.toEither()
+        val either = apiCall<Int> {
+            throw HttpException(response)
+        }
         assertTrue(either.isLeft())
         assertEquals(AppError.Unauthorized, (either as Either.Left).value)
     }
