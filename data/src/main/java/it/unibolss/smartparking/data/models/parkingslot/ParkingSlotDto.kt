@@ -8,5 +8,6 @@ internal data class ParkingSlotDto(
     val id: String,
     val position: GeoPositionDto,
     val occupied: Boolean,
+    val occupierId: String?,
     val stopEnd: Instant?
 )
