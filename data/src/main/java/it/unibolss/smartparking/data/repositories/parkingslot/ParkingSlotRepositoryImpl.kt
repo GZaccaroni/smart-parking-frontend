@@ -37,3 +37,13 @@ internal class ParkingSlotRepositoryImpl(
             list.map { it.toDomain(authInfo.userId == it.occupierId) }
         }
     }
+    override suspend fun getParkingSlot(id: String): Either<AppError, ParkingSlot> {
+        val authInfo = authenticationDataSource.getCurrentAuthInfo()
+            ?: return Either.Left(AppError.Unauthorized)
+        return apiCall {
+            parkingSlotDataSource
+                .getParkingSlot(id)
+        }.map {
+            it.toDomain(authInfo.userId == it.occupierId)
+        }
+    }
