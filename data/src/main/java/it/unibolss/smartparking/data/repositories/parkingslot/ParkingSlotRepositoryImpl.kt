@@ -47,3 +47,15 @@ internal class ParkingSlotRepositoryImpl(
             it.toDomain(authInfo.userId == it.occupierId)
         }
     }
+    override suspend fun getCurrentParkingSlot(): Either<AppError, ParkingSlot?> =
+        apiCall {
+            parkingSlotDataSource
+                .getCurrentParkingSlot()
+        }.map {
+            it.toDomain(true)
+        }.apply {
+            return when (this) {
+                Either.Left(AppError.ParkingSlotNotFound) -> Either.Right(null)
+                else -> this
+            }
+        }
