@@ -74,3 +74,17 @@ internal class ParkingSlotRepositoryImpl(
                     )
                 )
         }
+
+    override suspend fun incrementParkingSlotOccupation(
+        id: String,
+        stopEnd: Instant
+    ): Either<AppError, Unit> =
+        apiCall {
+            parkingSlotDataSource
+                .incrementParkingSlotOccupation(
+                    id = id,
+                    IncrementParkingSlotOccupationBody(
+                        stopEnd = stopEnd
+                    )
+                )
+        }
