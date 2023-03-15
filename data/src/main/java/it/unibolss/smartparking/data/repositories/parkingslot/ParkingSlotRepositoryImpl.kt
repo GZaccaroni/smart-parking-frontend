@@ -37,6 +37,7 @@ internal class ParkingSlotRepositoryImpl(
             list.map { it.toDomain(authInfo.userId == it.occupierId) }
         }
     }
+
     override suspend fun getParkingSlot(id: String): Either<AppError, ParkingSlot> {
         val authInfo = authenticationDataSource.getCurrentAuthInfo()
             ?: return Either.Left(AppError.Unauthorized)
@@ -58,4 +59,18 @@ internal class ParkingSlotRepositoryImpl(
                 Either.Left(AppError.ParkingSlotNotFound) -> Either.Right(null)
                 else -> this
             }
+        }
+
+    override suspend fun occupyParkingSlot(
+        id: String,
+        stopEnd: Instant
+    ): Either<AppError, Unit> =
+        apiCall {
+            parkingSlotDataSource
+                .occupyParkingSlot(
+                    id = id,
+                    OccupyParkingSlotBody(
+                        stopEnd = stopEnd
+                    )
+                )
         }
