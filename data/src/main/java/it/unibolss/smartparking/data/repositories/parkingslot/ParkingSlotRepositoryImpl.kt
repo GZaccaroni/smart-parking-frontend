@@ -88,3 +88,27 @@ internal class ParkingSlotRepositoryImpl(
                     )
                 )
         }
+
+    override suspend fun freeParkingSlot(id: String): Either<AppError, Unit> =
+        apiCall {
+            parkingSlotDataSource
+                .freeParkingSlot(id)
+        }
+
+    private fun ParkingSlotDto.toDomain(isCurrent: Boolean): ParkingSlot =
+        ParkingSlot(
+            id = id,
+            position = position.toDomain(),
+            state =
+            if (occupied && stopEnd != null) {
+                ParkingSlotState.Occupied(stopEnd, isCurrent)
+            } else {
+                ParkingSlotState.Free
+            }
+        )
+    private fun GeoPositionDto.toDomain(): GeoPosition =
+        GeoPosition(
+            latitude = latitude,
+            longitude = longitude
+        )
+}
