@@ -47,12 +47,21 @@ internal val dataSourceModule = module {
     single<ParkingSlotDataSource> {
         retrofit.create()
     }
+    single<AuthenticationDataSource> {
+        AuthenticationDataSourceImpl(get())
+    }
     single<UserDataSource> {
         retrofit.create()
     }
 }
 
 internal val repositoryModule = module {
+    single<UserRepository> {
+        UserRepositoryImpl(get(), get())
+    }
+    single<ParkingSlotRepository> {
+        ParkingSlotRepositoryImpl(get(), get())
+    }
 }
 
 /**
