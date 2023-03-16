@@ -150,6 +150,39 @@ class ParkingSlotRepositoryImplTest {
 
         assertEquals(Either.Left(AppError.Unauthorized), result)
     }
+
+    @Test
+    fun getCurrentParkingSlot() = runTest {
+        val parkingSlotId = "testId"
+        val parkingSlotDto = sampleParkingSlotDto(parkingSlotId, null)
+
+        coEvery {
+            parkingSlotDataSource.getCurrentParkingSlot()
+        } returns parkingSlotDto
+
+        val result = parkingSlotRepository.getCurrentParkingSlot()
+
+        assertIs<Either.Right<ParkingSlot>>(result)
+
+        assertEntityCorrect(
+            dto = parkingSlotDto,
+            entity = result.value,
+        )
+    }
+
+    @Test
+    fun getCurrentParkingSlotWhenNoneOccupied() = runTest {
+        coEvery {
+            parkingSlotDataSource.getCurrentParkingSlot()
+        } throws sampleHTTPException(AppErrorDto.ParkingSlotNotFound)
+
+        val result = parkingSlotRepository.getCurrentParkingSlot()
+
+        assertEquals(
+            Either.Right(null),
+            result
+        )
+    }
     private fun sampleHTTPException(errorCode: AppErrorDto): HttpException {
         val sampleResponse =
             """
