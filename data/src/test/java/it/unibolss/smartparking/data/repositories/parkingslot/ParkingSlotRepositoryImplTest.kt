@@ -183,6 +183,44 @@ class ParkingSlotRepositoryImplTest {
             result
         )
     }
+
+    @Test
+    fun occupyParkingSlot() = runTest {
+        val parkingSlotId = "testId"
+        val stopEnd = Clock.System.now().plus(1.hours)
+        val result = parkingSlotRepository.occupyParkingSlot(
+            parkingSlotId,
+            stopEnd,
+        )
+
+        assertEquals(Either.Right(Unit), result)
+
+        coVerify {
+            parkingSlotDataSource.occupyParkingSlot(
+                parkingSlotId,
+                OccupyParkingSlotBody(
+                    stopEnd = stopEnd
+                )
+            )
+        }
+    }
+
+    @Test
+    fun occupyParkingSlotFailure() = runTest {
+        val parkingSlotId = "testId"
+        val stopEnd = Clock.System.now().plus(1.hours)
+
+        coEvery {
+            parkingSlotDataSource.occupyParkingSlot(parkingSlotId, any())
+        } throws sampleHTTPException(AppErrorDto.ParkingSlotNotFound)
+        val result = parkingSlotRepository.occupyParkingSlot(
+            parkingSlotId,
+            stopEnd,
+        )
+
+        assertEquals(Either.Left(AppError.ParkingSlotNotFound), result)
+    }
+
     private fun sampleHTTPException(errorCode: AppErrorDto): HttpException {
         val sampleResponse =
             """
