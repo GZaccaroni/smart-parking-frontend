@@ -2,6 +2,7 @@ package it.unibolss.smartparking.data.di
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import it.unibolss.smartparking.data.common.AppJson
+import it.unibolss.smartparking.data.common.DataLayerConfig
 import it.unibolss.smartparking.data.datasources.parkingslot.ParkingSlotDataSource
 import it.unibolss.smartparking.data.datasources.user.AuthenticationDataSource
 import it.unibolss.smartparking.data.datasources.user.AuthenticationDataSourceImpl
@@ -38,7 +39,7 @@ internal val dataSourceModule = module {
         }
         .build()
     val retrofit = Retrofit.Builder()
-        .baseUrl("https://localhost/")
+        .baseUrl(DataLayerConfig.backendEndpoint)
         .client(client)
         .addConverterFactory(AppJson.instance.asConverterFactory(mediaType))
         .build()
