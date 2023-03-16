@@ -119,6 +119,37 @@ class ParkingSlotRepositoryImplTest {
         assertEquals(Either.Left(AppError.Unauthorized), result)
     }
 
+    @Test
+    fun getParkingSlot() = runTest {
+        val parkingSlotId = "testId1"
+        val parkingSlotDto = sampleParkingSlotDto(parkingSlotId, null)
+
+        coEvery {
+            parkingSlotDataSource.getParkingSlot(parkingSlotId)
+        } returns parkingSlotDto
+
+        val result = parkingSlotRepository.getParkingSlot(parkingSlotId)
+
+        assertIs<Either.Right<ParkingSlot>>(result)
+
+        assertEntityCorrect(
+            dto = parkingSlotDto,
+            entity = result.value,
+        )
+    }
+
+    @Test
+    fun getParkingSlotFailure() = runTest {
+        val parkingSlotId = "testId1"
+
+        coEvery {
+            parkingSlotDataSource.getParkingSlot(parkingSlotId)
+        } throws sampleHTTPException(AppErrorDto.Unauthorized)
+
+        val result = parkingSlotRepository.getParkingSlot(parkingSlotId)
+
+        assertEquals(Either.Left(AppError.Unauthorized), result)
+    }
     private fun sampleHTTPException(errorCode: AppErrorDto): HttpException {
         val sampleResponse =
             """
