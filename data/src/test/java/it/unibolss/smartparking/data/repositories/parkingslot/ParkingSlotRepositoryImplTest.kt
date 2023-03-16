@@ -258,6 +258,67 @@ class ParkingSlotRepositoryImplTest {
 
         assertEquals(Either.Left(AppError.Unauthorized), result)
     }
+
+    @Test
+    fun freeParkingSlot() = runTest {
+        val parkingSlotId = "testId"
+        val result = parkingSlotRepository.freeParkingSlot(parkingSlotId)
+
+        assertEquals(Either.Right(Unit), result)
+
+        coVerify {
+            parkingSlotDataSource.freeParkingSlot(parkingSlotId)
+        }
+    }
+
+    @Test
+    fun freeParkingSlotFailure() = runTest {
+        val parkingSlotId = "testId"
+
+        coEvery {
+            parkingSlotDataSource.freeParkingSlot(parkingSlotId)
+        } throws sampleHTTPException(AppErrorDto.ParkingSlotNotFound)
+
+        val result = parkingSlotRepository.freeParkingSlot(parkingSlotId)
+
+        assertEquals(Either.Left(AppError.ParkingSlotNotFound), result)
+    }
+
+    private fun sampleParkingSlotDto(
+        id: String,
+        occupierId: String?
+    ): ParkingSlotDto {
+        return ParkingSlotDto(
+            id = id,
+            position = GeoPositionDto(0.1, 0.1),
+            occupied = occupierId != null,
+            occupierId = occupierId,
+            stopEnd = if (occupierId != null) Clock.System.now().plus(1.hours) else null
+        )
+    }
+    private fun assertEntityCorrect(
+        dto: ParkingSlotDto,
+        entity: ParkingSlot
+    ) {
+        assertEquals(dto.id, entity.id)
+        assertEquals(dto.position.latitude, entity.position.latitude)
+        assertEquals(dto.position.longitude, entity.position.longitude)
+        if (dto.occupied) {
+            assertEquals(
+                ParkingSlotState.Occupied(
+                    freesAt = dto.stopEnd!!,
+                    currentUser = dto.occupierId == currentUserId,
+                ),
+                entity.state,
+            )
+        } else {
+            assertEquals(
+                ParkingSlotState.Free,
+                entity.state,
+            )
+        }
+    }
+
     private fun sampleHTTPException(errorCode: AppErrorDto): HttpException {
         val sampleResponse =
             """
