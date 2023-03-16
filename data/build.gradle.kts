@@ -25,6 +25,7 @@ dependencies {
     implementation(Deps.Libraries.androidXSecurity)
 
     testImplementation(kotlin("test"))
+    testImplementation(Deps.TestLibraries.roboelectric)
     testImplementation(Deps.TestLibraries.junit)
     testImplementation(Deps.TestLibraries.kotlinCoroutines)
     testImplementation(Deps.TestLibraries.mockk)
