@@ -56,7 +56,6 @@ dependencies {
     implementation(Deps.Libraries.koinAndroid)
 
     testImplementation(Deps.TestLibraries.junit)
-    androidTestImplementation(Deps.TestLibraries.junitAndroidExt)
-    androidTestImplementation(Deps.TestLibraries.espressoCore)
-    androidTestImplementation(Deps.TestLibraries.uiTestJunit4)
+    testImplementation(Deps.TestLibraries.koin)
+    testImplementation(Deps.TestLibraries.roboelectric)
 }
