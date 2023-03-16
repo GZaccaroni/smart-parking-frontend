@@ -11,9 +11,8 @@ import it.unibolss.smartparking.data.repositories.user.UserRepositoryImpl
 import it.unibolss.smartparking.domain.repositories.parkingslot.ParkingSlotRepository
 import it.unibolss.smartparking.domain.repositories.user.UserRepository
 import kotlinx.serialization.ExperimentalSerializationApi
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MediaType
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.core.module.Module
 import org.koin.dsl.module
 import org.koin.java.KoinJavaComponent.get
@@ -22,7 +21,7 @@ import retrofit2.create
 
 @OptIn(ExperimentalSerializationApi::class)
 internal val dataSourceModule = module {
-    val mediaType = "application/json".toMediaTypeOrNull()!!
+    val mediaType = MediaType.get("application/json")
     val client: OkHttpClient = OkHttpClient.Builder()
         .addInterceptor {
             val authenticationDataSource = get<AuthenticationDataSource>(AuthenticationDataSource::class.java)
