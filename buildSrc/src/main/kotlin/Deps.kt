@@ -91,6 +91,7 @@ object Deps {
         const val espressoCore = "androidx.test.espresso:espresso-core:${Versions.espressoCore}"
         const val uiTestJunit4 = "androidx.compose.ui:ui-test-junit4:${Libraries.Versions.androidXCompose}"
         const val kotlinCoroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Libraries.Versions.kotlinCoroutines}"
+        const val koin = "io.insert-koin:koin-test:${Libraries.Versions.koin}"
         const val mockk = "io.mockk:mockk:${Versions.mockk}"
         const val turbine = "app.cash.turbine:turbine:${Versions.turbine}"
         const val roboelectric = "org.robolectric:robolectric:${Versions.roboelectric}"
