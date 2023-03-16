@@ -11,6 +11,9 @@ android {
     buildTypes.all {
         enableUnitTestCoverage = true
     }
+    defaultConfig {
+        buildConfigField("String", "API_ENDPOINT", """"http://10.0.2.2:8080/"""")
+    }
 }
 
 dependencies {
