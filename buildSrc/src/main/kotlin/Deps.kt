@@ -9,7 +9,7 @@ object Deps {
         object Versions {
             const val buildTools = "7.4.1"
             const val androidKotlin = "1.8.0"
-            const val dokka = "1.7.20"
+            const val dokka = "1.8.10"
             const val sonarqube = "4.0.0.2929"
             const val compilerExtensionVersion = "1.4.0"
             const val googleMapsSecrets = "2.0.1"
