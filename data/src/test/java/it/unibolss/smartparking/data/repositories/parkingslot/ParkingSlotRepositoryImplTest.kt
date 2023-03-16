@@ -221,6 +221,43 @@ class ParkingSlotRepositoryImplTest {
         assertEquals(Either.Left(AppError.ParkingSlotNotFound), result)
     }
 
+    @Test
+    fun incrementParkingSlotOccupation() = runTest {
+        val parkingSlotId = "testId"
+        val newStopEnd = Clock.System.now().plus(1.hours)
+        val result = parkingSlotRepository.incrementParkingSlotOccupation(
+            parkingSlotId,
+            newStopEnd,
+        )
+
+        assertEquals(Either.Right(Unit), result)
+
+        coVerify {
+            parkingSlotDataSource.incrementParkingSlotOccupation(
+                parkingSlotId,
+                IncrementParkingSlotOccupationBody(
+                    stopEnd = newStopEnd
+                )
+            )
+        }
+    }
+
+    @Test
+    fun incrementParkingSlotOccupationFailure() = runTest {
+        val parkingSlotId = "testId"
+        val newStopEnd = Clock.System.now().plus(1.hours)
+
+        coEvery {
+            parkingSlotDataSource.incrementParkingSlotOccupation(parkingSlotId, any())
+        } throws sampleHTTPException(AppErrorDto.Unauthorized)
+
+        val result = parkingSlotRepository.incrementParkingSlotOccupation(
+            parkingSlotId,
+            newStopEnd,
+        )
+
+        assertEquals(Either.Left(AppError.Unauthorized), result)
+    }
     private fun sampleHTTPException(errorCode: AppErrorDto): HttpException {
         val sampleResponse =
             """
