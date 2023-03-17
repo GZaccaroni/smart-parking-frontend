@@ -5,7 +5,6 @@ import it.unibolss.smartparking.domain.entities.common.AppError
 import it.unibolss.smartparking.domain.entities.user.AuthState
 import it.unibolss.smartparking.domain.repositories.user.UserRepository
 import it.unibolss.smartparking.domain.usecases.common.AsyncFailableUseCase
-import it.unibolss.smartparking.domain.usecases.user.ChangeUserPassword.Params
 
 /**
  * Deletes the logged in user.
@@ -20,5 +19,4 @@ class DeleteUser(
             return Either.Left(AppError.Unauthorized)
         return userRepository.deleteUser()
     }
-
 }
