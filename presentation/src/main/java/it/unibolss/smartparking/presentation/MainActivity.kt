@@ -9,6 +9,9 @@ import it.unibolss.smartparking.domain.usecases.user.GetAuthState
 import it.unibolss.smartparking.presentation.common.SmartParkingApp
 import org.koin.android.ext.android.inject
 
+/**
+ * The main Activity of the Smart Parking App
+ */
 class MainActivity : ComponentActivity() {
 
     private val getAuthState: GetAuthState by inject()
