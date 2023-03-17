@@ -7,6 +7,9 @@ import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 
+/**
+ * Formats an [Instant] according to a given [FormatStyle]
+ */
 fun Instant.formatted(
     formatStyle: FormatStyle
 ): String {

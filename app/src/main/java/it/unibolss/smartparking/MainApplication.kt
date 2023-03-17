@@ -7,6 +7,9 @@ import it.unibolss.smartparking.presentation.di.presentationModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
+/**
+ * This class represents the entrypoint to launch the Smart Parking App
+ */
 class MainApplication : Application() {
     override fun onCreate() {
         super.onCreate()

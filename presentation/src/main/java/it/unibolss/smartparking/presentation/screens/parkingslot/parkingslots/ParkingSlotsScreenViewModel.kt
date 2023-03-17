@@ -169,18 +169,18 @@ class ParkingSlotsScreenViewModel(
                         FIND_PARKING_SLOTS_RADIUS
                     )
                 )
-                result.fold(
-                    {
-                        latestPositionRequested = null
-                        handleAppError(it, _alertState, router)
-                    },
-                    {
+                when (result) {
+                    is Either.Right -> {
                         _uiState.value = _uiState.value.copy(
                             loading = false,
-                            parkingSlots = it
+                            parkingSlots = result.value
                         )
                     }
-                )
+                    is Either.Left -> {
+                        latestPositionRequested = null
+                        handleAppError(result.value, _alertState, router)
+                    }
+                }
             }.collect()
         }
     }
@@ -200,20 +200,21 @@ class ParkingSlotsScreenViewModel(
         viewModelScope.launch {
             _uiState.value = _uiState.value.copy(loading = true)
             val result = viewCurrentParkingSlot(Unit)
-            result.fold(
-                {
+
+            when (result) {
+                is Either.Right -> {
                     _uiState.value = _uiState.value.copy(
-                        loading = false,
-                    )
-                    handleAppError(it, _alertState, router)
-                },
-                {
-                    _uiState.value = _uiState.value.copy(
-                        currentParkingSlot = it,
+                        currentParkingSlot = result.value,
                         loading = false
                     )
                 }
-            )
+                is Either.Left -> {
+                    _uiState.value = _uiState.value.copy(
+                        loading = false,
+                    )
+                    handleAppError(result.value, _alertState, router)
+                }
+            }
         }
     }
     private fun cancelParkingSlotRefreshJob() {

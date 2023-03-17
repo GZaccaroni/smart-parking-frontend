@@ -3,6 +3,7 @@ package it.unibolss.smartparking.presentation.screens.user.login
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavOptions
+import arrow.core.Either
 import it.unibolss.smartparking.domain.usecases.user.LoginUser
 import it.unibolss.smartparking.domain.usecases.user.ValidateUserEmail
 import it.unibolss.smartparking.domain.usecases.user.ValidateUserPassword
@@ -77,15 +78,17 @@ class LoginScreenViewModel(
             )
 
             _uiState.value = _uiState.value.copy(loading = false)
-            result.fold(
-                { _alertState.show(AppAlert.Error(it)) },
-                {
+            when (result) {
+                is Either.Right -> {
                     router.navigateTo(
                         ParkingSlotsRoute,
                         NavOptions.Builder().setPopUpTo(0, true).build(),
                     )
                 }
-            )
+                is Either.Left -> {
+                    _alertState.show(AppAlert.Error(result.value))
+                }
+            }
         }
     }
 

@@ -204,16 +204,17 @@ class ParkingSlotScreenViewModel(
         viewModelScope.launch {
             _uiState.value = _uiState.value.copy(loading = true)
             val result = viewParkingSlot(ViewParkingSlot.Params(parkingSlotId))
-            result.fold(
-                {
-                    _uiState.value = _uiState.value.copy(loading = false)
-                    handleAppError(it, _alertState, router)
-                    router.popBackStack()
-                },
-                {
-                    _uiState.value = _uiState.value.copy(loading = false, parkingSlot = it)
+
+            when (result) {
+                is Either.Right -> {
+                    _uiState.value = _uiState.value.copy(loading = false, parkingSlot = result.value)
                 }
-            )
+                is Either.Left -> {
+                    _uiState.value = _uiState.value.copy(loading = false)
+                    handleAppError(result.value, _alertState, router)
+                    router.popBackStack()
+                }
+            }
         }
     }
 
