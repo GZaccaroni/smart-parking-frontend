@@ -58,7 +58,6 @@ class ParkingSlotScreenTest {
 
     @Test
     fun testLoadingUIValid() {
-        val onBackCalled = AtomicBoolean(false)
         composeTestRule.setContent {
             ParkingSlotLayout(
                 uiState = ParkingSlotUiState(loading = true, parkingSlot = null),
@@ -67,9 +66,7 @@ class ParkingSlotScreenTest {
                 onIncrementOccupationClicked = { },
                 onFreeClicked = { },
                 onRefreshClicked = { },
-                onBackClicked = {
-                    onBackCalled.set(true)
-                },
+                onBackClicked = { },
             )
         }
         val missingNodesTexts =
@@ -87,9 +84,7 @@ class ParkingSlotScreenTest {
         composeTestRule
             .onNode(hasContentDescription(goBackLabel))
             .assertIsDisplayed()
-            .assertIsEnabled()
-            .performClick()
-        assertTrue(onBackCalled.get())
+            .assertIsNotEnabled()
     }
 
     @Test
