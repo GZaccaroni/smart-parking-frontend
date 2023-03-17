@@ -7,12 +7,27 @@ import it.unibolss.smartparking.domain.entities.common.AppError
 import it.unibolss.smartparking.presentation.common.error.message
 import org.jetbrains.annotations.TestOnly
 
+/**
+ * An [AppAlert] represents a message that should be displayed to the user to
+ * convey errors or warnings.
+*/
 sealed interface AppAlert {
+
+    /**
+     * Message of the alert
+     */
     @get:Composable
     val message: String
 
+    /**
+     * Type defines how the [AppAlert] should be shown
+     */
     val type: AppAlertType
 
+    /**
+     * An [AppAlert.Error] represents a message that should be displayed to the user to
+     * convey errors.
+     */
     data class Error(
         @get:TestOnly
         val error: AppError,
@@ -23,6 +38,11 @@ sealed interface AppAlert {
             @Composable
             get() = error.message
     }
+
+    /**
+     * An [AppAlert.Text] represents a message that should be displayed to the user to
+     * convey warnings.
+     */
     data class Text(
         @get:TestOnly
         @StringRes
