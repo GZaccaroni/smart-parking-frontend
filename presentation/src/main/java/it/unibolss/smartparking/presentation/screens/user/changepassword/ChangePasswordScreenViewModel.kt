@@ -2,6 +2,7 @@ package it.unibolss.smartparking.presentation.screens.user.changepassword
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import arrow.core.Either
 import it.unibolss.smartparking.domain.usecases.user.ChangeUserPassword
 import it.unibolss.smartparking.domain.usecases.user.ValidateUserPassword
 import it.unibolss.smartparking.presentation.R
@@ -75,16 +76,15 @@ class ChangePasswordScreenViewModel(
             )
 
             _uiState.value = _uiState.value.copy(loading = false)
-            result.fold(
-                {
-                    viewModelScope
-                    handleAppError(it, _alertState, router)
-                },
-                {
+            when (result) {
+                is Either.Right -> {
                     router.popBackStack()
                     _alertState.show(AppAlert.Text(R.string.app_success_change_password))
                 }
-            )
+                is Either.Left -> {
+                    handleAppError(result.value, _alertState, router)
+                }
+            }
         }
     }
 
