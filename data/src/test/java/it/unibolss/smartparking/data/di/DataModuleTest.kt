@@ -1,5 +1,7 @@
 package it.unibolss.smartparking.data.di
 
+import it.unibolss.smartparking.data.common.FakeAndroidKeyStore
+import org.junit.BeforeClass
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.koin.android.ext.koin.androidContext
@@ -22,6 +24,14 @@ class DataModuleTest {
             )
 
             checkModules()
+        }
+    }
+
+    companion object {
+        @JvmStatic
+        @BeforeClass
+        fun beforeClass() {
+            FakeAndroidKeyStore.setup
         }
     }
 }
