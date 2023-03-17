@@ -113,7 +113,10 @@ fun ParkingSlotLayout(
             TopAppBar(
                 title = { Text(stringResource(R.string.screen_title_parking_slot)) },
                 navigationIcon = {
-                    IconButton(onClick = onBackClicked) {
+                    IconButton(
+                        onClick = onBackClicked,
+                        enabled = !uiState.loading,
+                    ) {
                         Icon(Icons.Rounded.ArrowBack, stringResource(R.string.go_back_cta))
                     }
                 },
