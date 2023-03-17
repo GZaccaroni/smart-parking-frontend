@@ -13,3 +13,7 @@ Smart parking is an application that helps people to find out free places to par
 
 ## Usage
 You can download the latest apk from "Releases" ([here](https://github.com/GZaccaroni/smart-parking-frontend/releases/latest) and install it on your Android phone or you can build it from scratch using the source code in this repositroy.
+
+## Documentation
+
+You can find the latest documentation of the frontend [here](https://gzaccaroni.github.io/smart-parking-frontend/index.html).
