@@ -29,7 +29,7 @@ private val seenVisibleMap = SparseBooleanArray()
 private val seenHiddenMap = SparseBooleanArray()
 
 /**
- * A callback when the composable visibility changes. It will fire only when completely visible
+ * A callback called when the composable visibility changes. It will fire only when completely visible
  * and when the app is resumed, and it will not fire again on rotation.
  *
  * @param onVisibilityChanged The callback to call when the visibility changes.
