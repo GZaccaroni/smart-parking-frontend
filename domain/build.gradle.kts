@@ -18,7 +18,9 @@ dependencies {
     implementation(Deps.Libraries.koin)
     implementation(Deps.Libraries.kotlinCoroutines)
     implementation(Deps.Libraries.arrowFxCoroutines)
+
     testImplementation(Deps.TestLibraries.junit)
+    testImplementation(Deps.TestLibraries.koin)
     testImplementation(Deps.TestLibraries.kotlinCoroutines)
     testImplementation(Deps.TestLibraries.mockk)
 }
