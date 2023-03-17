@@ -24,6 +24,9 @@ private val LightColorPalette = lightColors(
     secondary = Teal200
 )
 
+/**
+ * The [Composable] theme of the application
+ */
 @Composable
 internal fun SmartParkingTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
     val colors = if (darkTheme) {
