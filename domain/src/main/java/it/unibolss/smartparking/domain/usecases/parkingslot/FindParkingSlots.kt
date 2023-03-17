@@ -6,6 +6,7 @@ import it.unibolss.smartparking.domain.entities.geo.GeoPosition
 import it.unibolss.smartparking.domain.entities.parkingslot.ParkingSlot
 import it.unibolss.smartparking.domain.repositories.parkingslot.ParkingSlotRepository
 import it.unibolss.smartparking.domain.usecases.common.AsyncFailableUseCase
+import it.unibolss.smartparking.domain.usecases.parkingslot.FindParkingSlots.Params
 
 /**
  * Finds the parking slots in a radius of [Params.radius] meters from [Params.center]

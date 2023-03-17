@@ -1,7 +1,9 @@
 package it.unibolss.smartparking.data.datasources.user
 
+import it.unibolss.smartparking.data.common.FakeAndroidKeyStore
 import it.unibolss.smartparking.data.models.user.AuthenticationInfo
 import org.junit.Before
+import org.junit.BeforeClass
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
@@ -56,5 +58,13 @@ class AuthenticationDataSourceImplTest {
             null,
             authenticationDataSource.getCurrentAuthInfo(),
         )
+    }
+
+    companion object {
+        @JvmStatic
+        @BeforeClass
+        fun beforeClass() {
+            FakeAndroidKeyStore.setup
+        }
     }
 }
