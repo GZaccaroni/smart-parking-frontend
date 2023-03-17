@@ -72,6 +72,7 @@ dependencies {
     implementation(Deps.Libraries.accompanistPermissions)
 
     testImplementation(Deps.TestLibraries.junit)
+    testImplementation(Deps.TestLibraries.koin)
     testImplementation(Deps.TestLibraries.kotlinCoroutines)
     testImplementation(Deps.TestLibraries.mockk)
     testImplementation(Deps.TestLibraries.turbine)
