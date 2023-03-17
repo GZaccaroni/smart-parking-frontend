@@ -80,14 +80,12 @@ object Deps {
     object TestLibraries {
         private object Versions {
             const val junit = "4.13.2"
-            const val junitAndroidExt = "1.1.5"
             const val espressoCore = "3.5.1"
             const val mockk = "1.13.4"
             const val turbine = "0.12.1"
             const val roboelectric = "4.9"
         }
         const val junit = "junit:junit:${Versions.junit}"
-        const val junitAndroidExt = "androidx.test.ext:junit-ktx:${Versions.junitAndroidExt}"
         const val espressoCore = "androidx.test.espresso:espresso-core:${Versions.espressoCore}"
         const val uiTestJunit4 = "androidx.compose.ui:ui-test-junit4:${Libraries.Versions.androidXCompose}"
         const val kotlinCoroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Libraries.Versions.kotlinCoroutines}"
