@@ -3,8 +3,6 @@
 plugins {
     id(Deps.BuildPlugins.androidApplication)
     id(Deps.BuildPlugins.androidKotlin)
-
-    id(ScriptPlugins.quality)
 }
 
 android {
