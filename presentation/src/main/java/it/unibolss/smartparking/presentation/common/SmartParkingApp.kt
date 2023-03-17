@@ -21,6 +21,13 @@ import it.unibolss.smartparking.presentation.screens.user.login.loginScreen
 import it.unibolss.smartparking.presentation.screens.user.signup.signUpScreen
 import org.koin.androidx.compose.get
 
+/**
+ * A composable function that defines the main UI for the Smart Parking application.
+ *
+ * This function takes two parameters: [isLoggedIn], which specifies whether the user is currently
+ * logged in, and [router]: a [Router] implementation used for navigating
+ * between screens.
+*/
 @Composable
 internal fun SmartParkingApp(
     isLoggedIn: Boolean,
