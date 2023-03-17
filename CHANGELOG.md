@@ -1,5 +1,56 @@
 # Changelog
 
+## [2.1.0](https://github.com/GZaccaroni/smart-parking-frontend/compare/v2.0.0...v2.1.0) (2023-03-17)
+
+
+### Features
+
+* added apiCall utility method ([3d36070](https://github.com/GZaccaroni/smart-parking-frontend/commit/3d3607003e434540aa8cf107410f9df5dcf5518a))
+* added authentication interceptor to data sources ([94859ce](https://github.com/GZaccaroni/smart-parking-frontend/commit/94859ce3a34a2ccc4edf988a06ab030d173ee965))
+* api endpoint config in gradle property ([c918c7a](https://github.com/GZaccaroni/smart-parking-frontend/commit/c918c7a9064e8be20c91870c4620605906b57664))
+* authentication user dtos ([b8ab642](https://github.com/GZaccaroni/smart-parking-frontend/commit/b8ab642842dec28929c142c8a325bb1df67503a0))
+* centered progress indicator ([d5cbc2e](https://github.com/GZaccaroni/smart-parking-frontend/commit/d5cbc2eb4cafc802d986ab0c5d609d0c8b1533fa))
+* disable back button while loading ([83d3703](https://github.com/GZaccaroni/smart-parking-frontend/commit/83d370325eff4a46061dc382f0e2f081cfef2aa8))
+* distance from geoposition ([c8315f2](https://github.com/GZaccaroni/smart-parking-frontend/commit/c8315f25199fed110cfba87be8c87bb93bac5977))
+* handle user session expired error ([709dc2a](https://github.com/GZaccaroni/smart-parking-frontend/commit/709dc2a2c9e13034a5fe492e7a8386f84ea2cfb4))
+* invalid parking slot stop end error added ([ec5cba8](https://github.com/GZaccaroni/smart-parking-frontend/commit/ec5cba8e0bb1eecd691292d9d817a1add3d13619))
+* InvalidParkingSlotStopEnd error added to AppError entity ([e123619](https://github.com/GZaccaroni/smart-parking-frontend/commit/e1236194629b34a303600c17ecb2a7e51397caec))
+* module wide json serializer instance ([4a8b043](https://github.com/GZaccaroni/smart-parking-frontend/commit/4a8b043d4ffaaf17cd5bc65be9cc9866ad750287))
+* parking slot ui state ([a31fd77](https://github.com/GZaccaroni/smart-parking-frontend/commit/a31fd77deba1628d2b16687ca4d6b32995b0abf2))
+* parking slots map dependencies ([7ae9a22](https://github.com/GZaccaroni/smart-parking-frontend/commit/7ae9a22fc8809c160496d61b23d4bfa155669b60))
+* parking slots screen ([3bd3436](https://github.com/GZaccaroni/smart-parking-frontend/commit/3bd3436061b3f8b71aa41e5eb245f6b6ebaddc55))
+* parking slots screen view model ([b15a68a](https://github.com/GZaccaroni/smart-parking-frontend/commit/b15a68a5d3269492d8eb87c70ae841f2cd010a9d))
+* **parkingslot:** added occupier id to parking slot dto ([33f677a](https://github.com/GZaccaroni/smart-parking-frontend/commit/33f677ac73c2414d2de99252cb99570c52277520))
+* **parkingslot:** check page is not loading when calling goBack ([a283ddf](https://github.com/GZaccaroni/smart-parking-frontend/commit/a283ddfbea2495e356d28ee7c0a7cc51b4a64c7a))
+* **parkingslot:** free parking slot implementation ([7cc6cad](https://github.com/GZaccaroni/smart-parking-frontend/commit/7cc6cadd301d227c95babe3e60084763abc563c0))
+* **parkingslot:** get current parking slot implementation ([d07cc1e](https://github.com/GZaccaroni/smart-parking-frontend/commit/d07cc1ef723e63f355d724a17424d453969cb4a4))
+* **parkingslot:** get single parking slot implementation ([1c3cff7](https://github.com/GZaccaroni/smart-parking-frontend/commit/1c3cff71cc8847770b5f2946bd1b48cee9d22ae1))
+* **parkingslot:** increment parking slot occupation implementation ([fdc0ef9](https://github.com/GZaccaroni/smart-parking-frontend/commit/fdc0ef950a119ef166efb8c0f5b518171d427d83))
+* **parkingslot:** occupy parking slot implementation ([6853f46](https://github.com/GZaccaroni/smart-parking-frontend/commit/6853f46828190cde3d1cddff240d37f8f0b4f5ba))
+* **parkingslot:** registered user repository in dependency injection ([99d2444](https://github.com/GZaccaroni/smart-parking-frontend/commit/99d244422c770d9edb34f00292a742401837cbb7))
+* **parkingslots:** repository get parking slots given a center and a radius ([63227c9](https://github.com/GZaccaroni/smart-parking-frontend/commit/63227c923ec056c7a003048d01ee3a7338a033ea))
+* removed UserParkingSlot ([aedee00](https://github.com/GZaccaroni/smart-parking-frontend/commit/aedee00be99fc57df608af4b4a05ba052854a524))
+* store data layer config in separated file ([e608a9c](https://github.com/GZaccaroni/smart-parking-frontend/commit/e608a9cbfb2e8262e46a5a74667834b553a58dc0))
+* ticker flow ([8ba78d1](https://github.com/GZaccaroni/smart-parking-frontend/commit/8ba78d169862228b47d18513addfcbe16a5c9cbd))
+* use encrypted shared preferences for storing auth token ([07fbdb8](https://github.com/GZaccaroni/smart-parking-frontend/commit/07fbdb8ae75a6f70efb3ea04d5794ff9646c0b95))
+* user repository implementation ([5f2bfea](https://github.com/GZaccaroni/smart-parking-frontend/commit/5f2bfeafefb176fd684438517c336afe5ea6f8ed))
+* **user:** authentication local data source ([cc950fb](https://github.com/GZaccaroni/smart-parking-frontend/commit/cc950fb7178988ff061781b766130d08c28e8922))
+* view current parking slot ([82cbaff](https://github.com/GZaccaroni/smart-parking-frontend/commit/82cbaffa35579649374aa204f69d5928637edf79))
+* visibility changed modifier ([d51b2f7](https://github.com/GZaccaroni/smart-parking-frontend/commit/d51b2f7da65ac1382bd9a5114cf53bd5dea9cbd5))
+
+
+### Bug Fixes
+
+* added missing permissions strings ([7d1b570](https://github.com/GZaccaroni/smart-parking-frontend/commit/7d1b570679fdd6598973e60cc89ebf2610db356a))
+* corrected apiCall dispatcher injection ([8254b30](https://github.com/GZaccaroni/smart-parking-frontend/commit/8254b30c75657492d38e56e36adb50905b59e1be))
+* open login route if not logged in ([a6bb46e](https://github.com/GZaccaroni/smart-parking-frontend/commit/a6bb46e5ad3b8edc78d7197c3c08de0608149087))
+* parking slot screen loader ([e8a4348](https://github.com/GZaccaroni/smart-parking-frontend/commit/e8a434876abb68cf94c5bec5c851e35ae050fc6d))
+* **parkingslot:** parking slot data source dto parsing ([d76b80f](https://github.com/GZaccaroni/smart-parking-frontend/commit/d76b80f91ff9800557bfc6b85f8ff98479676cc4))
+* remote content media type ([4bca734](https://github.com/GZaccaroni/smart-parking-frontend/commit/4bca734a00f83430471be4dc6187529723d94dd9))
+* use appError utility method in view models ([6005cc1](https://github.com/GZaccaroni/smart-parking-frontend/commit/6005cc16ea4166a0dfb8c5b4439419ba3be5e0ef))
+* **user:** corrected user data source responses ([f121403](https://github.com/GZaccaroni/smart-parking-frontend/commit/f1214034a2f198b2773448ef74b83e68fabc0730))
+* view current parking slot DI registration ([b886be1](https://github.com/GZaccaroni/smart-parking-frontend/commit/b886be1d65ff3fae9f39e8663a05d6a0ca1c5d00))
+
 ## [2.0.0](https://github.com/GZaccaroni/smart-parking-frontend/compare/v1.0.0...v2.0.0) (2023-03-01)
 
 
