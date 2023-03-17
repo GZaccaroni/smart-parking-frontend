@@ -8,8 +8,12 @@ import kotlinx.coroutines.flow.consumeAsFlow
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 
+/**
+ * Returns a [Flow] that emits a unit value at a fixed interval [delayMillis] after an initial delay
+ * of [initialDelayMillis].
+ */
 @OptIn(ObsoleteCoroutinesApi::class)
-fun tickerFlow(
+internal fun tickerFlow(
     delayMillis: Long,
     initialDelayMillis: Long = delayMillis,
     context: CoroutineContext = EmptyCoroutineContext,
