@@ -53,7 +53,7 @@ jobs:
           path: './build/dokka/htmlMultiModule'
       - name: Deploy release docs to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v2
       # Generate and upload jar
       - name: Bump version code
         uses: chkfung/android-version-actions@v1.2.1
