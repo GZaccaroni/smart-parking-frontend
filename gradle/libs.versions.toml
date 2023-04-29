@@ -25,7 +25,7 @@ junit4 = "4.13.2"
 androidxEspresso = "3.5.1"
 mockk = "1.13.4"
 turbine = "0.12.1"
-roboelectric = "4.9"
+robolectric = "4.9"
 
 androidGradlePlugin = "7.4.2"
 sonarqube = "4.0.0.2929"
@@ -40,7 +40,7 @@ androidx-compose-ui-ui = { group = "androidx.compose.ui", name = "ui" }
 androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 androidx-compose-material = { group = "androidx.compose.material", name = "material", version.ref = "androidxComposeMaterial" }
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "androidxNavigation" }
-androidx-security-ktx = { group = "androidx.security", name = "security-crypto-ktx", version.ref = "androidxNavigation" }
+androidx-security-ktx = { group = "androidx.security", name = "security-crypto-ktx", version.ref = "androidXSecurityKtx" }
 androidx-lifecycle-viewModelCompose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "androidxLifecycle" }
 accompanist-permissions = { group = "com.google.accompanist", name = "accompanist-permissions", version.ref = "accompanist" }
 google-maps-compose = { group = "com.google.maps.android", name = "maps-compose", version.ref = "googleMaps" }
@@ -66,7 +66,7 @@ kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-cor
 koin-test = { group = "io.insert-koin", name = "koin-test", version.ref = "koin" }
 mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
-roboelectric = { group = "org.roboelectric", name = "roboelectric", version.ref = "roboelectric" }
+robolectric = { group = "org.robolectric", name = "robolectric", version.ref = "robolectric" }
 
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
 
