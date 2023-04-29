@@ -1,5 +1,5 @@
 [versions]
-kotlin = "1.8.20"
+kotlin = "1.8.21"
 androidxCore = "1.10.0"
 androidxLifecycle = "2.6.1"
 androidxActivity = "1.7.1"
