@@ -20,14 +20,14 @@ dependencies {
 
     implementation(libs.koin.core)
     implementation(libs.koin.android)
-    implementation(libs.retrofit)
+    implementation(libs.retrofit.core)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.retrofit.kotlin.serialization)
-    implementation(libs.androidx.security)
+    implementation(libs.androidx.security.ktx)
 
     testImplementation(kotlin("test"))
     testImplementation(libs.koin.test)
-    testImplementation(libs.roboelectric)
+    testImplementation(libs.robolectric)
     testImplementation(libs.junit4)
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.mockk)

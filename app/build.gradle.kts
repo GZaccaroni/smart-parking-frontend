@@ -58,5 +58,5 @@ dependencies {
 
     testImplementation(libs.junit4)
     testImplementation(libs.koin.test)
-    testImplementation(libs.roboelectric)
+    testImplementation(libs.robolectric)
 }
