@@ -11,6 +11,9 @@ jacoco {
 android {
 
     compileSdk = AppConfig.AndroidSdk.compile
+    buildFeatures {
+        buildConfig = true
+    }
     defaultConfig {
         minSdk = AppConfig.AndroidSdk.min
 
@@ -45,7 +48,7 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    packagingOptions {
+    packaging {
         resources.excludes.addAll(
             listOf(
                 "META-INF/DEPENDENCIES",
