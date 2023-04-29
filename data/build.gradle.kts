@@ -2,7 +2,7 @@
 
 plugins {
     `android-base-lib`
-    id(Deps.BuildPlugins.kotlinSerialization) version Deps.BuildPlugins.Versions.androidKotlin
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -16,19 +16,19 @@ android {
 dependencies {
     implementation(project(":domain"))
 
-    implementation(Deps.Libraries.kotlinCoroutines)
+    implementation(libs.kotlinx.coroutines.core)
 
-    implementation(Deps.Libraries.koin)
-    implementation(Deps.Libraries.koinAndroid)
-    implementation(Deps.Libraries.retrofit)
-    implementation(Deps.Libraries.kotlinSerializationJson)
-    implementation(Deps.Libraries.kotlinRetrofitSerialization)
-    implementation(Deps.Libraries.androidXSecurity)
+    implementation(libs.koin.core)
+    implementation(libs.koin.android)
+    implementation(libs.retrofit.core)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.retrofit.kotlin.serialization)
+    implementation(libs.androidx.security.ktx)
 
     testImplementation(kotlin("test"))
-    testImplementation(Deps.TestLibraries.koin)
-    testImplementation(Deps.TestLibraries.roboelectric)
-    testImplementation(Deps.TestLibraries.junit)
-    testImplementation(Deps.TestLibraries.kotlinCoroutines)
-    testImplementation(Deps.TestLibraries.mockk)
+    testImplementation(libs.koin.test)
+    testImplementation(libs.robolectric)
+    testImplementation(libs.junit4)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.mockk)
 }

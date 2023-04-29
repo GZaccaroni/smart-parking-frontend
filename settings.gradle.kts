@@ -16,10 +16,10 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Smart Parking"
 
-val modules = arrayOf(
+val modules = listOf(
     ":app",
     ":domain",
     ":data",
     ":presentation",
 )
-include(*modules)
+include(modules)

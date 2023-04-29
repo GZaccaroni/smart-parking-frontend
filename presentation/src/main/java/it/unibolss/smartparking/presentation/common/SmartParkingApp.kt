@@ -19,7 +19,7 @@ import it.unibolss.smartparking.presentation.screens.user.changepassword.changeP
 import it.unibolss.smartparking.presentation.screens.user.login.LoginRoute
 import it.unibolss.smartparking.presentation.screens.user.login.loginScreen
 import it.unibolss.smartparking.presentation.screens.user.signup.signUpScreen
-import org.koin.androidx.compose.get
+import org.koin.compose.koinInject
 
 /**
  * A composable function that defines the main UI for the Smart Parking application.
@@ -31,7 +31,7 @@ import org.koin.androidx.compose.get
 @Composable
 internal fun SmartParkingApp(
     isLoggedIn: Boolean,
-    router: Router = get()
+    router: Router = koinInject()
 ) {
     val navController = createNavController(router)
     SmartParkingTheme {

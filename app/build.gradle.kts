@@ -1,8 +1,8 @@
 @file:Suppress("UnstableApiUsage")
 
 plugins {
-    id(Deps.BuildPlugins.androidApplication)
-    id(Deps.BuildPlugins.androidKotlin)
+    id(libs.plugins.android.application.get().pluginId)
+    id(libs.plugins.android.kotlin.get().pluginId)
 }
 
 android {
@@ -53,10 +53,10 @@ dependencies {
     implementation(project(":data"))
     implementation(project(":presentation"))
 
-    implementation(Deps.Libraries.koin)
-    implementation(Deps.Libraries.koinAndroid)
+    implementation(libs.koin.core)
+    implementation(libs.koin.android)
 
-    testImplementation(Deps.TestLibraries.junit)
-    testImplementation(Deps.TestLibraries.koin)
-    testImplementation(Deps.TestLibraries.roboelectric)
+    testImplementation(libs.junit4)
+    testImplementation(libs.koin.test)
+    testImplementation(libs.robolectric)
 }
