@@ -14,6 +14,7 @@ import org.koin.test.check.checkModules
 class PresentationModuleTest {
     @get:Rule
     val mockkRule = MockKRule(this)
+
     @get:Rule
     val mainDispatcherRule = MainDispatcherRule()
 
