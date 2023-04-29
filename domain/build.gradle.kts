@@ -8,15 +8,15 @@ android {
 }
 
 dependencies {
-    api(Deps.Libraries.arrowCore)
-    api(Deps.Libraries.kotlinDateTime)
+    api(libs.arrow.core)
+    api(libs.kotlinx.datetime)
 
-    implementation(Deps.Libraries.koin)
-    implementation(Deps.Libraries.kotlinCoroutines)
-    implementation(Deps.Libraries.arrowFxCoroutines)
+    implementation(libs.koin.core)
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.arrow.fx.coroutines)
 
-    testImplementation(Deps.TestLibraries.junit)
-    testImplementation(Deps.TestLibraries.koin)
-    testImplementation(Deps.TestLibraries.kotlinCoroutines)
-    testImplementation(Deps.TestLibraries.mockk)
+    testImplementation(libs.junit4)
+    testImplementation(libs.koin.test)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.mockk)
 }
