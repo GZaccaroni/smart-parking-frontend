@@ -1,8 +1,8 @@
 @file:Suppress("UnstableApiUsage")
 
 plugins {
-    id(Deps.BuildPlugins.androidApplication)
-    id(Deps.BuildPlugins.androidKotlin)
+    id(libs.plugins.android.application.get().pluginId)
+    id(libs.plugins.android.kotlin.get().pluginId)
 }
 
 android {

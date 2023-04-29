@@ -2,7 +2,7 @@
 
 plugins {
     `android-base-lib`
-    id(Deps.BuildPlugins.kotlinSerialization) version Deps.BuildPlugins.Versions.androidKotlin
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {

@@ -1,9 +1,10 @@
 @file:Suppress("UnstableApiUsage")
 
 plugins {
-    id(Deps.BuildPlugins.dokka) version Deps.BuildPlugins.Versions.dokka
-    id(Deps.BuildPlugins.sonarqube) version Deps.BuildPlugins.Versions.sonarqube
-    id(Deps.BuildPlugins.googleMapsSecrets) version Deps.BuildPlugins.Versions.googleMapsSecrets apply false
+    alias(libs.plugins.google.maps.secrets) apply false
+
+    alias(libs.plugins.dokka)
+    alias(libs.plugins.sonarqube)
 }
 sonarqube {
     properties {
@@ -13,5 +14,5 @@ sonarqube {
     }
 }
 subprojects {
-    apply(plugin = Deps.BuildPlugins.dokka)
+    apply(plugin = rootProject.libs.plugins.dokka.get().pluginId)
 }
