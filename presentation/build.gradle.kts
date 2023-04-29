@@ -2,7 +2,7 @@
 
 plugins {
     `android-base-lib`
-    id(Deps.BuildPlugins.googleMapsSecrets)
+    alias(libs.plugins.google.maps.secrets)
 }
 
 android {
@@ -12,7 +12,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = Deps.BuildPlugins.Versions.compilerExtensionVersion
+        kotlinCompilerExtensionVersion = libs.versions.androidXComposeCompiler.get()
     }
 }
 
