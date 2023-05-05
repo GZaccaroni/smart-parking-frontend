@@ -19,8 +19,6 @@ jobs:
           java-version: 17
           distribution: zulu
       - name: Copy MAPS_API_KEY
-        env:
-          MAPS_API_KEY: ${{ secrets.MAPS_API_KEY }}
         run: echo MAPS_API_KEY=\"$MAPS_API_KEY\" > ./local.properties
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
@@ -45,8 +43,6 @@ jobs:
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
       - name: Copy MAPS_API_KEY
-        env:
-          MAPS_API_KEY: ${{ secrets.MAPS_API_KEY }}
         run: echo MAPS_API_KEY=\"$MAPS_API_KEY\" > ./local.properties
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
