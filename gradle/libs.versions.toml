@@ -28,7 +28,7 @@ turbine = "0.12.3"
 robolectric = "4.10.3"
 
 androidGradlePlugin = "7.4.2"
-dokka = "1.8.10"
+dokka = "1.8.20"
 sonarqube = "4.0.0.2929"
 googleMapsSecrets = "2.0.1"
 
