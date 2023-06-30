@@ -1,5 +1,37 @@
 # Changelog
 
+## [2.2.0](https://github.com/GZaccaroni/smart-parking-frontend/compare/v2.1.0...v2.2.0) (2023-06-30)
+
+
+### Features
+
+* **deps:** added gradle version catalog ([db3dac9](https://github.com/GZaccaroni/smart-parking-frontend/commit/db3dac9ac17f02c45005bb5be0c21bea73d49afb))
+
+
+### Bug Fixes
+
+* allow check pipelines to run without MAPS_API_KEY ([f5cd0b6](https://github.com/GZaccaroni/smart-parking-frontend/commit/f5cd0b6cb0060dccfbee9e0be44b0d98c227f712))
+* allow check pr pipeline to run with TEST MAPS_API_KEY ([aea651e](https://github.com/GZaccaroni/smart-parking-frontend/commit/aea651e4d3cbcc0fd0a6a8f5e84dbad64e78638a))
+* allow check pr pipeline to run without MAPS_API_KEY ([cbae6d1](https://github.com/GZaccaroni/smart-parking-frontend/commit/cbae6d1da89147454c06d42da96fbd529f4bdbe0))
+* **deps:** Fixed gradle errors in app and data module ([09845a9](https://github.com/GZaccaroni/smart-parking-frontend/commit/09845a9d4396b2b288bdefcc02270b49731b769c))
+* **deps:** update dependency androidx.activity:activity-compose to v1.7.2 ([251f649](https://github.com/GZaccaroni/smart-parking-frontend/commit/251f649ec30f807fb6a8ec8566871fa9b0a5754f))
+* **deps:** update dependency androidx.compose:compose-bom to v2023.05.00 ([a6d4fb7](https://github.com/GZaccaroni/smart-parking-frontend/commit/a6d4fb778eed8f3c294b1abc9381763a9e88d4e8))
+* **deps:** update dependency androidx.compose:compose-bom to v2023.05.01 ([ea30b50](https://github.com/GZaccaroni/smart-parking-frontend/commit/ea30b50e5b00847d2953286cd49d5274615851e5))
+* **deps:** update dependency androidx.compose:compose-bom to v2023.06.00 ([7c59021](https://github.com/GZaccaroni/smart-parking-frontend/commit/7c590212505c1a467ec90b93657c1b7b611dd3ed))
+* **deps:** update dependency androidx.compose:compose-bom to v2023.06.01 ([eafd074](https://github.com/GZaccaroni/smart-parking-frontend/commit/eafd074f9540158d7e840665fa66aa543fd3b634))
+* **deps:** update dependency androidx.compose.material:material to v1.4.3 ([5b86d0f](https://github.com/GZaccaroni/smart-parking-frontend/commit/5b86d0fc020d149a67ee11cb23066abceb7fc19b))
+* **deps:** update dependency androidx.core:core-ktx to v1.10.0 ([4803ac8](https://github.com/GZaccaroni/smart-parking-frontend/commit/4803ac8f19b1977699523cebbeb4a6ccabda572a))
+* **deps:** update dependency androidx.core:core-ktx to v1.10.1 ([3afcce9](https://github.com/GZaccaroni/smart-parking-frontend/commit/3afcce9783526e49a634e62cdb22f891466d139c))
+* **deps:** update dependency androidx.navigation:navigation-compose to v2.6.0 ([8e9456c](https://github.com/GZaccaroni/smart-parking-frontend/commit/8e9456c6bc30b4fe941410ec513e51e0c2211155))
+* **deps:** update dependency androidx.security:security-crypto-ktx to v1.1.0-alpha06 ([f00bd25](https://github.com/GZaccaroni/smart-parking-frontend/commit/f00bd2508fc5f071a2284b892f6d6706dbc0a3b3))
+* **deps:** update dependency com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter to v1 ([f71219d](https://github.com/GZaccaroni/smart-parking-frontend/commit/f71219db710dfd360aa14df6ac696c5c62d0c77c))
+* **deps:** update dependency io.insert-koin:koin-androidx-compose to v3.4.5 ([64f2754](https://github.com/GZaccaroni/smart-parking-frontend/commit/64f27548ca1c4470184d518f7a3193ae4d1d6c9b))
+* **deps:** update dependency org.jetbrains.kotlinx:kotlinx-serialization-json to v1.5.1 ([60ba223](https://github.com/GZaccaroni/smart-parking-frontend/commit/60ba2235ebc4f165a461addb35270495f5c20876))
+* **deps:** update dependency org.robolectric:robolectric to v4.10 ([07722bd](https://github.com/GZaccaroni/smart-parking-frontend/commit/07722bd7c2d7553c6890fcff600e20fb3de54477))
+* **deps:** update dependency org.robolectric:robolectric to v4.10.1 ([3801eb5](https://github.com/GZaccaroni/smart-parking-frontend/commit/3801eb56f21b4cfe61a596e649963fe04d8f5879))
+* **deps:** update dependency org.robolectric:robolectric to v4.10.2 ([02b247f](https://github.com/GZaccaroni/smart-parking-frontend/commit/02b247f9da2cee1a50f465881fce1aac540b7677))
+* **deps:** update dependency org.robolectric:robolectric to v4.10.3 ([89dd0ea](https://github.com/GZaccaroni/smart-parking-frontend/commit/89dd0ea088a6522d5014d1ed4b5301f9456195fd))
+
 ## [2.1.0](https://github.com/GZaccaroni/smart-parking-frontend/compare/v2.0.0...v2.1.0) (2023-03-17)
 
 
